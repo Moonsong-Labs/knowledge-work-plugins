@@ -1,0 +1,89 @@
+# Moonsong Labs Plugins
+
+A collection of plugins for AI coding agents, built on top of composable "skills" and instructions that make sure your agent uses them.
+
+## Plugins
+
+### [Moonsong Engineering](./moonsong-engineering)
+
+A complete software engineering workflow: brainstorming, planning, TDD, debugging, code review, and more. Built on composable skills that trigger automatically when your agent encounters relevant tasks.
+
+## Installation
+
+**Note:** Installation differs by platform. Claude Code and Cursor have built-in plugin marketplaces. Codex and OpenCode require manual setup.
+
+### Claude Code (via Plugin Marketplace)
+
+In Claude Code, register the marketplace first:
+
+```bash
+/plugin marketplace add Moonsong-Labs/knowledge-work-plugins
+```
+
+Then install the plugin from this marketplace:
+
+```bash
+/plugin install moonsong-engineering@moonsong-labs
+```
+
+### Cursor
+
+Cursor automatically detects plugins installed by Claude Code. Install via Claude Code first, then restart Cursor.
+
+### Codex
+
+Tell Codex:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonsong-engineering/.codex/INSTALL.md
+```
+
+**Detailed docs:** [moonsong-engineering/docs/README.codex.md](moonsong-engineering/docs/README.codex.md)
+
+### OpenCode
+
+Tell OpenCode:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonsong-engineering/.opencode/INSTALL.md
+```
+
+**Detailed docs:** [moonsong-engineering/docs/README.opencode.md](moonsong-engineering/docs/README.opencode.md)
+
+### Verify Installation
+
+Start a new session in your chosen platform and ask for something that should trigger a skill (for example, "help me plan this feature" or "let's debug this issue"). The agent should automatically invoke the relevant skill.
+
+## Philosophy
+
+- **Test-Driven Development** - Write tests first, always
+- **Systematic over ad-hoc** - Process over guessing
+- **Complexity reduction** - Simplicity as primary goal
+- **Evidence over claims** - Verify before declaring success
+
+## Contributing
+
+Skills live directly in this repository. To contribute:
+
+1. Fork the repository
+2. Create a branch for your skill
+3. Follow the `writing-skills` skill for creating and testing new skills
+4. Submit a PR
+
+See `moonsong-engineering/skills/writing-skills/SKILL.md` for the complete guide.
+
+## Updating
+
+Skills update automatically when you update the plugin:
+
+```bash
+/plugin update moonsong-engineering
+```
+
+## Acknowledgments
+
+Inspired by:
+
+- [Anthropic knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins)
+- [Superpowers](https://github.com/obra/superpowers)
+- [awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents)

@@ -1,0 +1,219 @@
+name: Release
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      plugin:
+        description: 'Plugin to release (e.g. moonsong-engineering)'
+        required: true
+        type: string
+      bump:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+jobs:
+  prepare-release:
+    if: >-
+      (github.event_name == 'workflow_dispatch') ||
+      (github.event.pull_request.merged == true &&
+       !startsWith(github.event.pull_request.head.ref, 'release/') &&
+       contains(toJSON(github.event.pull_request.labels.*.name), 'release:') &&
+       !contains(toJSON(github.event.pull_request.labels.*.name), 'release:skip'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine plugin and bump type
+        id: release
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            PLUGIN="${{ inputs.plugin }}"
+            BUMP="${{ inputs.bump }}"
+          else
+            LABELS='${{ toJSON(github.event.pull_request.labels.*.name) }}'
+
+            # Labels follow the pattern: release:<plugin>:<bump>
+            # e.g. release:moonsong-engineering:patch
+            PLUGIN=""
+            BUMP=""
+
+            for label in $(echo "$LABELS" | jq -r '.[]'); do
+              if [[ "$label" =~ ^release:([^:]+):(major|minor|patch)$ ]]; then
+                PLUGIN="${BASH_REMATCH[1]}"
+                BUMP="${BASH_REMATCH[2]}"
+                break
+              fi
+            done
+          fi
+
+          if [ -z "$PLUGIN" ] || [ -z "$BUMP" ]; then
+            echo "No valid release parameters found"
+            echo "  For PRs: add a label like release:moonsong-engineering:patch"
+            echo "  For manual: provide plugin and bump inputs"
+            exit 1
+          fi
+
+          if [ ! -f "$PLUGIN/.claude-plugin/plugin.json" ]; then
+            echo "Plugin directory '$PLUGIN' not found or missing .claude-plugin/plugin.json"
+            exit 1
+          fi
+
+          echo "plugin=$PLUGIN" >> "$GITHUB_OUTPUT"
+          echo "bump=$BUMP" >> "$GITHUB_OUTPUT"
+
+      - name: Calculate new version
+        id: version
+        run: |
+          PLUGIN="${{ steps.release.outputs.plugin }}"
+          CURRENT=$(jq -r '.version' "$PLUGIN/.claude-plugin/plugin.json")
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT"
+
+          case "${{ steps.release.outputs.bump }}" in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+
+          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          echo "new=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Generate changelog entry
+        run: |
+          PLUGIN="${{ steps.release.outputs.plugin }}"
+          NEW_VERSION="${{ steps.version.outputs.new }}"
+          DATE=$(date +%Y-%m-%d)
+
+          # Find the previous tag for this plugin
+          PREVIOUS_TAG=$(git tag -l "${PLUGIN}/v*" --sort=-v:refname | head -1)
+
+          {
+            echo "## [${NEW_VERSION}] - ${DATE}"
+            echo ""
+
+            if [ -n "$PREVIOUS_TAG" ]; then
+              RANGE="${PREVIOUS_TAG}..HEAD"
+            else
+              RANGE="HEAD"
+            fi
+
+            # Only include commits that touch this plugin's directory
+            git log "$RANGE" --pretty=format:"- %s" --no-merges -- "$PLUGIN/"
+            echo ""
+          } > /tmp/changelog-entry.md
+
+      - name: Create version bump PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PLUGIN="${{ steps.release.outputs.plugin }}"
+          NEW_VERSION="${{ steps.version.outputs.new }}"
+          BRANCH="release/${PLUGIN}/v${NEW_VERSION}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout -b "$BRANCH"
+
+          # Update plugin's own plugin.json
+          jq --arg v "$NEW_VERSION" '.version = $v' "$PLUGIN/.claude-plugin/plugin.json" > tmp.json && mv tmp.json "$PLUGIN/.claude-plugin/plugin.json"
+
+          # Update the matching entry in marketplace.json
+          jq --arg name "$PLUGIN" --arg v "$NEW_VERSION" \
+            '(.plugins[] | select(.name == $name)).version = $v' \
+            .claude-plugin/marketplace.json > tmp.json && mv tmp.json .claude-plugin/marketplace.json
+
+          # Update cursor plugin.json if it exists
+          if [ -f "$PLUGIN/.cursor-plugin/plugin.json" ]; then
+            jq --arg v "$NEW_VERSION" '.version = $v' "$PLUGIN/.cursor-plugin/plugin.json" > tmp.json && mv tmp.json "$PLUGIN/.cursor-plugin/plugin.json"
+          fi
+
+          # Update changelog
+          if [ ! -f "$PLUGIN/CHANGELOG.md" ]; then
+            printf "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n" > "$PLUGIN/CHANGELOG.md"
+          fi
+
+          {
+            head -n 4 "$PLUGIN/CHANGELOG.md"
+            echo ""
+            cat /tmp/changelog-entry.md
+            echo ""
+            tail -n +5 "$PLUGIN/CHANGELOG.md"
+          } > CHANGELOG.tmp && mv CHANGELOG.tmp "$PLUGIN/CHANGELOG.md"
+
+          git add "$PLUGIN/.claude-plugin/plugin.json" .claude-plugin/marketplace.json "$PLUGIN/CHANGELOG.md"
+          if [ -f "$PLUGIN/.cursor-plugin/plugin.json" ]; then
+            git add "$PLUGIN/.cursor-plugin/plugin.json"
+          fi
+
+          git commit -m "chore(${PLUGIN}): bump version to ${NEW_VERSION}"
+          git push origin "$BRANCH"
+
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "chore(${PLUGIN}): release v${NEW_VERSION}" \
+            --body "Automated version bump and changelog update for ${PLUGIN} v${NEW_VERSION}."
+
+  publish-release:
+    if: >-
+      github.event.pull_request.merged == true &&
+      startsWith(github.event.pull_request.head.ref, 'release/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine plugin and create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH="${{ github.event.pull_request.head.ref }}"
+
+          # Extract plugin name from branch: release/<plugin>/v<version>
+          PLUGIN=$(echo "$BRANCH" | sed -n 's|^release/\(.*\)/v.*$|\1|p')
+
+          if [ -z "$PLUGIN" ] || [ ! -f "$PLUGIN/.claude-plugin/plugin.json" ]; then
+            echo "Could not determine plugin from branch '$BRANCH'"
+            exit 1
+          fi
+
+          NEW_VERSION=$(jq -r '.version' "$PLUGIN/.claude-plugin/plugin.json")
+          TAG="${PLUGIN}/v${NEW_VERSION}"
+
+          # Extract the changelog entry for this version
+          NOTES=$(sed -n "/^## \[${NEW_VERSION}\]/,/^## \[/{ /^## \[${NEW_VERSION}\]/p; /^## \[${NEW_VERSION}\]/!{ /^## \[/!p; } }" "$PLUGIN/CHANGELOG.md")
+
+          git tag "$TAG"
+          git push origin "$TAG"
+
+          echo "$NOTES" > /tmp/release-notes.md
+          gh release create "$TAG" \
+            --title "${PLUGIN} v${NEW_VERSION}" \
+            --notes-file /tmp/release-notes.md

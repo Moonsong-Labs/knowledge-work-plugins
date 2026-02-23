@@ -1,0 +1,20 @@
+This plugin includes work derived from:
+
+- superpowers (https://github.com/obra/superpowers)
+  Copyright (c) 2025 Jesse Vincent
+  Licensed under MIT License
+
+  Skills derived from superpowers:
+  - brainstorming
+  - dispatching-parallel-agents
+  - executing-plans
+  - finishing-a-development-branch
+  - receiving-code-review
+  - requesting-code-review
+  - subagent-driven-development
+  - systematic-debugging
+  - test-driven-development
+  - using-git-worktrees
+  - verification-before-completion
+  - writing-plans
+  - writing-skills
