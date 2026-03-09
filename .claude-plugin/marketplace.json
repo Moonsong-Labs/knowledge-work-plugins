@@ -8,7 +8,7 @@
     {
       "name": "plugin-management",
       "description": "Create, customize, and manage plugins for AI coding assistants",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "source": "./plugin-management",
       "author": {
         "name": "Moonsong Labs"
