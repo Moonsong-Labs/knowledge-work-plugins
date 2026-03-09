@@ -115,8 +115,8 @@ Generate for each selected platform. See `references/component-schemas.md` for e
 **CodeX** (.codex/INSTALL.md):
 - Clone-and-symlink instructions following the template in component-schemas.md
 
-**OpenCode** (.opencode/package.json):
-- `@opencode-ai/plugin` dependency
+**OpenCode** (.opencode/INSTALL.md):
+- Clone-and-symlink instructions following the template in component-schemas.md
 
 ### 4.3 Components
 
@@ -198,7 +198,7 @@ Run these checks and report results:
    - `.claude-plugin/plugin.json` exists and has `name` field
    - `.cursor-plugin/plugin.json` exists (if Cursor platform selected)
    - `.codex/INSTALL.md` exists (if CodeX platform selected)
-   - `.opencode/package.json` exists (if OpenCode platform selected)
+   - `.opencode/INSTALL.md` exists (if OpenCode platform selected)
    - At least one component exists
 
 2. **SKILL.md validation** (for each skill):

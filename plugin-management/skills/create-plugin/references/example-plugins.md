@@ -11,7 +11,7 @@ my-linting-rules/
 ├── .codex/
 │   └── INSTALL.md
 ├── .opencode/
-│   └── package.json
+│   └── INSTALL.md
 ├── skills/
 │   └── lint-check/
 │       └── SKILL.md
@@ -39,7 +39,7 @@ team-workflows/
 ├── .codex/
 │   └── INSTALL.md
 ├── .opencode/
-│   └── package.json
+│   └── INSTALL.md
 ├── skills/
 │   ├── sprint-planning/
 │   │   └── SKILL.md
@@ -63,7 +63,7 @@ engineering-ops/
 ├── .codex/
 │   └── INSTALL.md
 ├── .opencode/
-│   └── package.json
+│   └── INSTALL.md
 ├── skills/
 │   ├── triage-issues/
 │   │   ├── SKILL.md

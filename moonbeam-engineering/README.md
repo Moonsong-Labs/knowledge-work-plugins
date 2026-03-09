@@ -2,10 +2,6 @@
 
 A collection of skills that enhance AI agents with specialized capabilities for developing on the Moonbeam parachain. Each skill provides actionable instructions that enable agents to perform specific development tasks effectively.
 
-## What is Moonbeam?
-
-Moonbeam is a smart contract parachain on Polkadot that combines Ethereum-compatibility with Substrate functionality, allowing developers to use familiar Ethereum tools while leveraging Polkadot's cross-chain capabilities.
-
 ## Available Skills
 
 | Skill | Capability |
@@ -44,32 +40,42 @@ Moonbeam maintains three runtime variants:
 
 ## Installation
 
-### Claude Code
+**Note:** Installation differs by platform. Claude Code and Cursor have built-in plugin marketplaces. Codex and OpenCode require manual setup.
+
+### Claude Code (via Plugin Marketplace)
+
+In Claude Code, register the marketplace first:
 
 ```bash
-claude plugin add /path/to/moonbeam-engineering
+/plugin marketplace add Moonsong-Labs/knowledge-work-plugins
+```
+
+Then install the plugin:
+
+```bash
+/plugin install moonbeam-engineering@moonsong-labs
 ```
 
 ### Cursor
 
-Add the plugin path to your Cursor configuration.
+Cursor automatically detects plugins installed by Claude Code. Install via Claude Code first, then restart Cursor.
 
-### CodeX
+### Codex
 
-See [.codex/INSTALL.md](./.codex/INSTALL.md) for clone-and-symlink instructions.
+Tell Codex:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonbeam-engineering/.codex/INSTALL.md
+```
 
 ### OpenCode
 
-```bash
-cd .opencode && npm install
+Tell OpenCode:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonbeam-engineering/.opencode/INSTALL.md
 ```
 
 ## Maintainers
 
 - [Moonbeam Devs](https://github.com/orgs/Moonsong-Labs/teams/moonbeam-devs)
-
-## Resources
-
-- [Moonbeam Documentation](https://docs.moonbeam.network/)
-- [Substrate Documentation](https://docs.substrate.io/)
-- [Polkadot Wiki](https://wiki.polkadot.network/)

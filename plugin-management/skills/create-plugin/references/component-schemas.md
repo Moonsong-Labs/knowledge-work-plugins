@@ -65,14 +65,18 @@ Clone-and-symlink pattern:
 3. Restart Codex
 ```
 
-### OpenCode (.opencode/package.json)
+### OpenCode (.opencode/INSTALL.md)
 
-```json
-{
-  "dependencies": {
-    "@opencode-ai/plugin": "1.2.20"
-  }
-}
+Clone-and-symlink pattern (same as CodeX, different paths):
+
+```markdown
+# Installing the <Plugin Name> plugin for OpenCode
+
+## Installation
+
+1. Clone: `git clone <repo-url> ~/.config/opencode/knowledge-work-plugins`
+2. Symlink: `ln -s ~/.config/opencode/knowledge-work-plugins/<plugin-name>/skills ~/.config/opencode/skills/<plugin-name>`
+3. Restart OpenCode
 ```
 
 ---
