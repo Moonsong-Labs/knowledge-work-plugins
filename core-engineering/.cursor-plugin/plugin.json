@@ -1,0 +1,24 @@
+{
+  "name": "core-engineering",
+  "displayName": "Core Engineering",
+  "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques",
+  "version": "1.0.0",
+  "author": {
+    "name": "Moonsong Labs"
+  },
+  "homepage": "https://github.com/Moonsong-Labs/knowledge-work-plugins",
+  "repository": "https://github.com/Moonsong-Labs/knowledge-work-plugins",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "tdd",
+    "debugging",
+    "collaboration",
+    "best-practices",
+    "workflows"
+  ],
+  "skills": "./skills/",
+  "agents": "./agents/",
+  "commands": "./commands/",
+  "hooks": "./hooks/hooks.json"
+}

@@ -4,7 +4,11 @@ A collection of plugins for AI coding agents, built on top of composable "skills
 
 ## Plugins
 
-### [Moonsong Engineering](./moonsong-engineering)
+### [Plugin Management](./plugin-management)
+
+Create, customize, and manage plugins for AI coding assistants. Guides you through scaffolding plugin directories, designing components, and adapting distributable plugins for your organization.
+
+### [Core Engineering](./core-engineering)
 
 A complete software engineering workflow: brainstorming, planning, TDD, debugging, code review, and more. Built on composable skills that trigger automatically when your agent encounters relevant tasks.
 
@@ -27,7 +31,7 @@ In Claude Code, register the marketplace first:
 Then install the plugin from this marketplace:
 
 ```bash
-/plugin install moonsong-engineering@moonsong-labs
+/plugin install core-engineering@moonsong-labs
 ```
 
 ### Cursor
@@ -39,20 +43,20 @@ Cursor automatically detects plugins installed by Claude Code. Install via Claud
 Tell Codex:
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonsong-engineering/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/core-engineering/.codex/INSTALL.md
 ```
 
-**Detailed docs:** [moonsong-engineering/docs/README.codex.md](moonsong-engineering/docs/README.codex.md)
+**Detailed docs:** [core-engineering/docs/README.codex.md](core-engineering/docs/README.codex.md)
 
 ### OpenCode
 
 Tell OpenCode:
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonsong-engineering/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/core-engineering/.opencode/INSTALL.md
 ```
 
-**Detailed docs:** [moonsong-engineering/docs/README.opencode.md](moonsong-engineering/docs/README.opencode.md)
+**Detailed docs:** [core-engineering/docs/README.opencode.md](core-engineering/docs/README.opencode.md)
 
 ### Verify Installation
 
@@ -67,21 +71,54 @@ Start a new session in your chosen platform and ask for something that should tr
 
 ## Contributing
 
-Skills live directly in this repository. To contribute:
+### Adding a skill to an existing plugin
 
-1. Fork the repository
-2. Create a branch for your skill
-3. Follow the `writing-skills` skill for creating and testing new skills
-4. Submit a PR
+The `writing-skills` skill in the `plugin-management` plugin guides you through creating and testing new skills.
 
-See `moonsong-engineering/skills/writing-skills/SKILL.md` for the complete guide.
+1. Fork and clone the repository
+2. Start Claude Code with the plugin-management plugin loaded:
+
+   ```bash
+   claude --plugin-dir ./plugin-management
+   ```
+
+3. Ask your agent to create a new skill:
+
+   ```text
+   I want to add a new skill to [plugin name] for [describe what it does]
+   ```
+
+   The `writing-skills` skill will activate and guide you through the TDD process: write failing tests (baseline behavior), write the skill, verify it works, and refactor.
+
+4. Submit a PR with your new skill.
+
+### Creating a new plugin
+
+Plugins are self-contained directories at the root of this repository. The `plugin-management` plugin provides a guided workflow for creating new plugins.
+
+1. Fork and clone the repository
+2. Start Claude Code with the plugin-management plugin loaded:
+
+   ```bash
+   claude --plugin-dir ./plugin-management
+   ```
+
+3. Ask your agent to create a new plugin:
+
+   ```text
+   I want to create a new plugin for [describe what it does]
+   ```
+
+   The `create-plugin` skill will activate and walk you through a 5-phase process: discovery, component planning, designing your first component, generating all files, and validation.
+
+4. Submit a PR with your new plugin.
 
 ## Updating
 
 Skills update automatically when you update the plugin:
 
 ```bash
-/plugin update moonsong-engineering
+/plugin update core-engineering
 ```
 
 ## Acknowledgments

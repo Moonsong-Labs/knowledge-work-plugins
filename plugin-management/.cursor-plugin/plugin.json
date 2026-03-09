@@ -1,0 +1,22 @@
+{
+  "name": "plugin-management",
+  "displayName": "Plugin Management",
+  "description": "Create, customize, and manage plugins for AI coding assistants",
+  "version": "0.1.0",
+  "author": {
+    "name": "Moonsong Labs"
+  },
+  "homepage": "https://github.com/Moonsong-Labs/knowledge-work-plugins",
+  "repository": "https://github.com/Moonsong-Labs/knowledge-work-plugins",
+  "license": "MIT",
+  "keywords": [
+    "scaffolding",
+    "plugin-creation",
+    "plugin-management",
+    "customization"
+  ],
+  "skills": "./skills/",
+  "agents": "",
+  "commands": "",
+  "hooks": ""
+}
