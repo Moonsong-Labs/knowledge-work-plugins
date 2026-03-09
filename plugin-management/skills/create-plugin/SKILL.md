@@ -187,7 +187,48 @@ If the plugin specifies a `license` in plugin.json, create the corresponding lic
 Generate a README with:
 - Plugin name and description
 - What's inside (list of components)
-- Installation instructions per platform
+- Installation instructions per platform, following this pattern:
+
+```markdown
+## Installation
+
+**Note:** Installation differs by platform. Claude Code and Cursor have built-in plugin marketplaces. Codex and OpenCode require manual setup.
+
+### Claude Code (via Plugin Marketplace)
+
+In Claude Code, register the marketplace first:
+
+\`\`\`bash
+/plugin marketplace add <org>/<repo>
+\`\`\`
+
+Then install the plugin:
+
+\`\`\`bash
+/plugin install <plugin-name>@<marketplace-name>
+\`\`\`
+
+### Cursor
+
+Cursor automatically detects plugins installed by Claude Code. Install via Claude Code first, then restart Cursor.
+
+### Codex
+
+Tell Codex:
+
+\`\`\`text
+Fetch and follow instructions from https://raw.githubusercontent.com/<org>/<repo>/refs/heads/main/<plugin-name>/.codex/INSTALL.md
+\`\`\`
+
+### OpenCode
+
+Tell OpenCode:
+
+\`\`\`text
+Fetch and follow instructions from https://raw.githubusercontent.com/<org>/<repo>/refs/heads/main/<plugin-name>/.opencode/INSTALL.md
+\`\`\`
+```
+
 - Contributing section (if community plugin)
 
 ## Phase 5: Validation
@@ -217,6 +258,11 @@ Run these checks and report results:
    [PASS] Structure: all required files present
    [PASS] Skills: frontmatter valid (2/2)
    [WARN] Connectors: ~~chat tool defined but not used in any file
+   ```
+
+5. **Local testing** - suggest testing the plugin locally:
+   ```
+   claude --plugin-dir ./<plugin-name>
    ```
 
 After validation, if inside the monorepo, ask whether to register in marketplace.json.

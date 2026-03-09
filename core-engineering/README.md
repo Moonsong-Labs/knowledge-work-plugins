@@ -64,3 +64,41 @@ There's a bunch more to it, but that's the core of the system. And because the s
 - **documentation-specialist** - API docs, tutorials, architecture guides, and documentation audits
 - **git-workflow-manager** - Branching strategies, release automation, and merge conflict resolution
 - **rust-specialist** - Ownership/borrowing, trait design, async patterns, unsafe review, and performance optimization
+
+## Installation
+
+**Note:** Installation differs by platform. Claude Code and Cursor have built-in plugin marketplaces. Codex and OpenCode require manual setup.
+
+### Claude Code (via Plugin Marketplace)
+
+In Claude Code, register the marketplace first:
+
+```bash
+/plugin marketplace add Moonsong-Labs/knowledge-work-plugins
+```
+
+Then install the plugin:
+
+```bash
+/plugin install core-engineering@moonsong-labs
+```
+
+### Cursor
+
+Cursor automatically detects plugins installed by Claude Code. Install via Claude Code first, then restart Cursor.
+
+### Codex
+
+Tell Codex:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/core-engineering/.codex/INSTALL.md
+```
+
+### OpenCode
+
+Tell OpenCode:
+
+```text
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/core-engineering/.opencode/INSTALL.md
+```
