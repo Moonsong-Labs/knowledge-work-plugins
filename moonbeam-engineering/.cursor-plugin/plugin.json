@@ -1,0 +1,23 @@
+{
+  "name": "moonbeam-engineering",
+  "displayName": "Moonbeam Engineering",
+  "description": "A collection of skills that enhance AI agents with specialized capabilities for developing on the Moonbeam parachain. Each skill provides actionable instructions that enable agents to perform specific development tasks effectively.",
+  "version": "0.0.0",
+  "author": {
+    "name": "Moonsong Labs"
+  },
+  "homepage": "https://github.com/Moonsong-Labs/knowledge-work-plugins",
+  "repository": "https://github.com/Moonsong-Labs/knowledge-work-plugins",
+  "license": "MIT OR Apache-2.0",
+  "keywords": [
+    "moonbeam",
+    "substrate",
+    "polkadot",
+    "parachain",
+    "rust",
+    "evm",
+    "xcm",
+    "runtime"
+  ],
+  "skills": "./skills/"
+}

@@ -8,6 +8,10 @@ A collection of plugins for AI coding agents, built on top of composable "skills
 
 A complete software engineering workflow: brainstorming, planning, TDD, debugging, code review, and more. Built on composable skills that trigger automatically when your agent encounters relevant tasks.
 
+### [Moonbeam Engineering](./moonbeam-engineering)
+
+A collection of skills that enhance AI agents with specialized capabilities for developing on the Moonbeam parachain: adding pallets, precompiles, XCM messaging, runtime development, testing, migrations, and more.
+
 ## Installation
 
 **Note:** Installation differs by platform. Claude Code and Cursor have built-in plugin marketplaces. Codex and OpenCode require manual setup.
