@@ -2,7 +2,7 @@
   "name": "moonbeam-engineering",
   "displayName": "Moonbeam Engineering",
   "description": "A collection of skills that enhance AI agents with specialized capabilities for developing on the Moonbeam parachain. Each skill provides actionable instructions that enable agents to perform specific development tasks effectively.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": {
     "name": "Moonsong Labs"
   },
