@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       plugin:
-        description: 'Plugin to release (e.g. moonsong-engineering)'
+        description: 'Plugin to release (e.g. core-engineering)'
         required: true
         type: string
       bump:
@@ -48,7 +48,7 @@ jobs:
             LABELS='${{ toJSON(github.event.pull_request.labels.*.name) }}'
 
             # Labels follow the pattern: release:<plugin>:<bump>
-            # e.g. release:moonsong-engineering:patch
+            # e.g. release:core-engineering:patch
             PLUGIN=""
             BUMP=""
 
@@ -63,7 +63,7 @@ jobs:
 
           if [ -z "$PLUGIN" ] || [ -z "$BUMP" ]; then
             echo "No valid release parameters found"
-            echo "  For PRs: add a label like release:moonsong-engineering:patch"
+            echo "  For PRs: add a label like release:core-engineering:patch"
             echo "  For manual: provide plugin and bump inputs"
             exit 1
           fi

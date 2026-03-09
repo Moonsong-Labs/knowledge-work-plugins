@@ -8,7 +8,7 @@ A collection of plugins for AI coding agents, built on top of composable "skills
 
 Create, customize, and manage plugins for AI coding assistants. Guides you through scaffolding plugin directories, designing components, and adapting distributable plugins for your organization.
 
-### [Moonsong Engineering](./moonsong-engineering)
+### [Moonsong Engineering](./core-engineering)
 
 A complete software engineering workflow: brainstorming, planning, TDD, debugging, code review, and more. Built on composable skills that trigger automatically when your agent encounters relevant tasks.
 
@@ -31,7 +31,7 @@ In Claude Code, register the marketplace first:
 Then install the plugin from this marketplace:
 
 ```bash
-/plugin install moonsong-engineering@moonsong-labs
+/plugin install core-engineering@moonsong-labs
 ```
 
 ### Cursor
@@ -43,20 +43,20 @@ Cursor automatically detects plugins installed by Claude Code. Install via Claud
 Tell Codex:
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonsong-engineering/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/core-engineering/.codex/INSTALL.md
 ```
 
-**Detailed docs:** [moonsong-engineering/docs/README.codex.md](moonsong-engineering/docs/README.codex.md)
+**Detailed docs:** [core-engineering/docs/README.codex.md](core-engineering/docs/README.codex.md)
 
 ### OpenCode
 
 Tell OpenCode:
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonsong-engineering/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/core-engineering/.opencode/INSTALL.md
 ```
 
-**Detailed docs:** [moonsong-engineering/docs/README.opencode.md](moonsong-engineering/docs/README.opencode.md)
+**Detailed docs:** [core-engineering/docs/README.opencode.md](core-engineering/docs/README.opencode.md)
 
 ### Verify Installation
 
@@ -78,7 +78,7 @@ Start a new session in your chosen platform and ask for something that should tr
 3. Follow the `writing-skills` skill for creating and testing new skills
 4. Submit a PR
 
-See `moonsong-engineering/skills/writing-skills/SKILL.md` for the complete guide.
+See `core-engineering/skills/writing-skills/SKILL.md` for the complete guide.
 
 ### Creating a new plugin
 
@@ -105,7 +105,7 @@ Plugins are self-contained directories at the root of this repository. The `plug
 Skills update automatically when you update the plugin:
 
 ```bash
-/plugin update moonsong-engineering
+/plugin update core-engineering
 ```
 
 ## Acknowledgments
