@@ -13,6 +13,15 @@
       "author": {
         "name": "Moonsong Labs"
       }
+    },
+    {
+      "name": "moonbeam-engineering",
+      "description": "Skills for developing on the Moonbeam parachain: pallets, precompiles, XCM, runtime, testing, and more",
+      "version": "0.0.0",
+      "source": "./moonbeam-engineering",
+      "author": {
+        "name": "Moonsong Labs"
+      }
     }
   ]
 }
