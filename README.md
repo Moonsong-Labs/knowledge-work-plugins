@@ -4,6 +4,10 @@ A collection of plugins for AI coding agents, built on top of composable "skills
 
 ## Plugins
 
+### [Plugin Management](./plugin-management)
+
+Create, customize, and manage plugins for AI coding assistants. Guides you through scaffolding plugin directories, designing components, and adapting distributable plugins for your organization.
+
 ### [Moonsong Engineering](./moonsong-engineering)
 
 A complete software engineering workflow: brainstorming, planning, TDD, debugging, code review, and more. Built on composable skills that trigger automatically when your agent encounters relevant tasks.
@@ -67,7 +71,7 @@ Start a new session in your chosen platform and ask for something that should tr
 
 ## Contributing
 
-Skills live directly in this repository. To contribute:
+### Adding a skill to an existing plugin
 
 1. Fork the repository
 2. Create a branch for your skill
@@ -75,6 +79,26 @@ Skills live directly in this repository. To contribute:
 4. Submit a PR
 
 See `moonsong-engineering/skills/writing-skills/SKILL.md` for the complete guide.
+
+### Creating a new plugin
+
+Plugins are self-contained directories at the root of this repository. The `plugin-management` plugin provides a guided workflow for creating new plugins.
+
+1. Install the plugin-management plugin:
+
+   ```bash
+   /plugin install plugin-management@moonsong-labs
+   ```
+
+2. Ask your agent to create a new plugin:
+
+   ```text
+   I want to create a new plugin for [describe what it does]
+   ```
+
+   The `create-plugin` skill will activate and walk you through a 5-phase process: discovery, component planning, designing your first component, generating all files, and validation.
+
+3. Submit a PR with your new plugin.
 
 ## Updating
 
