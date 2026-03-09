@@ -8,7 +8,7 @@ A collection of plugins for AI coding agents, built on top of composable "skills
 
 Create, customize, and manage plugins for AI coding assistants. Guides you through scaffolding plugin directories, designing components, and adapting distributable plugins for your organization.
 
-### [Moonsong Engineering](./core-engineering)
+### [Core Engineering](./core-engineering)
 
 A complete software engineering workflow: brainstorming, planning, TDD, debugging, code review, and more. Built on composable skills that trigger automatically when your agent encounters relevant tasks.
 
@@ -73,24 +73,37 @@ Start a new session in your chosen platform and ask for something that should tr
 
 ### Adding a skill to an existing plugin
 
-1. Fork the repository
-2. Create a branch for your skill
-3. Follow the `writing-skills` skill for creating and testing new skills
-4. Submit a PR
+The `writing-skills` skill in the `plugin-management` plugin guides you through creating and testing new skills.
 
-See `core-engineering/skills/writing-skills/SKILL.md` for the complete guide.
+1. Fork and clone the repository
+2. Start Claude Code with the plugin-management plugin loaded:
+
+   ```bash
+   claude --plugin-dir ./plugin-management
+   ```
+
+3. Ask your agent to create a new skill:
+
+   ```text
+   I want to add a new skill to [plugin name] for [describe what it does]
+   ```
+
+   The `writing-skills` skill will activate and guide you through the TDD process: write failing tests (baseline behavior), write the skill, verify it works, and refactor.
+
+4. Submit a PR with your new skill.
 
 ### Creating a new plugin
 
 Plugins are self-contained directories at the root of this repository. The `plugin-management` plugin provides a guided workflow for creating new plugins.
 
-1. Install the plugin-management plugin:
+1. Fork and clone the repository
+2. Start Claude Code with the plugin-management plugin loaded:
 
    ```bash
-   /plugin install plugin-management@moonsong-labs
+   claude --plugin-dir ./plugin-management
    ```
 
-2. Ask your agent to create a new plugin:
+3. Ask your agent to create a new plugin:
 
    ```text
    I want to create a new plugin for [describe what it does]
@@ -98,7 +111,7 @@ Plugins are self-contained directories at the root of this repository. The `plug
 
    The `create-plugin` skill will activate and walk you through a 5-phase process: discovery, component planning, designing your first component, generating all files, and validation.
 
-3. Submit a PR with your new plugin.
+4. Submit a PR with your new plugin.
 
 ## Updating
 

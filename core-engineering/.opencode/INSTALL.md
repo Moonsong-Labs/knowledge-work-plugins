@@ -1,4 +1,4 @@
-# Installing Moonsong Engineering for OpenCode
+# Installing the Core Engineering plugin for OpenCode
 
 ## Prerequisites
 
@@ -7,7 +7,7 @@
 
 ## Installation Steps
 
-### 1. Clone Moonsong Engineering
+### 1. Clone the Core Engineering plugin
 
 ```bash
 git clone https://github.com/Moonsong-Labs/knowledge-work-plugins.git ~/.config/opencode/core-engineering

@@ -1,4 +1,4 @@
-# Moonsong Engineering
+# Core Engineering
 
 A complete software development workflow for your coding agents, built on top of a set of composable "skills" and some initial instructions that make sure your agent uses them.
 
@@ -55,7 +55,6 @@ There's a bunch more to it, but that's the core of the system. And because the s
 - **subagent-driven-development** - Fast iteration with two-stage review (spec compliance, then code quality)
 
 **Meta**
-- **writing-skills** - Create new skills following best practices (includes testing methodology)
 - **using-skills** - Introduction to the skills system
 
 ### Agents

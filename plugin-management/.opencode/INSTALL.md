@@ -1,4 +1,4 @@
-# Installing Plugin Management for OpenCode
+# Installing the Plugin Management plugin for OpenCode
 
 ## Prerequisites
 
@@ -7,7 +7,7 @@
 
 ## Installation Steps
 
-### 1. Clone Plugin Management
+### 1. Clone the Plugin Management plugin
 
 ```bash
 git clone https://github.com/Moonsong-Labs/knowledge-work-plugins.git ~/.config/opencode/plugin-management

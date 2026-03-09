@@ -1,5 +1,5 @@
 /**
- * Moonsong Engineering plugin for OpenCode.ai
+ * Core Engineering plugin for OpenCode.ai
  *
  * Injects skills bootstrap context via system prompt transform.
  * Skills are discovered via OpenCode's native skill tool from symlinked directory.
@@ -69,7 +69,7 @@ When skills reference tools you don't have, substitute OpenCode equivalents:
 - \`Read\`, \`Write\`, \`Edit\`, \`Bash\` → Your native tools
 
 **Skills location:**
-Moonsong Engineering are in \`${configDir}/skills/core-engineering/\`
+Core Engineering are in \`${configDir}/skills/core-engineering/\`
 Use OpenCode's native \`skill\` tool to list and load skills.`;
 
     return `<EXTREMELY_IMPORTANT>

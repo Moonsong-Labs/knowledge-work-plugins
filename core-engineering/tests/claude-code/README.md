@@ -1,6 +1,6 @@
 # Claude Code Skills Tests
 
-Automated tests for Moonsong Engineering using Claude Code CLI.
+Automated tests for the Core Engineering plugin using Claude Code CLI.
 
 ## Overview
 

@@ -14,6 +14,10 @@ Guides you through building a new plugin from scratch via a conversational 5-pha
 4. **Implementation** - generate all plugin files
 5. **Validation** - verify structure and report issues
 
+### writing-skills
+
+Guides you through creating new skills following a TDD process: write failing tests (baseline behavior without the skill), write the skill, verify agents comply, and refactor to close loopholes.
+
 ### plugin-customizer
 
 Adapts distributable plugins for your organization by replacing `~~placeholder` patterns with your specific tool names (e.g., `~~project tracker` → Linear).
