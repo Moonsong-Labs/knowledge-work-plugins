@@ -1,0 +1,37 @@
+name: Plugin Request
+description: Suggest a new plugin for the marketplace
+labels: ["plugin-request"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Plugin name
+      description: "Proposed name (e.g. moonsong-research, moonsong-ops)"
+      placeholder: "moonsong-..."
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What domain or workflow would this plugin cover?
+      placeholder: "This plugin would help with..."
+    validations:
+      required: true
+  - type: textarea
+    id: skills
+    attributes:
+      label: Suggested skills
+      description: What skills should this plugin include?
+      placeholder: |
+        - skill-name: description of what it does
+        - another-skill: description
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Any references, examples, or related tools that inspired this idea?
+    validations:
+      required: false
