@@ -121,7 +121,9 @@ jobs:
             fi
 
             # Only include commits that touch this plugin's directory
-            git log "$RANGE" --pretty=format:"- %s" --no-merges -- "$PLUGIN/"
+            # Exclude docs, typos, and chore commits from the changelog
+            git log "$RANGE" --pretty=format:"- %s" --no-merges -- "$PLUGIN/" \
+              | grep -v -iE '^- (docs|typo|chore|ci|style)(\(.*\))?:' || true
             echo ""
           } > /tmp/changelog-entry.md
 
