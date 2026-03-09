@@ -20,11 +20,13 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-La
 ### Steps
 
 1. Clone the repo:
+
    ```bash
    git clone https://github.com/Moonsong-Labs/knowledge-work-plugins.git ~/.codex/core-engineering
    ```
 
 2. Create the skills symlink:
+
    ```bash
    mkdir -p ~/.agents/skills
    ln -s ~/.codex/core-engineering/core-engineering/skills ~/.agents/skills/core-engineering
@@ -36,7 +38,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-La
 
 Codex has native skill discovery — it scans `~/.agents/skills/` at startup, parses SKILL.md frontmatter, and loads skills on demand. Skills are made visible through a single symlink:
 
-```
+```text
 ~/.agents/skills/core-engineering/ → ~/.codex/core-engineering/core-engineering/skills/
 ```
 
@@ -45,6 +47,7 @@ The `using-skills` skill is discovered automatically and enforces skill usage di
 ## Usage
 
 Skills are discovered automatically. Codex activates them when:
+
 - You mention a skill by name (e.g., "use brainstorming")
 - The task matches a skill's description
 - The `using-skills` skill directs Codex to use one

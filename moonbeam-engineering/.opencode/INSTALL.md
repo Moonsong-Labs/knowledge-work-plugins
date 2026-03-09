@@ -1,4 +1,4 @@
-# Installing the Plugin Management plugin for OpenCode
+# Installing the Moonbeam Engineering plugin for OpenCode
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Create a symlink so OpenCode discovers the skills:
 
 ```bash
 mkdir -p ~/.config/opencode/skills
-ln -s ~/.config/opencode/knowledge-work-plugins/plugin-management/skills ~/.config/opencode/skills/plugin-management
+ln -s ~/.config/opencode/knowledge-work-plugins/moonbeam-engineering/skills ~/.config/opencode/skills/moonbeam-engineering
 ```
 
 ### 3. Restart OpenCode
@@ -32,7 +32,7 @@ Use OpenCode's native `skill` tool to list and load skills:
 
 ```text
 use skill tool to list skills
-use skill tool to load plugin-management/create-plugin
+use skill tool to load moonbeam-engineering/adding-precompiles
 ```
 
 ## Updating
@@ -44,7 +44,7 @@ cd ~/.config/opencode/knowledge-work-plugins && git pull
 ## Uninstalling
 
 ```bash
-rm ~/.config/opencode/skills/plugin-management
+rm ~/.config/opencode/skills/moonbeam-engineering
 ```
 
 Optionally delete the clone: `rm -rf ~/.config/opencode/knowledge-work-plugins`
