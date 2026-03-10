@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "plugin-management",
-      "description": "Create, customize, and manage plugins for AI coding assistants",
+      "description": "Create, customize, and manage plugins for agentic AI assistants",
       "version": "1.0.0",
       "source": "./plugin-management",
       "author": {
