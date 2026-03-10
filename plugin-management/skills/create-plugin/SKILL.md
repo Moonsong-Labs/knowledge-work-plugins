@@ -290,12 +290,21 @@ cd <plugin-dir>
 zip -r /tmp/<plugin-name>.plugin . -x "*.DS_Store"
 ```
 
-Then present the file to the user:
+Then save a copy to the outputs folder AND present the file to the user:
+```bash
+cp /tmp/<plugin-name>.plugin <outputs-dir>/<plugin-name>.plugin
 ```
-mcp__cowork__present_files([{ "file_path": "/tmp/<plugin-name>.plugin" }])
+```
+mcp__cowork__present_files([{ "file_path": "<outputs-dir>/<plugin-name>.plugin" }])
 ```
 
 Tell the user: **"Click 'Copy to your plugins' to install. It will be available in your next session."**
+
+**If `present_files` fails or the user reports an installation error**, provide the `computer://` download link as a fallback:
+```
+[Download your plugin](computer://<outputs-dir>/<plugin-name>.plugin)
+```
+Tell the user they can drag and drop the downloaded `.plugin` file into a Cowork conversation to install it.
 
 **Step 2: Offer sharing options**
 
