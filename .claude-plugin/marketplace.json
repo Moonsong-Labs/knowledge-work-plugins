@@ -8,7 +8,7 @@
     {
       "name": "plugin-management",
       "description": "Create, customize, and manage plugins for agentic AI assistants",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "source": "./plugin-management",
       "author": {
         "name": "Moonsong Labs"
