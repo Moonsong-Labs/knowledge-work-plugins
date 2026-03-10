@@ -25,6 +25,7 @@ jobs:
       (github.event_name == 'workflow_dispatch') ||
       (github.event.pull_request.merged == true &&
        !startsWith(github.event.pull_request.head.ref, 'release/') &&
+       contains(toJSON(github.event.pull_request.labels.*.name), 'plugin:') &&
        contains(toJSON(github.event.pull_request.labels.*.name), 'release:') &&
        !contains(toJSON(github.event.pull_request.labels.*.name), 'release:skip'))
     runs-on: ubuntu-latest
@@ -47,23 +48,23 @@ jobs:
           else
             LABELS='${{ toJSON(github.event.pull_request.labels.*.name) }}'
 
-            # Labels follow the pattern: release:<plugin>:<bump>
-            # e.g. release:core-engineering:patch
+            # Plugin label: plugin:<name> (e.g. plugin:core-engineering)
+            # Bump label: release:<type> (e.g. release:patch)
             PLUGIN=""
             BUMP=""
 
             for label in $(echo "$LABELS" | jq -r '.[]'); do
-              if [[ "$label" =~ ^release:([^:]+):(major|minor|patch)$ ]]; then
+              if [[ "$label" =~ ^plugin:(.+)$ ]]; then
                 PLUGIN="${BASH_REMATCH[1]}"
-                BUMP="${BASH_REMATCH[2]}"
-                break
+              elif [[ "$label" =~ ^release:(major|minor|patch)$ ]]; then
+                BUMP="${BASH_REMATCH[1]}"
               fi
             done
           fi
 
           if [ -z "$PLUGIN" ] || [ -z "$BUMP" ]; then
             echo "No valid release parameters found"
-            echo "  For PRs: add a label like release:core-engineering:patch"
+            echo "  For PRs: add labels 'plugin:<name>' and 'release:<type>'"
             echo "  For manual: provide plugin and bump inputs"
             exit 1
           fi
