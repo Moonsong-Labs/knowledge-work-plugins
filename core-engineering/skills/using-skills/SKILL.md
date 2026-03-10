@@ -90,6 +90,16 @@ When multiple skills could apply, use this order:
 
 The skill itself tells you which.
 
+## Instruction Priority
+
+When instructions conflict, follow this hierarchy:
+
+1. **User preferences** (CLAUDE.md, conversation instructions) — highest priority
+2. **Skills** (invoked skill content) — override system defaults
+3. **System defaults** (model behavior) — lowest priority
+
+Skills define HOW to work. User preferences define WHAT to build and constraints. If a user preference contradicts a skill's process, the preference wins.
+
 ## User Instructions
 
 Instructions say WHAT, not HOW. "Add X" or "Fix Y" doesn't mean skip workflows.
