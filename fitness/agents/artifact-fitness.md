@@ -49,6 +49,10 @@ Return these sections:
 - `Rewrite Brief`
 
 Interaction rules:
-- Present findings first.
-- Ask whether rewrite guidance should run now.
+- Default to completing the assessment without interruption.
+- Ask a question during or after the review only when the answer would materially change the verdict, failed-test mapping, remediation, or rewrite path.
+- Otherwise make a reasonable assumption, state it briefly, and continue.
+- Present findings before offering rewrite guidance.
+- Ask whether rewrite guidance should run now when there are actionable fixes.
+- Do not ask preference questions that only affect tone, formatting, or minor wording.
 - Do not edit files unless explicitly asked.

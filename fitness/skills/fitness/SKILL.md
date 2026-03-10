@@ -43,7 +43,7 @@ Run this workflow in order for each artifact.
    - Use `REJECT` when it is mostly generic, actively misleading, or clearly shaped for the wrong abstraction.
 4. Score the artifact on the eight rubric dimensions.
 5. Turn every negative finding into a failed test plus a concrete remediation pattern.
-6. Synthesize the final review using the required output sections, then ask whether rewrite guidance should run now.
+6. Synthesize the final review using the required output sections, ask targeted questions only when the answer materially changes the assessment or rewrite path, then offer rewrite guidance after findings when there are actionable fixes.
 7. If remediation is requested, produce the smallest rewrite that fixes the accepted issues. Prefer replacement snippets, section moves, example additions, and frontmatter rewrites over generic commentary.
 
 ## Review Helpers
@@ -77,15 +77,25 @@ Use one of:
 - `RETHINK`: the artifact may contain salvageable pieces, but it currently lacks enough unique knowledge or has the wrong shape for the role.
 - `REJECT`: the artifact is mostly generic, misleading, or counterproductive as a reusable skill or subagent.
 
-## Two-Step User Interaction
+## Interaction Policy
 
-After producing each assessment:
-1. Present the findings and rewrite brief
-2. Ask whether rewrite guidance should run now
+Default to completing the assessment without interruption.
+
+Ask a user question during or after the review only when the answer would materially change:
+- the verdict
+- the failed-test or remediation mapping
+- whether the artifact should be kept, narrowed, or collapsed
+- the rewrite path
+
+Otherwise, make a reasonable assumption, state it briefly, and continue.
 
 Platform behavior:
-- **Claude Code**: use ask-user-question behavior when available
-- **Codex**: ask a direct yes/no question in normal response flow
+- **Claude Code**: use AskUserQuestion behavior when available
+- **Codex**: ask directly in normal response flow
+
+Always present findings before offering rewrite guidance.
+Ask whether rewrite guidance should run now when there are actionable fixes.
+Do not ask preference questions that only affect tone, formatting, or minor wording.
 
 If user confirms remediation:
 - Produce targeted rewrite snippets, replacement sections, and concrete edits tied to each failed test

@@ -12,7 +12,7 @@ Expected flow:
 2. Run the existence test before scoring.
 3. Apply the rubric, anti-patterns, artifact adapters, and test-case references.
 4. Produce an opinionated assessment with fixed sections.
-5. Ask whether rewrite guidance should run.
+5. Ask targeted questions only when they materially change the assessment or rewrite path, then offer rewrite guidance after findings when there are actionable fixes.
 
 Expected output sections:
 - `Verdict`

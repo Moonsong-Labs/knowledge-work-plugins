@@ -19,6 +19,7 @@ Do not assume one runtime reads the other's metadata file.
   - run the existence test before scoring
   - use the same verdict ladder
   - require the same review sections
+  - allow targeted user questions only when the answer materially changes the assessment or rewrite path
   - offer rewrite guidance only after findings are presented
 - Allow runtime-specific differences only where the host requires them:
   - Codex uses `agents/openai.yaml` for UI metadata
@@ -32,6 +33,7 @@ When either runtime artifact changes, verify:
 - supported artifact types still match
 - verdict definitions still match
 - required output sections still match
+- targeted-question policy still matches
 - rewrite guidance remains opt-in
 - Claude tool scope remains minimum necessary
 
