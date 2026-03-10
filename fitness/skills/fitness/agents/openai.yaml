@@ -1,0 +1,5 @@
+version: 1
+metadata:
+  display_name: Fitness Assessor
+  short_description: Assess Codex skills and Claude subagents for reusable artifact fitness
+  default_prompt: Assess a Codex skill or Claude subagent for trigger precision, knowledge density, workflow clarity, and remediation readiness. Produce the required review sections, then ask whether to run rewrite guidance.
