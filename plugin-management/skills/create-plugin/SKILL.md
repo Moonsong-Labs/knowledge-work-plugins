@@ -18,6 +18,7 @@ You MUST create a task for each phase and complete them in order:
 3. **Phase 3: Design First Component** - detailed design of the first skill/agent/command
 4. **Phase 4: Implementation** - generate all plugin files
 5. **Phase 5: Validation** - verify structure and report issues
+6. **Phase 6: Installation & Sharing** - install the plugin and optionally publish/share it
 
 ## Phase 1: Discovery
 
@@ -266,6 +267,84 @@ Run these checks and report results:
    ```
 
 After validation, if inside the monorepo, ask whether to register in marketplace.json.
+
+## Phase 6: Installation & Sharing
+
+### 6.1 Environment Detection
+
+Detect the runtime environment to determine available installation paths:
+
+Detection method:
+1. Check if `mcp__cowork__present_files` tool is available → Cowork
+2. Otherwise → CLI environment (Claude Code)
+
+### 6.2 Cowork Path
+
+**Step 1: Package as `.plugin` and install**
+
+Package the plugin as a `.plugin` zip with all contents at the **root of the archive** (not nested inside a parent folder). The archive must contain `.claude-plugin/plugin.json` at root level.
+
+```bash
+# IMPORTANT: zip from inside the plugin directory so contents are at root
+cd <plugin-dir>
+zip -r /tmp/<plugin-name>.plugin . -x "*.DS_Store"
+```
+
+Then present the file to the user:
+```
+mcp__cowork__present_files([{ "file_path": "/tmp/<plugin-name>.plugin" }])
+```
+
+Tell the user: **"Click 'Copy to your plugins' to install. It will be available in your next session."**
+
+**Step 2: Offer sharing options**
+
+Ask if the user wants to share the plugin with others. If yes, offer:
+
+- **Option A: Open a GitHub PR** — Guide the user through opening a PR to the [Moonsong-Labs/knowledge-work-plugins](https://github.com/Moonsong-Labs/knowledge-work-plugins) repository to add the plugin to the marketplace. Help them prepare the necessary files (plugin directory, marketplace.json entry, README update) and explain the PR process.
+- **Option B: Download and share manually** — Tell the user they can download the `.plugin` file and share it directly with teammates
+
+### 6.3 CLI Path (Claude Code)
+
+**Step 1: Install locally**
+```bash
+claude --plugin-dir ./<plugin-name>
+```
+
+**Step 2: Offer publishing options**
+
+Ask if the user wants to publish or share the plugin:
+
+- **Option A: PR to existing marketplace** — Create a branch, commit the plugin directory along with marketplace.json and README updates, push, and open a PR with `gh pr create`
+- **Option B: Share as `.plugin` package** — Package as a `.plugin` zip (same as Cowork path) for sharing with Cowork users
+
+### 6.4 Decision Flowchart
+
+```
+After validation passes
+        │
+        ▼
+  Detect environment
+        │
+        ├─── Cowork ──► .plugin zip → present_files
+        │                    → "Copy to your plugins"
+        │                    │
+        │                    ▼
+        │              Ask: "Want to share?"
+        │               ├─── Yes ──► GitHub PR to marketplace / manual share
+        │               └─── No  ──► Done
+        │
+        └─── CLI ────► claude --plugin-dir
+                             │
+                             ▼
+                       Ask: "Want to publish?"
+                        ├─── Marketplace PR
+                        └─── .plugin package
+```
+
+### Packaging Notes (Cowork install & `.plugin` sharing only)
+
+- `.skill` is for single skills (requires `SKILL.md` at root). `.plugin` is for full plugins (requires `.claude-plugin/plugin.json` at root). Prefer `.plugin` since `create-plugin` produces full plugins
 
 ## When Inside the Monorepo
 
