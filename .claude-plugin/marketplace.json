@@ -17,7 +17,7 @@
     {
       "name": "core-engineering",
       "description": "Software engineering skills for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "source": "./core-engineering",
       "author": {
         "name": "Moonsong Labs"
