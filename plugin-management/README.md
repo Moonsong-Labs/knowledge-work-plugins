@@ -1,6 +1,6 @@
 # Plugin Management
 
-Create, customize, and manage plugins for AI coding assistants. Works with Claude Code, Cursor, CodeX, and OpenCode.
+Create, customize, and manage plugins for agentic AI assistants. Works with Claude Code, Cursor, CodeX, and OpenCode.
 
 ## Skills
 

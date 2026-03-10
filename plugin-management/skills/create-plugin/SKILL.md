@@ -1,13 +1,13 @@
 ---
 name: create-plugin
-description: Use when creating a new plugin for AI coding assistants, scaffolding plugin directory structures, starting a new plugin project from scratch, or porting existing skills from another repository
+description: Use when creating a new plugin for agentic AI assistants, scaffolding plugin directory structures, starting a new plugin project from scratch, or porting existing skills from another repository
 ---
 
 # Create Plugin
 
 ## Overview
 
-Guide users through creating a complete plugin for AI coding assistants (Claude Code, Cursor, CodeX, OpenCode) via a structured conversational workflow. Produces a fully scaffolded plugin directory with platform configs, first component, and validation.
+Guide users through creating a complete plugin for agentic AI assistants (Claude Code, Cursor, CodeX, OpenCode) via a structured conversational workflow. Produces a fully scaffolded plugin directory with platform configs, first component, and validation.
 
 ## Checklist
 

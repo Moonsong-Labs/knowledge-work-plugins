@@ -1,12 +1,12 @@
 # Moonsong Labs Plugins
 
-A collection of plugins for AI coding agents, built on top of composable "skills" and instructions that make sure your agent uses them.
+A collection of plugins for agentic AI assistants, built on top of composable "skills" and instructions that make sure your agent uses them.
 
 ## Plugins
 
 ### [Plugin Management](./plugin-management)
 
-Create, customize, and manage plugins for AI coding assistants. Guides you through scaffolding plugin directories, designing components, and adapting distributable plugins for your organization.
+Create, customize, and manage plugins for agentic AI assistants. Guides you through scaffolding plugin directories, designing components, and adapting distributable plugins for your organization.
 
 ### [Core Engineering](./core-engineering)
 
