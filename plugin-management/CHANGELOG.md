@@ -6,8 +6,6 @@ All notable changes to this project will be documented in this file.
 ## [1.0.1] - 2026-03-10
 
 - feat(plugin-management): make plugin-management cowork agnostic (#15)
-- doc: add installation steps in all plugins (#11)
-
 
 
 ## [1.0.0] - 2026-03-09
