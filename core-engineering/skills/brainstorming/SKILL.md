@@ -28,7 +28,8 @@ You MUST create a task for each of these items and complete them in order:
 3. **Propose 2-3 approaches** — with trade-offs and your recommendation
 4. **Present design** — in sections scaled to their complexity, get user approval after each section
 5. **Write design doc** — save to `docs/plans/YYYY-MM-DD-<topic>-design.md` and commit
-6. **Transition to implementation** — invoke writing-plans skill to create implementation plan
+6. **User reviews written spec** — ask user to review the spec file before proceeding
+7. **Transition to implementation** — invoke writing-plans skill to create implementation plan
 
 ## Process Flow
 
@@ -40,6 +41,8 @@ digraph brainstorming {
     "Present design sections" [shape=box];
     "User approves design?" [shape=diamond];
     "Write design doc" [shape=box];
+    "Spec review loop" [shape=diamond];
+    "User reviews spec?" [shape=diamond];
     "Invoke writing-plans skill" [shape=doublecircle];
 
     "Explore project context" -> "Ask clarifying questions";
@@ -48,7 +51,11 @@ digraph brainstorming {
     "Present design sections" -> "User approves design?";
     "User approves design?" -> "Present design sections" [label="no, revise"];
     "User approves design?" -> "Write design doc" [label="yes"];
-    "Write design doc" -> "Invoke writing-plans skill";
+    "Write design doc" -> "Spec review loop";
+    "Spec review loop" -> "Write design doc" [label="issues found"];
+    "Spec review loop" -> "User reviews spec?" [label="approved"];
+    "User reviews spec?" -> "Write design doc" [label="changes requested"];
+    "User reviews spec?" -> "Invoke writing-plans skill" [label="approved"];
 }
 ```
 
@@ -58,7 +65,9 @@ digraph brainstorming {
 
 **Understanding the idea:**
 - Check out the current project state first (files, docs, recent commits)
-- Ask questions one at a time to refine the idea
+- Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.
+- If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
+- For appropriately-scoped projects, ask questions one at a time to refine the idea
 - Prefer multiple choice questions when possible, but open-ended is fine too
 - Only one question per message - if a topic needs more exploration, break it into multiple questions
 - Focus on understanding: purpose, constraints, success criteria
@@ -82,6 +91,20 @@ digraph brainstorming {
 - Use elements-of-style:writing-clearly-and-concisely skill if available
 - For documentation-heavy projects, dispatch core-engineering:documentation-specialist to review doc quality
 - Commit the design document to git
+
+**Spec Review Loop:**
+After writing the spec document, dispatch a spec document reviewer subagent (see `spec-document-reviewer-prompt.md`):
+
+1. If Approved: proceed to user review gate
+2. If Issues Found: fix, re-dispatch, repeat until Approved
+3. If loop exceeds 5 iterations, surface to human for guidance
+
+**User Review Gate:**
+After the spec review loop passes, ask the user to review the written spec before proceeding:
+
+> "Spec written and committed to `<path>`. Please review it and let me know if you want to make any changes before we start writing out the implementation plan."
+
+Wait for the user's response. If they request changes, make them and re-run the spec review loop. Only proceed once the user approves.
 
 **Implementation:**
 - Invoke the writing-plans skill to create a detailed implementation plan
