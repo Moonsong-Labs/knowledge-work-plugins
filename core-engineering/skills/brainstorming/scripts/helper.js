@@ -1,25 +1,33 @@
 (function() {
-  var evtSource = null;
+  var WS_URL = 'ws://' + window.location.host;
+  var ws = null;
+  var eventQueue = [];
 
-  function connectSSE() {
-    evtSource = new EventSource('/events');
-    evtSource.onmessage = function(msg) {
+  function connect() {
+    ws = new WebSocket(WS_URL);
+
+    ws.onopen = function() {
+      eventQueue.forEach(function(e) { ws.send(JSON.stringify(e)); });
+      eventQueue = [];
+    };
+
+    ws.onmessage = function(msg) {
       var data = JSON.parse(msg.data);
       if (data.type === 'reload') window.location.reload();
     };
-    evtSource.onerror = function() {
-      evtSource.close();
-      setTimeout(connectSSE, 1000);
+
+    ws.onclose = function() {
+      setTimeout(connect, 1000);
     };
   }
 
   function sendEvent(event) {
     event.timestamp = Date.now();
-    fetch('/events', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(event)
-    }).catch(function() {});
+    if (ws && ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify(event));
+    } else {
+      eventQueue.push(event);
+    }
   }
 
   document.addEventListener('click', function(e) {
@@ -41,8 +49,10 @@
       if (selected.length === 0) {
         indicator.textContent = 'Click an option above, then return to the terminal';
       } else if (selected.length === 1) {
-        var label = (selected[0].querySelector('h3, .content h3, .card-body h3') || {}).textContent || selected[0].dataset.choice;
-        indicator.innerHTML = '<span class="selected-text">' + label.trim() + ' selected</span> \u2014 return to terminal to continue';
+        var el = selected[0];
+        var h3 = el.querySelector('h3, .content h3, .card-body h3');
+        var label = (h3 && h3.textContent ? h3.textContent.trim() : null) || el.dataset.choice;
+        indicator.innerHTML = '<span class="selected-text">' + label + ' selected</span> \u2014 return to terminal to continue';
       } else {
         indicator.innerHTML = '<span class="selected-text">' + selected.length + ' selected</span> \u2014 return to terminal to continue';
       }
@@ -70,5 +80,5 @@
     choice: function(value, metadata) { sendEvent(Object.assign({ type: 'choice', value: value }, metadata || {})); }
   };
 
-  connectSSE();
+  connect();
 })();
