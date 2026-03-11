@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       run_llm_tests:
-        description: 'Run LLM-based tests (requires ANTHROPIC_API_KEY secret)'
+        description: 'Run LLM-based tests (requires ANTHROPIC_AUTH_TOKEN secret)'
         required: false
         type: boolean
         default: false
@@ -31,18 +31,18 @@ jobs:
 
       - name: Run skill triggering tests
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
         run: ./core-engineering/tests/skill-triggering/run-all.sh
 
       - name: Run explicit skill request tests
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
         run: ./core-engineering/tests/explicit-skill-requests/run-all.sh
 
       - name: Run Claude Code skill tests
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
         run: ./core-engineering/tests/claude-code/run-skill-tests.sh --timeout 900
