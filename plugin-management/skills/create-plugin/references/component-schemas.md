@@ -83,7 +83,7 @@ Clone-and-symlink pattern (same as CodeX, different paths):
 
 ## Skills (skills/&lt;name&gt;/SKILL.md)
 
-Use `../../../references/skill-standards/README.md` as the canonical contract for skills. New plugin scaffolds should satisfy:
+Use [references/skill-standards/README.md](../../../references/skill-standards/README.md) as the canonical contract for skills. New plugin scaffolds should satisfy:
 
 - `NAME-01`
 - `FRONTMATTER-01`
