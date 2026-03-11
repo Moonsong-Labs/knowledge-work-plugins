@@ -1,0 +1,23 @@
+{
+  "file": "skills/universal-research/SKILL.md",
+  "role": "primary",
+  "status": "needs_improvement",
+  "findings": [
+    {
+      "priority": "P1",
+      "kind": "trigger",
+      "title": "[TRIGGER-01] Trigger fog",
+      "message": "The description is broad enough to trigger on unrelated help requests.",
+      "evidence": "The description says the skill 'helps with research' but does not name concrete tasks, boundaries, or near misses.",
+      "fix": "Rewrite the description around one concrete research job and include an explicit non-goal."
+    },
+    {
+      "priority": "P2",
+      "kind": "pattern",
+      "title": "[STRUCTURE-01] Missing output contract",
+      "message": "Two reasonable agents could produce materially different outputs from the current body.",
+      "evidence": "The instructions describe gathering information but never define required sections, citations, or stopping conditions.",
+      "fix": "Add required output sections and one completion check."
+    }
+  ]
+}
