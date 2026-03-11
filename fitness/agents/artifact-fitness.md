@@ -1,6 +1,6 @@
 ---
 name: artifact-fitness
-description: Use this agent when auditing or refactoring a Codex skill, skill bundle, or Claude subagent for structure, progressive disclosure, trigger quality, or reusable capability fit.
+description: Use this agent when auditing or refactoring a skill, skill bundle, or subagent for structure, progressive disclosure, trigger quality, or reusable capability fit.
 model: inherit
 tools: Read, Grep, Glob
 ---
