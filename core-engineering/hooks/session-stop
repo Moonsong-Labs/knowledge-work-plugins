@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# SessionEnd hook: kill any brainstorm servers started by this plugin
+pkill -f 'node.*/brainstorming/scripts/server\.js' 2>/dev/null
+exit 0
