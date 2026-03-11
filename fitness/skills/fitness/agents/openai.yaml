@@ -2,4 +2,4 @@ version: 1
 metadata:
   display_name: Fitness Reviewer
   short_description: Review skills and subagents with structured findings, topology checks, and refactor plans
-  default_prompt: Audit a Codex skill, skill bundle, or Claude subagent. Review artifact topology and individual files, use structured findings with P1/P2/P3 priorities, then synthesize a compact refactor plan. Do not use numeric scores.
+  default_prompt: Audit a skill, skill bundle, or subagent. Review artifact topology and individual files, use structured findings with P1/P2/P3 priorities, then synthesize a compact refactor plan. Do not use numeric scores.
