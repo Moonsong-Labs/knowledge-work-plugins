@@ -1,7 +1,7 @@
 {
   "name": "plugin-management",
   "description": "Create, review, customize, and manage plugins and reusable agent artifacts",
-  "version": "1.1.0",
+  "version": "1.0.1",
   "author": {
     "name": "Moonsong Labs"
   },
