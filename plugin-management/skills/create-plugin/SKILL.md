@@ -244,7 +244,7 @@ Run these checks and report results:
    - At least one component exists
 
 2. **SKILL.md validation** (for each skill):
-   - Satisfies `NAME-01`, `FRONTMATTER-01`, `TRIGGER-01`, and `TRIGGER-02` from `../../references/skill-standards/README.md`
+   - Satisfies `NAME-01`, `FRONTMATTER-01`, `TRIGGER-01`, and `TRIGGER-02` from [references/skill-standards/README.md](../../references/skill-standards/README.md)
    - Uses the shared standard rather than inventing a local skill contract
 
 3. **Connector validation** (if distributable):
