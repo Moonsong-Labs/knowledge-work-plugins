@@ -17,7 +17,7 @@ You write test cases (pressure scenarios with subagents), watch them fail (basel
 
 **REQUIRED BACKGROUND:** You MUST understand core-engineering:test-driven-development before using this skill. That skill defines the fundamental RED-GREEN-REFACTOR cycle. This skill adapts TDD to documentation.
 
-**Authoring standard:** Use `../../references/skill-standards/README.md` as the source of truth for naming, frontmatter, trigger contracts, progressive disclosure, metadata parity, and example quality.
+**Authoring standard:** Use [references/skill-standards/README.md](../../references/skill-standards/README.md) as the source of truth for naming, frontmatter, trigger contracts, progressive disclosure, metadata parity, and example quality.
 
 ## What is a Skill?
 
