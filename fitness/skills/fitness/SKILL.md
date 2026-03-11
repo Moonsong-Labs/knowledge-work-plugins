@@ -9,8 +9,8 @@ Review reusable agent artifacts as bundles of files, not as essay prompts.
 
 ## Supported Artifacts
 
-- Codex and OpenCode skills rooted at `SKILL.md`
-- Claude subagents with YAML frontmatter
+- Skills rooted at `SKILL.md`
+- Subagents with YAML frontmatter
 - Directly referenced support files that materially affect behavior, such as `references/`, `examples/`, runtime metadata, or bundled scripts
 
 Do not use this skill for generic prompt review, slash commands, or broad documentation audits with no reusable agent behavior.
