@@ -67,7 +67,7 @@ Apply this baseline when reviewing a standalone Claude subagent.
 - The subagent should have a specific purpose and expertise area.
 - The instructions should be detailed enough to execute without guessing the core workflow.
 - Tool access should be the minimum necessary for the job.
-- Use examples, constraints, or explicit structure when the task is fragile or easy to mis-execute.
+- Use examples, constraints, or explicit structure when the task is fragile or easy to misexecute.
 - Output shape, escalation points, and failure handling should be explicit.
 
 Look for:
