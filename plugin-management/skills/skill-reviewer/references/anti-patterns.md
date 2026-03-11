@@ -83,7 +83,7 @@ Use for example quality problems:
 
 ## `tool_scope`
 
-Use for Claude subagent tool issues:
+Use for standalone agent file tool issues:
 - unnecessary tools
 - missing constraints on sensitive tools
 - permissions broader than the task requires

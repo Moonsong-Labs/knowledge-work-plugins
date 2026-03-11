@@ -9,7 +9,7 @@ Validate these scenarios:
 - a skill with a support file linked only from another support file (`TOPOLOGY-01`)
 - a skill with a broken reference from `SKILL.md` (`DISCLOSURE-01`)
 - a skill with orphaned examples or stale `agents/openai.yaml` (`DISCLOSURE-01` or `METADATA-01`)
-- a standalone Claude subagent with no linked support files
+- a standalone agent definition with no linked support files
 
 Expected checks:
 - broken or stale paths are caught as `bundle` findings
@@ -24,7 +24,7 @@ Validate these scenarios:
 - strong example file that matches the current JSON contract
 - weak example file that is generic or still uses legacy score-sheet language (`EXAMPLE-01`)
 - stale or misleading `agents/openai.yaml` (`METADATA-01`)
-- broad, tool-heavy Claude subagent
+- broad, tool-heavy standalone agent definition
 
 Expected checks:
 - file reviewers stay local and do not make package-level worth-keeping calls

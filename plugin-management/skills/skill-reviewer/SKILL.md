@@ -1,6 +1,6 @@
 ---
 name: skill-reviewer
-description: Use when auditing or refactoring a skill, skill bundle, or subagent for trigger quality, bundle structure, metadata parity, progressive disclosure, or reusable capability fit.
+description: Use when auditing or refactoring a reusable agent artifact such as a `SKILL.md` bundle or standalone agent definition for trigger quality, bundle structure, metadata parity, progressive disclosure, or reusable capability fit.
 ---
 
 # Skill Reviewer
@@ -9,8 +9,8 @@ Review reusable agent artifacts as bundles of files, not as essay prompts.
 
 ## Supported Artifacts
 
-- Skills rooted at `SKILL.md`
-- Subagents with YAML frontmatter
+- Artifacts rooted at `SKILL.md`
+- Standalone agent definitions with YAML frontmatter
 - Directly referenced support files that materially affect behavior, such as `references/`, `examples/`, runtime metadata, or bundled scripts
 
 Do not use this skill for generic prompt review, slash commands, or broad documentation audits with no reusable agent behavior.
@@ -21,7 +21,7 @@ Use [references/skill-standards/README.md](../../references/skill-standards/READ
 
 ## Runtime Mapping
 
-Use `references/runtime-targets.md` as the source of truth for which artifact defines behavior in Codex versus Claude.
+Use `references/runtime-targets.md` as the source of truth for host-specific definition files.
 
 ## Core Model
 
@@ -37,11 +37,11 @@ This skill does not use weighted scoring.
 Run this workflow in order for each artifact.
 
 1. Identify the artifact type and the primary file.
-   - For skills, primary is `SKILL.md`.
-   - For standalone Claude subagents, primary is the agent file.
+   - For artifacts rooted at `SKILL.md`, the primary definition file is `SKILL.md`.
+   - For standalone agent definitions, the primary definition file is the agent file.
 2. Build a lightweight manifest using normal file discovery and link reading.
    - Track reviewable files, file roles, direct references, inbound references, and any obviously stale or missing paths.
-   - Treat `agents/openai.yaml` as a required metadata file for Codex skills even if it is not linked from `SKILL.md`.
+   - Treat `agents/openai.yaml` as required runtime metadata when the artifact depends on it, even if it is not linked from `SKILL.md`.
 3. Run a `Topology Reviewer`.
    - Use `references/topology-rules.md` to apply `DISCLOSURE-01`, `TOPOLOGY-01`, `TOPOLOGY-02`, and `METADATA-01`.
    - Return strict JSON only, following `references/reviewer-json.md`.
@@ -93,7 +93,7 @@ Roles:
 - `reference`
 - `example`
 - `metadata`
-- `subagent`
+- `subagent` for standalone agent definition files
 
 Checks:
 - local formatting and clarity

@@ -4,9 +4,9 @@ Use `../../../references/skill-standards/README.md` as the baseline. This file n
 
 ## Primary File
 
-- For skills, the primary file is `SKILL.md`.
-- For standalone Claude subagents, the primary file is the agent file.
-- For Codex skills, `agents/openai.yaml` is load-bearing metadata even if it is not linked from `SKILL.md`.
+- For artifacts rooted at `SKILL.md`, the primary definition file is `SKILL.md`.
+- For standalone agent definitions, the primary definition file is the agent file.
+- Required runtime metadata such as `agents/openai.yaml` is load-bearing even if it is not linked from `SKILL.md`.
 - Prefix titles with the relevant shared rule ID when the topology failure comes from the shared standard.
 
 ## Direct Discoverability
@@ -15,7 +15,7 @@ Use `../../../references/skill-standards/README.md` as the baseline. This file n
 
 Directly discoverable:
 - linked from `SKILL.md`
-- linked from the standalone subagent file
+- linked from the standalone agent file
 - required runtime metadata such as `agents/openai.yaml`
 
 Not directly discoverable:

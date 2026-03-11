@@ -20,7 +20,7 @@ Guides you through creating new skills with a TDD workflow while relying on the 
 
 ### skill-reviewer
 
-Audits a skill bundle or Claude subagent against the shared skill standard by combining topology review, file review, and package-level synthesis.
+Audits reusable agent artifacts such as `SKILL.md` bundles and standalone agent definitions against the shared skill standard by combining topology review, file review, and package-level synthesis.
 
 ### plugin-customizer
 
@@ -30,7 +30,7 @@ Adapts distributable plugins for your organization by replacing `~~placeholder` 
 
 ### artifact-reviewer
 
-A companion agent for Claude and Cursor that applies the same structured reviewer workflow with minimum necessary file-reading tools.
+A companion agent definition that applies the same structured reviewer workflow with minimum necessary file-reading tools.
 
 ## Installation
 

@@ -5,7 +5,7 @@ This file is the single source of truth for repo-local skill best practices.
 Use it when:
 - authoring or editing a skill
 - scaffolding a new skill or plugin
-- reviewing a skill bundle or Claude subagent for quality
+- reviewing a reusable artifact bundle or standalone agent definition for quality
 
 `writing-skills`, `create-plugin`, and `skill-reviewer` should point here rather than restating these rules.
 
@@ -108,7 +108,7 @@ Use small tables or short lists when they improve scanning. Avoid filler prose.
 
 ### `TOPOLOGY-01` Load-bearing files are directly discoverable
 
-A file is load-bearing if the skill depends on it for correct execution.
+A file is load-bearing if the artifact depends on it for correct execution.
 
 Load-bearing files should be directly named by the primary artifact, with one exception:
 - required runtime metadata such as `agents/openai.yaml`
@@ -131,12 +131,12 @@ Do not make the reader discover required behavior by hopping through support fil
 
 ### `METADATA-01` Runtime metadata matches the real job
 
-- `agents/openai.yaml`, plugin metadata, and display names must match the skill’s actual trigger scope and behavior.
+- Runtime metadata such as `agents/openai.yaml`, plugin metadata, and display names must match the artifact's actual trigger scope and behavior.
 - Metadata must not promise unsupported outputs or artifact types.
 
 ### `RUNTIME-01` Multi-runtime artifacts stay aligned
 
-If a capability ships both as a Codex/OpenCode skill and as a Claude/Cursor agent:
+If a capability ships through multiple host-specific definition files:
 
 - keep the same core job
 - keep the same trigger scope
@@ -162,4 +162,4 @@ Reviewer-local docs should map shared-rule failures into reviewer findings inste
 - direct-discoverability failures -> `depth` or `bundle`
 - fragmentation -> `fragmentation`
 
-If a finding is reviewer-only, such as excessive Claude tool access, it does not need a shared rule ID.
+If a finding is reviewer-only, such as overly broad tool access in a standalone agent definition, it does not need a shared rule ID.

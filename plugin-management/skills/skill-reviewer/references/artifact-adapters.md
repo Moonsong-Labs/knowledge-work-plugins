@@ -2,7 +2,7 @@
 
 Use `../../../references/skill-standards/README.md` as the baseline. This file maps shared rule IDs to reviewer-local roles, kinds, and evidence expectations.
 
-## Primary Skill File
+## Primary Definition File (`SKILL.md`)
 
 Apply this baseline when reviewing a `SKILL.md` file.
 
@@ -52,18 +52,18 @@ Look for:
 Apply this baseline when reviewing `agents/openai.yaml`.
 
 - `METADATA-01` covers display name, short description, and prompt accuracy.
-- `RUNTIME-01` covers parity with the Claude/Cursor companion agent when both exist.
+- `RUNTIME-01` covers parity with the companion host-specific definition when both exist.
 
 Look for:
 - runtime alignment
 - stale terminology
 - missing mention of structured findings, rule IDs, or fix planning
 
-## Claude Subagent
+## Standalone Agent File
 
-Apply this baseline when reviewing a standalone Claude subagent.
+Apply this baseline when reviewing a standalone agent definition.
 
-- `STRUCTURE-01` and `RUNTIME-01` cover the job, structure, and parity with the skill runtime.
+- `STRUCTURE-01` and `RUNTIME-01` cover the job, structure, and parity with the companion `SKILL.md`-rooted definition when both exist.
 - Tool access remains reviewer-local and should still use the `tool_scope` finding kind.
 
 Look for:
