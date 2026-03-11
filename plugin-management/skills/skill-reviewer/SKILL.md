@@ -17,7 +17,7 @@ Do not use this skill for generic prompt review, slash commands, or broad docume
 
 ## Shared Standard
 
-Use `../../references/skill-standards/README.md` as the authoring baseline. Local reviewer references map those shared rule IDs to finding kinds, priorities, and output expectations.
+Use [references/skill-standards/README.md](../../references/skill-standards/README.md) as the authoring baseline. Local reviewer references map those shared rule IDs to finding kinds, priorities, and output expectations.
 
 ## Runtime Mapping
 
