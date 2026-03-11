@@ -32,7 +32,7 @@ Use OpenCode's native `skill` tool to list and load skills:
 
 ```text
 use skill tool to list skills
-use skill tool to load plugin-management/create-plugin
+use skill tool to load plugin-management/skill-reviewer
 ```
 
 ## Updating

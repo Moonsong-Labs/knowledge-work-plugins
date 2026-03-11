@@ -1,30 +1,30 @@
 # Artifact Adapters
 
-Use the correct baseline for the artifact type and file role before generating findings.
+Use `../../../references/skill-standards/README.md` as the baseline. This file maps shared rule IDs to reviewer-local roles, kinds, and evidence expectations.
 
 ## Primary Skill File
 
 Apply this baseline when reviewing a `SKILL.md` file.
 
-- Frontmatter should contain only `name` and `description`.
-- `description` is the trigger contract. It should start with `Use when...` and describe triggering conditions rather than summarizing the workflow.
-- The body should stay imperative and lean. Keep only the core workflow in `SKILL.md`.
-- Move bulky detail into one-level-deep `references/`, `examples/`, or scripts only when those files materially improve execution.
-- `agents/openai.yaml` should match the actual behavior and trigger scope.
+- `NAME-01` and `FRONTMATTER-01` usually fail as `formatting`.
+- `TRIGGER-01`, `TRIGGER-02`, and `SEARCH-01` usually fail as `trigger` or `coherence`.
+- `STRUCTURE-01`, `STRUCTURE-02`, and `DISCLOSURE-01` usually fail as `pattern` or `coherence`.
+- `TOPOLOGY-01` and `TOPOLOGY-02` only become local file findings when the problem is visible from the file under review. Otherwise leave them to topology.
+- `METADATA-01` or `RUNTIME-01` mismatches can surface as `coherence` from the primary file when the description/body drift is visible there.
 
 Look for:
 - a concrete reusable workflow, not generic prompt-writing advice
 - a narrow trigger boundary with obvious near-misses that should not trigger
 - output expectations, fallback behavior, and direct file-loading guidance
+- titles prefixed with shared rule IDs when the violation comes from the shared standard
 
 ## Reference File
 
 Apply this baseline when reviewing `references/*.md`.
 
-- The file should deepen one specific area rather than restating the whole skill.
-- The file should be directly discoverable from the primary artifact.
-- The content should improve execution, not act as a second primary workflow.
-- The file should not require another support file to explain its own role.
+- `DISCLOSURE-01` checks whether the file materially reduces primary-file load.
+- `TOPOLOGY-01` and `TOPOLOGY-02` check whether the file is directly discoverable and not part of a multi-hop maze.
+- Use `pattern`, `bundle`, `depth`, or `fragmentation` based on the smallest real problem.
 
 Look for:
 - concise scope
@@ -36,7 +36,7 @@ Look for:
 
 Apply this baseline when reviewing `examples/*`.
 
-- The example should model real desired behavior, not generic filler.
+- `EXAMPLE-01` governs realism, currentness, and regression value.
 - JSON examples should match the actual reviewer contract exactly.
 - Markdown report examples should match the final synthesized output format.
 - Examples should make regression obvious after future edits.
@@ -51,24 +51,20 @@ Look for:
 
 Apply this baseline when reviewing `agents/openai.yaml`.
 
-- Display name and short description should match the current job.
-- Default prompt should describe the findings workflow, not the removed scorecard.
-- Metadata must not promise unsupported artifact types or outputs.
+- `METADATA-01` covers display name, short description, and prompt accuracy.
+- `RUNTIME-01` covers parity with the Claude/Cursor companion agent when both exist.
 
 Look for:
 - runtime alignment
 - stale terminology
-- missing mention of structured findings or fix planning
+- missing mention of structured findings, rule IDs, or fix planning
 
 ## Claude Subagent
 
 Apply this baseline when reviewing a standalone Claude subagent.
 
-- The subagent should have a specific purpose and expertise area.
-- The instructions should be detailed enough to execute without guessing the core workflow.
-- Tool access should be the minimum necessary for the job.
-- Use examples, constraints, or explicit structure when the task is fragile or easy to misexecute.
-- Output shape, escalation points, and failure handling should be explicit.
+- `STRUCTURE-01` and `RUNTIME-01` cover the job, structure, and parity with the skill runtime.
+- Tool access remains reviewer-local and should still use the `tool_scope` finding kind.
 
 Look for:
 - narrow scope rather than "general assistant" behavior

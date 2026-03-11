@@ -1,6 +1,6 @@
 # Plugin Management
 
-Create, customize, and manage plugins for agentic AI assistants. Works with Claude Code, Cursor, CodeX, and OpenCode.
+Create, review, customize, and manage plugins and reusable agent artifacts. Works with Claude Code, Cursor, CodeX, and OpenCode.
 
 ## Skills
 
@@ -16,11 +16,21 @@ Guides you through building a new plugin from scratch via a conversational 5-pha
 
 ### writing-skills
 
-Guides you through creating new skills following a TDD process: write failing tests (baseline behavior without the skill), write the skill, verify agents comply, and refactor to close loopholes.
+Guides you through creating new skills with a TDD workflow while relying on the shared skill standard for naming, trigger contracts, bundle shape, and metadata parity.
+
+### skill-reviewer
+
+Audits a skill bundle or Claude subagent against the shared skill standard by combining topology review, file review, and package-level synthesis.
 
 ### plugin-customizer
 
 Adapts distributable plugins for your organization by replacing `~~placeholder` patterns with your specific tool names (e.g., `~~project tracker` → Linear).
+
+## Agents
+
+### artifact-reviewer
+
+A companion agent for Claude and Cursor that applies the same structured reviewer workflow with minimum necessary file-reading tools.
 
 ## Installation
 

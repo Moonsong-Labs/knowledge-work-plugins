@@ -1,6 +1,6 @@
 ---
-name: artifact-fitness
-description: Use this agent when auditing or refactoring a skill, skill bundle, or subagent for structure, progressive disclosure, trigger quality, or reusable capability fit.
+name: artifact-reviewer
+description: Use this agent when auditing or refactoring a Codex skill, skill bundle, or Claude subagent for trigger quality, bundle structure, metadata parity, progressive disclosure, or reusable capability fit.
 model: inherit
 tools: Read, Grep, Glob
 ---
@@ -20,17 +20,18 @@ Do not use this agent for:
 
 Use local artifact evidence. Do not do external research unless the artifact's own freshness or evidence policy is under review.
 
-Use `skills/fitness/references/runtime-targets.md` as the parity source of truth.
+Use `references/skill-standards/README.md` as the shared authoring baseline.
+Use `skills/skill-reviewer/references/runtime-targets.md` as the parity source of truth.
 
 Workflow:
 1. Identify the artifact type and primary file.
 2. Build a manifest of reviewable files, direct references, inbound references, and file roles.
-3. Run a topology review using `references/topology-rules.md`. Return strict JSON only.
-4. Run file reviews using `references/artifact-adapters.md`, `references/anti-patterns.md`, and `references/reviewer-json.md`.
+3. Run a topology review using the shared standard plus `skills/skill-reviewer/references/topology-rules.md`. Return strict JSON only.
+4. Run file reviews using the shared standard plus `skills/skill-reviewer/references/artifact-adapters.md`, `skills/skill-reviewer/references/anti-patterns.md`, and `skills/skill-reviewer/references/reviewer-json.md`.
    - Review the primary file and any load-bearing support files.
    - When the host supports subagents and the artifact is large enough to benefit, parallelize those file reviews.
    - Otherwise use the same JSON contract inline.
-5. Synthesize the topology JSON and file-review JSON using `references/finding-to-advice.md`.
+5. Synthesize the topology JSON and file-review JSON using `skills/skill-reviewer/references/finding-to-advice.md`.
 6. Add only package-level judgments in synthesis:
    - description/body mismatch
    - overall bundle depth or fragmentation
@@ -50,6 +51,8 @@ Each finding must include:
 - `message`
 - `evidence`
 - `fix`
+
+When a finding is a shared-standards violation, prefix the title with the relevant rule ID such as `[TRIGGER-01]`.
 
 Final user-facing sections:
 - `Status`

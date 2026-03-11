@@ -5,10 +5,10 @@ Use these prompts and checks to validate the topology pass, file reviewers, and 
 ## Topology Review
 
 Validate these scenarios:
-- a well-formed skill with direct references only
-- a skill with a support file linked only from another support file
-- a skill with a broken reference from `SKILL.md`
-- a skill with orphaned examples or stale `agents/openai.yaml`
+- a well-formed skill satisfying `DISCLOSURE-01` and `TOPOLOGY-01`
+- a skill with a support file linked only from another support file (`TOPOLOGY-01`)
+- a skill with a broken reference from `SKILL.md` (`DISCLOSURE-01`)
+- a skill with orphaned examples or stale `agents/openai.yaml` (`DISCLOSURE-01` or `METADATA-01`)
 - a standalone Claude subagent with no linked support files
 
 Expected checks:
@@ -19,11 +19,11 @@ Expected checks:
 ## File Review
 
 Validate these scenarios:
-- strong primary `SKILL.md` with a narrow trigger and lean workflow
-- weak `SKILL.md` with broad trigger language or vague operational guidance
+- strong primary `SKILL.md` satisfying `TRIGGER-01`, `TRIGGER-02`, and `STRUCTURE-01`
+- weak `SKILL.md` with broad trigger language or vague operational guidance (`TRIGGER-01`, `STRUCTURE-01`)
 - strong example file that matches the current JSON contract
-- weak example file that is generic or still uses legacy score-sheet language
-- stale or misleading `agents/openai.yaml`
+- weak example file that is generic or still uses legacy score-sheet language (`EXAMPLE-01`)
+- stale or misleading `agents/openai.yaml` (`METADATA-01`)
 - broad, tool-heavy Claude subagent
 
 Expected checks:
@@ -47,3 +47,4 @@ Expected final output:
 
 Regression check:
 - no numeric scoring language remains in docs or examples
+- shared-standard findings can cite rule IDs without changing the JSON shape

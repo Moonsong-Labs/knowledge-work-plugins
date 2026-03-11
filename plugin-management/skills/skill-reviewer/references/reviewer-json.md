@@ -13,7 +13,7 @@ Topology reviewers and file reviewers must return strict JSON only. No Markdown 
     {
       "priority": "P2",
       "kind": "trigger",
-      "title": "Trigger fog",
+      "title": "[TRIGGER-01] Trigger fog",
       "message": "The description is broader than the workflow it actually teaches.",
       "evidence": "The description promises general research help, but the body only covers market briefs.",
       "fix": "Rewrite the description around market-brief work and add a near-miss boundary."
@@ -33,7 +33,7 @@ Topology reviewers and file reviewers must return strict JSON only. No Markdown 
 
 - `priority`: `P1`, `P2`, or `P3`
 - `kind`: `formatting`, `depth`, `fragmentation`, `coherence`, `trigger`, `pattern`, `metadata`, `examples`, `tool_scope`, or `bundle`
-- `title`: short label
+- `title`: short label; prefix with `[RULE-ID]` when the issue violates the shared skill standard
 - `message`: what is wrong
 - `evidence`: concrete local evidence
 - `fix`: smallest useful repair move

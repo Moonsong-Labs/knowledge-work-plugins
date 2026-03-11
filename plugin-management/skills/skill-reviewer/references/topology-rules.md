@@ -1,16 +1,17 @@
 # Topology Rules
 
-Use this file when reviewing the shape of a skill bundle or subagent bundle before deeper file review.
+Use `../../../references/skill-standards/README.md` as the baseline. This file narrows the topology pass to `DISCLOSURE-01`, `TOPOLOGY-01`, `TOPOLOGY-02`, and `METADATA-01`.
 
 ## Primary File
 
 - For skills, the primary file is `SKILL.md`.
 - For standalone Claude subagents, the primary file is the agent file.
 - For Codex skills, `agents/openai.yaml` is load-bearing metadata even if it is not linked from `SKILL.md`.
+- Prefix titles with the relevant shared rule ID when the topology failure comes from the shared standard.
 
 ## Direct Discoverability
 
-A load-bearing support file should be directly discoverable from the primary file.
+`TOPOLOGY-01` requires load-bearing support files to be directly discoverable from the primary file.
 
 Directly discoverable:
 - linked from `SKILL.md`
@@ -23,7 +24,7 @@ Not directly discoverable:
 
 ## Too Deep
 
-Flag `depth` when a load-bearing file is only reachable through another support file.
+Flag `depth` when a load-bearing file is only reachable through another support file. This is usually a `[TOPOLOGY-01]` or `[TOPOLOGY-02]` failure.
 
 Examples:
 - `SKILL.md` links to `references/index.md`, and only that file links to the real required reference
@@ -33,7 +34,7 @@ If the missing direct link hides required behavior, use `P1`. Otherwise use `P2`
 
 ## Fragmentation
 
-Flag `fragmentation` when the artifact spreads one workflow across too many small support files without adding clarity.
+Flag `fragmentation` when the artifact spreads one workflow across too many small support files without adding clarity. This is usually a `[TOPOLOGY-02]` failure.
 
 Common signals:
 - several tiny references that each contain one rule
@@ -46,7 +47,7 @@ Use `bundle` for:
 - broken relative links
 - stale paths after file renames
 - orphaned load-bearing files
-- support files that do not materially improve execution
+- support files that do not materially improve execution (`DISCLOSURE-01`)
 
 ## Topology Reviewer Output
 

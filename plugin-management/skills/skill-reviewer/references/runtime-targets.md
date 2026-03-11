@@ -5,10 +5,12 @@ Use this file as the single source of truth for runtime-specific packaging.
 ## Route Ownership
 
 - Codex and OpenCode runtime definition:
-  - `skills/fitness/SKILL.md`
-  - `skills/fitness/agents/openai.yaml`
+  - `skills/skill-reviewer/SKILL.md`
+  - `skills/skill-reviewer/agents/openai.yaml`
 - Claude Code and Cursor runtime definition:
-  - `agents/artifact-fitness.md`
+  - `agents/artifact-reviewer.md`
+
+Use `../../../references/skill-standards/README.md` as the shared baseline for both runtimes.
 
 Do not assume one runtime reads the other's metadata file.
 

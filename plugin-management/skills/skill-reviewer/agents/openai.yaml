@@ -1,0 +1,5 @@
+version: 1
+metadata:
+  display_name: Skill Reviewer
+  short_description: Review skills and subagents against shared standards with topology checks and refactor plans
+  default_prompt: Audit a Codex skill, skill bundle, or Claude subagent. Evaluate it against the shared skill standards and local reviewer adapters, use structured findings with P1/P2/P3 priorities, cite rule IDs when relevant, then synthesize a compact refactor plan. Do not use numeric scores.

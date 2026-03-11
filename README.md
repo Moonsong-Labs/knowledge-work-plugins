@@ -6,15 +6,11 @@ A collection of plugins for agentic AI assistants, built on top of composable "s
 
 ### [Plugin Management](./plugin-management)
 
-Create, customize, and manage plugins for agentic AI assistants. Guides you through scaffolding plugin directories, designing components, and adapting distributable plugins for your organization.
+Create, review, customize, and manage plugins and reusable agent artifacts. Includes workflows for scaffolding plugins, writing skills against a shared standard, reviewing skill bundles and subagents, and adapting distributable plugins for your organization.
 
 ### [Core Engineering](./core-engineering)
 
 A complete software engineering workflow: brainstorming, planning, TDD, debugging, code review, and more. Built on composable skills that trigger automatically when your agent encounters relevant tasks.
-
-### [Fitness Reviewer](./fitness)
-
-Review skills and subagents with structured findings, topology checks, and refactor guidance.
 
 ### [Moonbeam Engineering](./moonbeam-engineering)
 

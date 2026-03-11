@@ -1,9 +1,9 @@
 ---
-name: fitness
-description: Use when auditing or refactoring a skill, skill bundle, or subagent for structure, progressive disclosure, trigger quality, or reusable capability fit.
+name: skill-reviewer
+description: Use when auditing or refactoring a Codex skill, skill bundle, or Claude subagent for trigger quality, bundle structure, metadata parity, progressive disclosure, or reusable capability fit.
 ---
 
-# Fitness
+# Skill Reviewer
 
 Review reusable agent artifacts as bundles of files, not as essay prompts.
 
@@ -14,6 +14,10 @@ Review reusable agent artifacts as bundles of files, not as essay prompts.
 - Directly referenced support files that materially affect behavior, such as `references/`, `examples/`, runtime metadata, or bundled scripts
 
 Do not use this skill for generic prompt review, slash commands, or broad documentation audits with no reusable agent behavior.
+
+## Shared Standard
+
+Use `../../references/skill-standards/README.md` as the authoring baseline. Local reviewer references map those shared rule IDs to finding kinds, priorities, and output expectations.
 
 ## Runtime Mapping
 
@@ -39,10 +43,10 @@ Run this workflow in order for each artifact.
    - Track reviewable files, file roles, direct references, inbound references, and any obviously stale or missing paths.
    - Treat `agents/openai.yaml` as a required metadata file for Codex skills even if it is not linked from `SKILL.md`.
 3. Run a `Topology Reviewer`.
-   - Use `references/topology-rules.md` for direct-discoverability, depth, fragmentation, and bundle checks.
+   - Use `references/topology-rules.md` to apply `DISCLOSURE-01`, `TOPOLOGY-01`, `TOPOLOGY-02`, and `METADATA-01`.
    - Return strict JSON only, following `references/reviewer-json.md`.
 4. Run `File Reviewer` passes on the primary file and any load-bearing support files.
-   - Use `references/artifact-adapters.md` for role-specific expectations.
+   - Use `references/artifact-adapters.md` to map shared rule IDs to role-specific expectations.
    - Use `references/anti-patterns.md` for finding kinds and priority calibration.
    - When there are three or more reviewable files and the host supports subagents, parallelize. Otherwise run the same reviewer contract inline.
    - Each file reviewer returns strict JSON only.
@@ -153,6 +157,7 @@ Otherwise make a reasonable assumption, state it briefly, and continue.
 ## References
 
 Load these files as needed:
+- `../../references/skill-standards/README.md`
 - `references/anti-patterns.md`
 - `references/artifact-adapters.md`
 - `references/finding-to-advice.md`
