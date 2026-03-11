@@ -1,7 +1,7 @@
 {
   "name": "fitness",
-  "displayName": "Fitness Assessor",
-  "description": "Assess Codex skills and Claude subagents for reusable artifact fitness, trigger precision, workflow clarity, and remediation readiness",
+  "displayName": "Fitness Reviewer",
+  "description": "Review Codex skills and Claude subagents with structured findings, topology checks, and refactor guidance",
   "version": "1.0.0",
   "author": {
     "name": "Moonsong Labs"

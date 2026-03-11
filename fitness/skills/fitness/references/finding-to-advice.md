@@ -1,45 +1,68 @@
-# Finding to Advice
+# Synthesis Rules
 
-Every negative finding must map to both a failed test and a remediation pattern.
+Use this file during the final pass that turns topology JSON and file-review JSON into one judgment and repair plan.
 
-## Mapping Rules
+## Inputs
 
-Use this shape:
-- `Finding`: what is wrong
-- `Failed test`: the prompt or check that exposes it
-- `Why it matters`: how it weakens reusability
-- `Advice`: the smallest concrete fix
+The synthesizer receives:
+- one topology JSON object
+- zero or more file-review JSON objects
 
-## Common Failure Modes
+Do not rewrite those objects. Collate them.
 
-### Trigger Fog
-- Failed test: a near-miss prompt would still trigger the artifact
-- Advice: rewrite the `description` or opening purpose statement with explicit inclusion and exclusion language
+## Dedupe Rules
 
-### Generic Wrapper
-- Failed test: removing the artifact would not meaningfully reduce work for a capable base model
-- Advice: either add reusable decision structure, domain-specific heuristics, or collapse the artifact into a one-off prompt
+- Treat findings as duplicates when `file`, `kind`, and `evidence` materially match.
+- Prefer the clearer title and fix text when duplicates conflict.
+- If the same issue appears across several files, collapse it into one package-level finding in the final report.
 
-### Missing Decision Surface
-- Failed test: the first missing prerequisite or environment variation leaves no next step
-- Advice: add branches for absent tools, stale inputs, missing auth, or partial failure
+## Escalation Rules
 
-### Missing Output Contract
-- Failed test: two reasonable agents would produce materially different outputs
-- Advice: specify required sections, files, fields, or success checks
+- Escalate to `P1` when the artifact has broken references, invalid runtime metadata, unreadable primary structure, or a misleading primary contract.
+- Escalate repeated `P2` findings in the same category into one package-level `P1` or high `P2` when they reveal a systemic issue.
+- Do not escalate cosmetic issues simply because they are frequent.
 
-### Tool Overreach
-- Failed test: the artifact requests tools or permissions that are not needed for its primary task
-- Advice: remove unnecessary tools and state when escalation is allowed
+## Package-Level Judgments
 
-### Stale Research Posture
-- Failed test: the artifact handles time-sensitive questions without source or freshness rules
-- Advice: add source preference, freshness checks, and a safe fallback when current evidence is unavailable
+Only the synthesizer may add findings for:
+- description/body mismatch
+- overall bundle depth
+- overall fragmentation
+- worth-keeping judgment for the artifact as a reusable capability
 
-### Dead Bundle
-- Failed test: the artifact references files that do not exist or do not materially improve execution
-- Advice: delete the reference or add the missing file with a clear reason to exist
+Ask:
+- What reusable knowledge would be lost if this artifact disappeared?
+- Could a one-off prompt or ordinary documentation replace it without meaningful degradation?
 
-### Untestable Advice
-- Failed test: no concrete prompt, example, or scenario can confirm the artifact works as intended
-- Advice: add trigger examples, regression prompts, and at least one failure-mode scenario
+If the answers point to generic advice, an obvious wrapper, or a misleading abstraction, final status should be `rethink`.
+
+## Refactor Plan Rules
+
+Turn findings into concrete moves. Prefer these verbs:
+- `keep`
+- `cut`
+- `move`
+- `merge`
+- `rewrite`
+- `relink`
+
+Each plan item should name:
+- the file or file set to change
+- the concrete problem being fixed
+- the smallest useful change
+
+## Final Status Rules
+
+- `good`: only minor P3 findings, if any, and no package-level concern
+- `needs_improvement`: worthwhile artifact with fixable P1 or P2 findings
+- `rethink`: structural or conceptual problems make the artifact misleading, too fragmented, or not worth keeping in its current shape
+
+## Final Output Shape
+
+Return these sections only:
+- `Status`
+- `Key Findings`
+- `What To Keep`
+- `Refactor Plan`
+
+Use brief prose or flat bullets. Do not emit numeric scores, weighted averages, or redundant restatements of the same issue.

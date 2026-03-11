@@ -1,34 +1,49 @@
 # Test Cases
 
-Use these prompts and checks to validate both the target artifact and the assessment.
+Use these prompts and checks to validate the topology pass, file reviewers, and final synthesis.
 
-## Existence Tests
+## Topology Review
 
-- Ask: "What reusable knowledge would be lost if this artifact disappeared?"
-- Ask: "Could this be replaced by a one-off prompt without meaningful degradation?"
-- Fail the existence test if the answers point to generic advice, an obvious tool wrapper, or a scope that is too broad to execute consistently.
+Validate these scenarios:
+- a well-formed skill with direct references only
+- a skill with a support file linked only from another support file
+- a skill with a broken reference from `SKILL.md`
+- a skill with orphaned examples or stale `agents/openai.yaml`
+- a standalone Claude subagent with no linked support files
 
-## Codex Skill Prompts
+Expected checks:
+- broken or stale paths are caught as `bundle` findings
+- multi-hop discovery is caught as `depth`
+- file sprawl is caught as `fragmentation`
 
-- Direct hit: `Audit our vendor-risk SKILL.md and tell me whether it is specific enough to keep.`
-- Near miss: `Give me general advice on writing better prompts.`
-- Freshness case: `Review this research skill that claims to answer "latest" questions with citations.`
-- Failure path: `Assess this skill that assumes a CLI is installed and never says what to do if it is missing.`
+## File Review
 
-## Claude Subagent Prompts
+Validate these scenarios:
+- strong primary `SKILL.md` with a narrow trigger and lean workflow
+- weak `SKILL.md` with broad trigger language or vague operational guidance
+- strong example file that matches the current JSON contract
+- weak example file that is generic or still uses legacy score-sheet language
+- stale or misleading `agents/openai.yaml`
+- broad, tool-heavy Claude subagent
 
-- Direct hit: `Review this release-notes subagent for focused scope and tool use.`
-- Near miss: `Make my whole prompt library better.`
-- Tool-overreach case: `Assess this subagent that requests Bash, browser, and Slack for a formatting task.`
-- Structure case: `Review this subagent that has a narrow purpose but no examples or output contract.`
+Expected checks:
+- file reviewers stay local and do not make package-level worth-keeping calls
+- every finding includes priority, evidence, and a concrete fix
+- clean files can return `good` with an empty findings array
 
-## Assessment Output Checks
+## Synthesis
 
-Every `IMPROVE`, `RETHINK`, or `REJECT` review should include:
-- at least one failed test prompt
-- at least one concrete remediation move
-- at least one note about what to cut, add, or move
+Validate these scenarios:
+- repeated file-local findings collapse into one package issue
+- description/body mismatch is caught even when no single file calls it out directly
+- review order does not change the final result
+- small artifacts can skip parallel review without changing the final report format
 
-Every `ADOPT` review should still include:
-- one regression prompt that would protect against future drift
-- one optional tightening suggestion when useful
+Expected final output:
+- `Status`
+- `Key Findings`
+- `What To Keep`
+- `Refactor Plan`
+
+Regression check:
+- no numeric scoring language remains in docs or examples

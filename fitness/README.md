@@ -1,18 +1,18 @@
-# Fitness Assessor
+# Fitness Reviewer
 
-Assess Codex skills and Claude subagents for reusable artifact fitness: trigger precision, knowledge density, workflow clarity, tool scope, and remediation readiness.
+Review Codex skills and Claude subagents with structured findings, topology checks, and compact refactor plans.
 
 ## Skills
 
-### [assessing-artifact-fitness](./skills/assessing-artifact-fitness/SKILL.md)
+### [fitness](./skills/fitness/SKILL.md)
 
-Review a Codex skill or Claude subagent and decide whether it deserves to exist as a reusable capability.
+Audit a skill bundle or Claude subagent by combining topology review, file review, and package-level synthesis.
 
 ## Agents
 
 ### [artifact-fitness](./agents/artifact-fitness.md)
 
-A companion agent for Claude and Cursor that applies the same artifact-fitness review workflow with minimum necessary file-reading tools.
+A companion agent for Claude and Cursor that applies the same structured-findings workflow with minimum necessary file-reading tools.
 
 ## Installation
 

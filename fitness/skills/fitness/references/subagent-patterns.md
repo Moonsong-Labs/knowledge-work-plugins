@@ -4,56 +4,48 @@ Use subagents only when they reduce complexity.
 
 ## When to use them
 
-- The artifact is large enough that structure and rewrite planning would interfere with each other
-- The task spans both Codex-skill and Claude-subagent review
-- A rewrite draft needs to be produced after findings are agreed
+- The artifact has three or more reviewable files
+- File roles are mixed enough that one reviewer would carry too much context
+- Topology review and file review can proceed independently
+- The host supports real subagents or parallel reviewer calls
 
 ## Recommended subagents
 
-### Structure Reviewer
+### Topology Reviewer
 
 Use for:
-- trigger precision
-- unique knowledge density
-- progressive disclosure
-- dead bundles
+- direct discoverability
+- depth and fragmentation
+- broken, stale, or orphaned references
+- bundle shape problems
 
 Prompt shape:
-`Review this artifact for structure and knowledge density only. Do not assess tools or host-specific conventions. Return findings with exact evidence, failed tests, and direct refactoring advice.`
+`Review this artifact topology only. Use the provided manifest and primary file. Check direct discoverability, depth, fragmentation, broken references, and stale paths. Return strict JSON only using the reviewer contract.`
 
-### Codex Skill Reviewer
+### File Reviewer
 
 Use for:
-- Codex-specific frontmatter and progressive disclosure checks
-- reference and `agents/openai.yaml` coherence
-- body discipline relative to the `description` trigger contract
+- one file at a time
+- role-specific quality checks
+- trigger, pattern, metadata, example, or tool-scope findings that are visible locally
 
 Prompt shape:
-`Review this Codex skill against the artifact-fitness baseline. Focus on trigger quality, reusable knowledge, progressive disclosure, and metadata alignment. Return only findings that materially affect reusability.`
+`Review this file in isolation with the supplied role and minimal artifact context. Do not make package-level judgments. Return strict JSON only using the reviewer contract.`
 
-### Claude Subagent Reviewer
+### Synthesizer
 
 Use for:
-- focused-purpose checks
-- least-privilege tool review
-- prompt structure, examples, and constraint review
+- deduping topology and file findings
+- collapsing repeated issues into one package-level issue
+- deciding the final status
+- producing the refactor plan
 
 Prompt shape:
-`Review this Claude subagent for focused scope, minimum necessary tools, clear execution instructions, and example or constraint quality. Return only findings that change adoption readiness.`
-
-### Rewrite Drafter
-
-Use for:
-- replacement frontmatter
-- tighter section structure
-- concrete examples or fallback branches to add
-- targeted rewrite snippets after findings are accepted
-
-Prompt shape:
-`Given these accepted findings, draft the smallest rewrite that fixes them. Preserve the artifact's intent, map each edit to a failed test, and prefer snippets over commentary.`
+`Given topology JSON and file-review JSON, dedupe overlapping findings, add only package-level judgments, decide final status, and return the final report sections. Do not emit numeric scores.`
 
 ## Constraints
 
 - Keep subagents narrow
-- Do not create a fixed pipeline of subagents for every invocation
-- Do not create a subagent only to restate the rubric
+- Do not create a fixed pipeline for tiny artifacts
+- Do not ask file reviewers to decide whether the artifact deserves to exist
+- If the host cannot dispatch subagents, run the same reviewer contracts inline

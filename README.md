@@ -12,9 +12,9 @@ Create, customize, and manage plugins for agentic AI assistants. Guides you thro
 
 A complete software engineering workflow: brainstorming, planning, TDD, debugging, code review, and more. Built on composable skills that trigger automatically when your agent encounters relevant tasks.
 
-### [Fitness Assessor](./fitness)
+### [Fitness Reviewer](./fitness)
 
-Assess Codex skills and Claude subagents for reusable artifact fitness: trigger precision, workflow clarity, tool scope, and remediation guidance.
+Review Codex skills and Claude subagents with structured findings, topology checks, and refactor guidance.
 
 ### [Moonbeam Engineering](./moonbeam-engineering)
 
