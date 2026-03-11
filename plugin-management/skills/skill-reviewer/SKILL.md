@@ -1,6 +1,6 @@
 ---
 name: skill-reviewer
-description: Use when auditing or refactoring a Codex skill, skill bundle, or Claude subagent for trigger quality, bundle structure, metadata parity, progressive disclosure, or reusable capability fit.
+description: Use when auditing or refactoring a skill, skill bundle, or subagent for trigger quality, bundle structure, metadata parity, progressive disclosure, or reusable capability fit.
 ---
 
 # Skill Reviewer
