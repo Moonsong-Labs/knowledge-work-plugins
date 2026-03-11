@@ -1,4 +1,4 @@
-# Installing the Fitness Assessor plugin for OpenCode
+# Installing the Fitness Reviewer plugin for OpenCode
 
 ## Prerequisites
 
