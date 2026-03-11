@@ -14,7 +14,7 @@ A complete software engineering workflow: brainstorming, planning, TDD, debuggin
 
 ### [Fitness Reviewer](./fitness)
 
-Review Codex skills and Claude subagents with structured findings, topology checks, and refactor guidance.
+Review skills and subagents with structured findings, topology checks, and refactor guidance.
 
 ### [Moonbeam Engineering](./moonbeam-engineering)
 
