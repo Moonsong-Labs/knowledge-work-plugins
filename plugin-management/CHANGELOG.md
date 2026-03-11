@@ -5,12 +5,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.1.0] - 2026-03-11
 
-- feat: ✨ Add `fitness` skill (#19)
-- fix(plugin-management): make plugin-management cowork agnostic (#17)
-
-
-
-
+- feat(plugin-management): add `skill-reviewer` and `artifact-reviewer` (#19)
 
 ## [1.0.1] - 2026-03-10
 
