@@ -1,8 +1,8 @@
 {
   "name": "plugin-management",
   "displayName": "Plugin Management",
-  "description": "Create, customize, and manage plugins for agentic AI assistants",
-  "version": "1.0.1",
+  "description": "Create, review, customize, and manage plugins and reusable agent artifacts",
+  "version": "1.1.0",
   "author": {
     "name": "Moonsong Labs"
   },
@@ -13,10 +13,14 @@
     "scaffolding",
     "plugin-creation",
     "plugin-management",
-    "customization"
+    "customization",
+    "skills",
+    "skill-review",
+    "subagents",
+    "artifact-review"
   ],
   "skills": "./skills/",
-  "agents": "",
+  "agents": "./agents/",
   "commands": "",
   "hooks": ""
 }
