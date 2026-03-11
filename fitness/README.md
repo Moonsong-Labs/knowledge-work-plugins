@@ -1,6 +1,6 @@
 # Fitness Reviewer
 
-Review Codex skills and Claude subagents with structured findings, topology checks, and compact refactor plans.
+Review skills and subagents with structured findings, topology checks, and compact refactor plans.
 
 ## Skills
 
