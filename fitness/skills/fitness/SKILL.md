@@ -1,6 +1,6 @@
 ---
 name: fitness
-description: Use when auditing or refactoring a Codex skill, skill bundle, or Claude subagent for structure, progressive disclosure, trigger quality, or reusable capability fit.
+description: Use when auditing or refactoring a skill, skill bundle, or subagent for structure, progressive disclosure, trigger quality, or reusable capability fit.
 ---
 
 # Fitness
