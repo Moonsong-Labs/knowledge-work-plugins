@@ -83,10 +83,20 @@ Clone-and-symlink pattern (same as CodeX, different paths):
 
 ## Skills (skills/&lt;name&gt;/SKILL.md)
 
-### Frontmatter (YAML)
+Use [references/skill-standards/README.md](../../../references/skill-standards/README.md) as the canonical contract for skills. New plugin scaffolds should satisfy:
 
-- `name`: letters, numbers, hyphens only. No parentheses or special characters.
-- `description`: Max 1024 chars total. Start with "Use when...". Third person. Describe ONLY triggering conditions, never summarize the workflow.
+- `NAME-01`
+- `FRONTMATTER-01`
+- `TRIGGER-01`
+- `TRIGGER-02`
+- `SEARCH-01`
+- `STRUCTURE-01`
+- `STRUCTURE-02`
+- `DISCLOSURE-01`
+- `EXAMPLE-01`
+- `METADATA-01`
+
+### Minimum frontmatter stub
 
 ```yaml
 ---
@@ -95,7 +105,9 @@ description: Use when [specific triggering conditions and symptoms]
 ---
 ```
 
-### Body Structure
+### Minimum body scaffold
+
+The first generated skill should follow the shared standard. For stubs, keep the default structure lean and easy to expand:
 
 ```markdown
 # Skill Name
@@ -119,6 +131,8 @@ Inline code or link to separate file.
 ## Common Mistakes
 What goes wrong + fixes.
 ```
+
+If a skill needs heavy references, examples, or runtime metadata, add them only when they materially improve execution and keep them directly discoverable from `SKILL.md`.
 
 ---
 

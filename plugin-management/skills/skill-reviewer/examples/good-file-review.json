@@ -1,0 +1,15 @@
+{
+  "file": "skills/market-brief/SKILL.md",
+  "role": "primary",
+  "status": "good",
+  "findings": [
+    {
+      "priority": "P3",
+      "kind": "pattern",
+      "title": "Optional fallback could be sharper",
+      "message": "The workflow is complete, but one unavailable-provider branch is implied rather than stated.",
+      "evidence": "The body defines source policy and output shape, but does not explicitly say what to do when the premium database is unavailable.",
+      "fix": "Add one short fallback branch that switches to official and public sources when the premium provider is unavailable."
+    }
+  ]
+}
