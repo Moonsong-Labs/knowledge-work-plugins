@@ -71,7 +71,7 @@ API docs, syntax guides, tool documentation (office docs)
 
 ## Authoring Standard
 
-Use `../../references/skill-standards/README.md` as the single source of truth for:
+Use [references/skill-standards/README.md](../../references/skill-standards/README.md) as the single source of truth for:
 
 - `NAME-01` and `FRONTMATTER-01` for skill naming and frontmatter
 - `TRIGGER-01`, `TRIGGER-02`, and `SEARCH-01` for descriptions and discoverability
