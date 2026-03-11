@@ -196,9 +196,8 @@ jobs:
       - name: Determine plugin and create release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.event.pull_request.head.ref }}
         run: |
-          BRANCH="${{ github.event.pull_request.head.ref }}"
-
           # Extract plugin name from branch: release/<plugin>/v<version>
           PLUGIN=$(echo "$BRANCH" | sed -n 's|^release/\(.*\)/v.*$|\1|p')
 

@@ -1,0 +1,37 @@
+name: Skills Spec
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/SKILL.md"
+  pull_request:
+    paths:
+      - "**/SKILL.md"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install skills-ref
+        run: >-
+          python3 -m pip install
+          "git+https://github.com/agentskills/agentskills.git@0c61f1efc081cbb1ffe3420f6bbcb5b08920e133#subdirectory=skills-ref"
+      - name: Validate skills
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r skill_dir; do
+            skills-ref validate "$skill_dir"
+          done < <(
+            find . -path '*/SKILL.md' -print0 \
+              | xargs -0 -n1 dirname \
+              | sort -u
+          )

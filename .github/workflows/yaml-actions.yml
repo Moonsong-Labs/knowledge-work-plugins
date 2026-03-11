@@ -1,0 +1,42 @@
+name: YAML and Actions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/**/*.yml"
+      - ".github/**/*.yaml"
+      - ".yamllint.yml"
+  pull_request:
+    paths:
+      - ".github/**/*.yml"
+      - ".github/**/*.yaml"
+      - ".yamllint.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install yamllint
+        run: python3 -m pip install yamllint==1.38.0
+      - name: Lint GitHub YAML
+        run: yamllint .github
+
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+      - name: Install actionlint
+        run: go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.9
+      - name: Lint GitHub Actions workflows
+        run: PATH="$(go env GOPATH)/bin:$PATH" actionlint

@@ -9,7 +9,7 @@ description: Use when creating new skills, editing existing skills, or verifying
 
 **Writing skills IS Test-Driven Development applied to process documentation.**
 
-**Personal skills live in agent-specific directories (`~/.claude/skills` for Claude Code, `~/.agents/skills/` for Codex)** 
+**Personal skills live in agent-specific directories (`~/.claude/skills` for Claude Code, `~/.agents/skills/` for Codex)**
 
 You write test cases (pressure scenarios with subagents), watch them fail (baseline behavior), write the skill (documentation), watch tests pass (agents comply), and refactor (close loopholes).
 
@@ -70,7 +70,6 @@ Way of thinking about problems (flatten-with-flags, test-invariants)
 API docs, syntax guides, tool documentation (office docs)
 
 ## Directory Structure
-
 
 ```
 skills/
@@ -135,7 +134,6 @@ What goes wrong + fixes
 ## Real-World Impact (optional)
 Concrete results
 ```
-
 
 ## Claude Search Optimization (CSO)
 
