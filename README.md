@@ -71,6 +71,27 @@ Start a new session in your chosen platform and ask for something that should tr
 
 ## Contributing
 
+### Development
+
+To run the root `just check` and `just test` recipes locally, install these CLIs and make sure they are on your `PATH`:
+
+- `just`
+- `bun` (provides `bunx` for `markdownlint-cli2` and `shellcheck`)
+- `go` (used via `go run` for `shfmt` and `actionlint`)
+- `yamllint`
+- `typos`
+- `skills-ref`
+- `claude` (Claude Code CLI)
+- `jq`
+- `node` and `npm`
+- `python3`
+- `git`
+- GNU `timeout` (`coreutils`; on macOS you may need to install it separately so `timeout` is available in `PATH`)
+
+You do not need to install `markdownlint-cli2`, `shellcheck`, `shfmt`, or `actionlint` separately because the root [justfile](./justfile) runs them through `bunx` and `go run`.
+
+The Claude-based test suites also expect the local plugin to be enabled. This can be most easily be enabled via the `--plugin-dir` command line option.
+
 ### Adding a skill to an existing plugin
 
 The `writing-skills` skill in the `plugin-management` plugin guides you through creating and testing new skills.
