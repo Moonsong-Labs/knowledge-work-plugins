@@ -244,10 +244,8 @@ Run these checks and report results:
    - At least one component exists
 
 2. **SKILL.md validation** (for each skill):
-   - Has YAML frontmatter with `name` and `description`
-   - `name` uses only letters, numbers, hyphens
-   - `description` starts with "Use when" (or is a TODO stub)
-   - Frontmatter total under 1024 characters
+   - Satisfies `NAME-01`, `FRONTMATTER-01`, `TRIGGER-01`, and `TRIGGER-02` from [references/skill-standards/README.md](../../references/skill-standards/README.md)
+   - Uses the shared standard rather than inventing a local skill contract
 
 3. **Connector validation** (if distributable):
    - Every `~~placeholder` in content files has an entry in CONNECTORS.md

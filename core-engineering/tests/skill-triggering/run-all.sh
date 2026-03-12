@@ -34,7 +34,7 @@ for skill in "${SKILLS[@]}"; do
 
     echo "Testing: $skill"
 
-    if "$SHARED_RUNNER" "$skill" "$prompt_file" 3 2>&1 | tee /tmp/skill-test-$skill.log; then
+    if "$SHARED_RUNNER" "$skill" "$prompt_file" 3 2>&1 | tee "/tmp/skill-test-$skill.log"; then
         PASSED=$((PASSED + 1))
         RESULTS+=("✅ $skill")
     else

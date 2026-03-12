@@ -6,7 +6,7 @@ A collection of plugins for agentic AI assistants, built on top of composable "s
 
 ### [Plugin Management](./plugin-management)
 
-Create, customize, and manage plugins for agentic AI assistants. Guides you through scaffolding plugin directories, designing components, and adapting distributable plugins for your organization.
+Create, review, customize, and manage plugins and reusable agent artifacts. Includes workflows for scaffolding plugins, writing skills against a shared standard, reviewing skill bundles and subagents, and adapting distributable plugins for your organization.
 
 ### [Core Engineering](./core-engineering)
 
@@ -70,6 +70,27 @@ Start a new session in your chosen platform and ask for something that should tr
 - **Evidence over claims** - Verify before declaring success
 
 ## Contributing
+
+### Development
+
+To run the root `just check` and `just test` recipes locally, install these CLIs and make sure they are on your `PATH`:
+
+- `just`
+- `bun` (provides `bunx` for `markdownlint-cli2` and `shellcheck`)
+- `go` (used via `go run` for `shfmt` and `actionlint`)
+- `yamllint`
+- `typos`
+- `skills-ref`
+- `claude` (Claude Code CLI)
+- `jq`
+- `node` and `npm`
+- `python3`
+- `git`
+- GNU `timeout` (`coreutils`; on macOS you may need to install it separately so `timeout` is available in `PATH`)
+
+You do not need to install `markdownlint-cli2`, `shellcheck`, `shfmt`, or `actionlint` separately because the root [justfile](./justfile) runs them through `bunx` and `go run`.
+
+The Claude-based test suites also expect the local plugin to be enabled. This can be most easily be enabled via the `--plugin-dir` command line option.
 
 ### Adding a skill to an existing plugin
 

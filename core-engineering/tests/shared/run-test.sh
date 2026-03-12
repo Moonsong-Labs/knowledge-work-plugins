@@ -47,7 +47,7 @@ PROJECT_DIR="$OUTPUT_DIR/project"
 mkdir -p "$PROJECT_DIR/docs/plans"
 
 # Create a dummy plan file for mid-conversation tests
-cat > "$PROJECT_DIR/docs/plans/auth-system.md" << 'EOF'
+cat >"$PROJECT_DIR/docs/plans/auth-system.md" <<'EOF'
 # Auth System Implementation Plan
 
 ## Task 1: Add User Model
@@ -77,7 +77,7 @@ timeout --foreground 300 claude -p "$PROMPT" \
     --max-turns "$MAX_TURNS" \
     --verbose \
     --output-format stream-json \
-    > "$LOG_FILE" 2>&1 || true
+    >"$LOG_FILE" 2>&1 || true
 
 echo ""
 echo "=== Results ==="
@@ -108,10 +108,10 @@ FIRST_SKILL_LINE=$(grep -n '"name":"Skill"' "$LOG_FILE" | head -1 | cut -d: -f1)
 if [ -n "$FIRST_SKILL_LINE" ]; then
     # Check if any non-Skill, non-system tools were invoked before the first Skill invocation
     # Filter out system messages, TodoWrite (planning is ok), and other non-action tools
-    PREMATURE_TOOLS=$(head -n "$FIRST_SKILL_LINE" "$LOG_FILE" | \
-        grep '"type":"tool_use"' | \
-        grep -v '"name":"Skill"' | \
-        grep -v '"name":"TodoWrite"' | \
+    PREMATURE_TOOLS=$(head -n "$FIRST_SKILL_LINE" "$LOG_FILE" |
+        grep '"type":"tool_use"' |
+        grep -v '"name":"Skill"' |
+        grep -v '"name":"TodoWrite"' |
         grep -v '"name":"ToolSearch"' || true)
     if [ -n "$PREMATURE_TOOLS" ]; then
         echo "WARNING: Tools invoked BEFORE Skill tool:"

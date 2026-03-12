@@ -8,13 +8,20 @@ unset CLAUDECODE 2>/dev/null || true
 HELPERS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PLUGIN_DIR="$(cd "$HELPERS_DIR/../.." && pwd)"
 
+print_indented() {
+    while IFS= read -r line; do
+        printf '    %s\n' "$line"
+    done <<<"$1"
+}
+
 # Run Claude Code with a prompt and capture output
 # Usage: run_claude "prompt text" [timeout_seconds] [allowed_tools]
 run_claude() {
     local prompt="$1"
     local timeout="${2:-60}"
     local allowed_tools="${3:-}"
-    local output_file=$(mktemp)
+    local output_file=""
+    output_file=$(mktemp)
 
     # Build command
     local cmd="claude -p \"$prompt\" --plugin-dir \"$PLUGIN_DIR\""
@@ -23,7 +30,7 @@ run_claude() {
     fi
 
     # Run Claude in headless mode with timeout
-    if timeout --foreground "$timeout" bash -c "$cmd" > "$output_file" 2>&1; then
+    if timeout --foreground "$timeout" bash -c "$cmd" >"$output_file" 2>&1; then
         cat "$output_file"
         rm -f "$output_file"
         return 0
@@ -49,7 +56,7 @@ assert_contains() {
         echo "  [FAIL] $test_name"
         echo "  Expected to find: $pattern"
         echo "  In output:"
-        echo "$output" | sed 's/^/    /'
+        print_indented "$output"
         return 1
     fi
 }
@@ -65,7 +72,7 @@ assert_not_contains() {
         echo "  [FAIL] $test_name"
         echo "  Did not expect to find: $pattern"
         echo "  In output:"
-        echo "$output" | sed 's/^/    /'
+        print_indented "$output"
         return 1
     else
         echo "  [PASS] $test_name"
@@ -80,8 +87,8 @@ assert_count() {
     local pattern="$2"
     local expected="$3"
     local test_name="${4:-test}"
-
-    local actual=$(echo "$output" | grep -ci "$pattern" || echo "0")
+    local actual=""
+    actual=$(echo "$output" | grep -ci "$pattern" || echo "0")
 
     if [ "$actual" -eq "$expected" ]; then
         echo "  [PASS] $test_name (found $actual instances)"
@@ -91,7 +98,7 @@ assert_count() {
         echo "  Expected $expected instances of: $pattern"
         echo "  Found $actual instances"
         echo "  In output:"
-        echo "$output" | sed 's/^/    /'
+        print_indented "$output"
         return 1
     fi
 }
@@ -103,10 +110,12 @@ assert_order() {
     local pattern_a="$2"
     local pattern_b="$3"
     local test_name="${4:-test}"
+    local pos_a=""
+    local pos_b=""
 
     # Get byte offset where patterns first appear
-    local pos_a=$(echo "$output" | grep -boi "$pattern_a" | head -1 | cut -d: -f1)
-    local pos_b=$(echo "$output" | grep -boi "$pattern_b" | head -1 | cut -d: -f1)
+    pos_a=$(echo "$output" | grep -boi "$pattern_a" | head -1 | cut -d: -f1)
+    pos_b=$(echo "$output" | grep -boi "$pattern_b" | head -1 | cut -d: -f1)
 
     if [ -z "$pos_a" ]; then
         echo "  [FAIL] $test_name: pattern A not found: $pattern_a"
@@ -132,7 +141,8 @@ assert_order() {
 # Create a temporary test project directory
 # Usage: test_project=$(create_test_project)
 create_test_project() {
-    local test_dir=$(mktemp -d)
+    local test_dir=""
+    test_dir=$(mktemp -d)
     echo "$test_dir"
 }
 
@@ -154,7 +164,7 @@ create_test_plan() {
 
     mkdir -p "$(dirname "$plan_file")"
 
-    cat > "$plan_file" <<'EOF'
+    cat >"$plan_file" <<'EOF'
 # Test Implementation Plan
 
 ## Task 1: Create Hello Function

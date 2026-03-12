@@ -13,26 +13,26 @@ jobs:
     name: LLM-based tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        test-type:
+          - test-skill-triggering
+          - test-explicit-skill-requests
+          - test-claude-code
+
     steps:
       - uses: actions/checkout@v4
+
+      - uses: extractions/setup-just@v3
+        with:
+          just-version: "1.46.0"
 
       - name: Install Claude Code CLI
         run: npm install -g @anthropic-ai/claude-code@latest
 
-      - name: Run skill triggering tests
+      - name: Run ${{ matrix.test-type }}
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
-        run: ./core-engineering/tests/skill-triggering/run-all.sh
-
-      - name: Run explicit skill request tests
-        env:
-          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
-          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
-        run: ./core-engineering/tests/explicit-skill-requests/run-all.sh
-
-      - name: Run Claude Code skill tests
-        env:
-          ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
-          ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
-        run: ./core-engineering/tests/claude-code/run-skill-tests.sh --timeout 900
+        run: just ${{ matrix.test-type }}

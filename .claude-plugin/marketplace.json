@@ -8,7 +8,7 @@
     {
       "name": "plugin-management",
       "description": "Create, customize, and manage plugins for agentic AI assistants",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "source": "./plugin-management",
       "author": {
         "name": "Moonsong Labs"
@@ -17,7 +17,7 @@
     {
       "name": "core-engineering",
       "description": "Software engineering skills for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "source": "./core-engineering",
       "author": {
         "name": "Moonsong Labs"

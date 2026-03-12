@@ -26,12 +26,12 @@ TEST_PROJECT=$(create_test_project)
 echo "Test project: $TEST_PROJECT"
 
 # Trap to cleanup
-trap "cleanup_test_project $TEST_PROJECT" EXIT
+trap 'cleanup_test_project "$TEST_PROJECT"' EXIT
 
 # Set up minimal Node.js project
 cd "$TEST_PROJECT"
 
-cat > package.json <<'EOF'
+cat >package.json <<'EOF'
 {
   "name": "test-project",
   "version": "1.0.0",
@@ -45,7 +45,7 @@ EOF
 mkdir -p src test docs/plans
 
 # Create a simple implementation plan
-cat > docs/plans/implementation-plan.md <<'EOF'
+cat >docs/plans/implementation-plan.md <<'EOF'
 # Test Implementation Plan
 
 This is a minimal plan to test the subagent-driven-development workflow.
@@ -121,7 +121,7 @@ echo ""
 OUTPUT_FILE="$TEST_PROJECT/claude-output.txt"
 
 # Create prompt file
-cat > "$TEST_PROJECT/prompt.txt" <<'EOF'
+cat >"$TEST_PROJECT/prompt.txt" <<'EOF'
 I want you to execute the implementation plan at docs/plans/implementation-plan.md using the subagent-driven-development skill.
 
 IMPORTANT: Follow the skill exactly. I will be verifying that you:
@@ -150,12 +150,16 @@ Begin now. Execute the plan."
 
 echo "Running Claude (output will be shown below and saved to $OUTPUT_FILE)..."
 echo "================================================================================"
-cd "$SCRIPT_DIR/../.." && timeout --foreground 1800 claude -p "$PROMPT" --allowed-tools=all --add-dir "$TEST_PROJECT" --permission-mode bypassPermissions 2>&1 | tee "$OUTPUT_FILE" || {
+cd "$SCRIPT_DIR/../.."
+if timeout --foreground 1800 claude -p "$PROMPT" --allowed-tools=all --add-dir "$TEST_PROJECT" --permission-mode bypassPermissions 2>&1 | tee "$OUTPUT_FILE"; then
+    :
+else
+    exit_code=$?
     echo ""
     echo "================================================================================"
-    echo "EXECUTION FAILED (exit code: $?)"
+    echo "EXECUTION FAILED (exit code: $exit_code)"
     exit 1
-}
+fi
 echo "================================================================================"
 
 echo ""
@@ -263,7 +267,7 @@ else
 fi
 
 # Try running tests
-if cd "$TEST_PROJECT" && npm test > test-output.txt 2>&1; then
+if cd "$TEST_PROJECT" && npm test >test-output.txt 2>&1; then
     echo "  [PASS] Tests pass"
 else
     echo "  [FAIL] Tests failed"
@@ -275,7 +279,7 @@ echo ""
 # Test 7: Git commits show proper workflow
 echo "Test 7: Git commit history..."
 commit_count=$(git -C "$TEST_PROJECT" log --oneline | wc -l | tr -d ' ')
-if [ "$commit_count" -gt 2 ]; then  # Initial + at least 2 task commits
+if [ "$commit_count" -gt 2 ]; then # Initial + at least 2 task commits
     echo "  [PASS] Multiple commits created ($commit_count total)"
 else
     echo "  [FAIL] Too few commits ($commit_count, expected >2)"
