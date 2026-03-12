@@ -15,8 +15,14 @@ echo "Test time: $(date)"
 echo "Claude version: $(claude --version 2>/dev/null || echo 'not found')"
 echo ""
 
+print_indented() {
+    while IFS= read -r line; do
+        printf '    %s\n' "$line"
+    done <<<"$1"
+}
+
 # Check if Claude Code is available
-if ! command -v claude &> /dev/null; then
+if ! command -v claude &>/dev/null; then
     echo "ERROR: Claude Code CLI not found"
     echo "Install Claude Code first: https://code.claude.com"
     exit 1
@@ -25,16 +31,16 @@ fi
 # Parse command line arguments
 VERBOSE=false
 SPECIFIC_TEST=""
-TIMEOUT=300  # Default 5 minute timeout per test
+TIMEOUT=300 # Default 5 minute timeout per test
 RUN_INTEGRATION=false
 
 while [[ $# -gt 0 ]]; do
     case $1 in
-        --verbose|-v)
+        --verbose | -v)
             VERBOSE=true
             shift
             ;;
-        --test|-t)
+        --test | -t)
             SPECIFIC_TEST="$2"
             shift 2
             ;;
@@ -42,11 +48,11 @@ while [[ $# -gt 0 ]]; do
             TIMEOUT="$2"
             shift 2
             ;;
-        --integration|-i)
+        --integration | -i)
             RUN_INTEGRATION=true
             shift
             ;;
-        --help|-h)
+        --help | -h)
             echo "Usage: $0 [options]"
             echo ""
             echo "Options:"
@@ -160,7 +166,7 @@ for test in "${tests[@]}"; do
             fi
             echo ""
             echo "  Output:"
-            echo "$output" | sed 's/^/    /'
+            print_indented "$output"
             failed=$((failed + 1))
         fi
     fi
