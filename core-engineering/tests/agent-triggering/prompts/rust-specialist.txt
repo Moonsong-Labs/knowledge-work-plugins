@@ -1,0 +1,13 @@
+I have an implementation plan for a new caching layer. Here's Task 3:
+
+## Task 3: Implement the LRU cache with TTL support
+
+Create `src/cache/lru.rs` with:
+- Generic `LruCache<K, V>` struct with configurable capacity and TTL
+- Thread-safe access using `Arc<RwLock<_>>`
+- Eviction on capacity overflow and TTL expiry
+- Unit tests covering concurrent access patterns
+
+The project uses tokio for async runtime. Work from the `engine/` directory.
+
+Please implement this task using the subagent-driven-development workflow.

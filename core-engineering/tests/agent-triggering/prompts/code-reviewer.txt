@@ -1,0 +1,9 @@
+I've completed implementing the full authentication system — user model, auth routes,
+JWT middleware, and password reset flow. This covers steps 1-4 of our implementation
+plan at docs/plans/auth-system.md. All 23 tests pass.
+
+I need a thorough review of this implementation: plan alignment, code quality,
+architecture, test coverage, and security. The changes span 8 files across
+src/auth/, src/middleware/, and tests/auth/.
+
+Can you do a comprehensive review before I create the PR?
