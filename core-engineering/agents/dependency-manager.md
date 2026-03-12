@@ -1,7 +1,12 @@
 ---
 name: dependency-manager
 description: |
-  Use this agent for dependency management tasks including vulnerability scanning, version conflict resolution, dependency audits, and bundle optimization across ecosystems. Examples: <example>Context: The user wants to check their project for known vulnerabilities. user: "Can you scan our dependencies for security vulnerabilities and suggest fixes?" assistant: "Let me use the dependency-manager agent to perform a comprehensive vulnerability scan and provide remediation steps" <commentary>Security vulnerability scanning across the dependency tree is a core capability of the dependency-manager agent.</commentary></example> <example>Context: The user is dealing with conflicting dependency versions. user: "We're getting version conflicts after upgrading React - several packages need incompatible versions of a shared dependency" assistant: "Let me bring in the dependency-manager agent to analyze the conflict and find a resolution strategy" <commentary>Version conflict resolution requires understanding semver, peer dependencies, and resolution strategies - ideal for the dependency-manager agent.</commentary></example> <example>Context: The user wants to reduce their bundle size by auditing dependencies. user: "Our bundle has gotten huge - I want to find unnecessary or oversized dependencies we can replace or remove" assistant: "Let me use the dependency-manager agent to audit the dependency tree for size impact and identify optimization opportunities" <commentary>Dependency auditing for bundle optimization involves analyzing the full dependency tree, finding duplicates, and suggesting lighter alternatives.</commentary></example>
+  Use proactively when working with dependencies — package.json, Cargo.toml,
+  go.mod, pyproject.toml, requirements.txt, pom.xml, build.gradle.
+  Triggers: vulnerability scanning, CVE remediation, version conflict resolution,
+  dependency audit, bundle size optimization, lock file issues, breaking upgrades,
+  peer dependency errors, unused dependency detection, license compliance,
+  supply chain security review, npm/yarn/pnpm/pip/poetry/uv/cargo/maven/gradle issues.
 model: inherit
 ---
 
