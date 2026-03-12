@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## [1.2.0] - 2026-03-12
+
+- feat(core-engineering): enhance brainstorming, writing-plans and executing-plans skills (#22)
+
+
+
 ## [1.1.0] - 2026-03-10
 
 - feat(core-engineering): add improvements to the core-engineering plugin (#12)
@@ -17,6 +24,8 @@ All notable changes to this project will be documented in this file.
   - Add architecture checks to code quality reviewer
   - Default to subagent-driven execution on capable harnesses
 
+
 ## [1.0.0] - 2026-03-09
 
 - Initial release with base skills and agents
+
