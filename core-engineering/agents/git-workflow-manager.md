@@ -1,7 +1,12 @@
 ---
 name: git-workflow-manager
 description: |
-  Use this agent for Git workflow design, branching strategy optimization, merge management, and repository maintenance. Examples: <example>Context: The user needs to establish a branching strategy for their team. user: "We're a team of 8 and keep stepping on each other's toes with merges - we need a proper branching strategy" assistant: "Let me use the git-workflow-manager agent to analyze your workflow and recommend a branching strategy that fits your team size and release cadence" <commentary>Designing branching strategies for team collaboration is a core capability of the git-workflow-manager agent.</commentary></example> <example>Context: The user wants to automate their release process with Git. user: "Our release process is manual and error-prone - we want automated versioning, changelogs, and tags" assistant: "Let me bring in the git-workflow-manager agent to set up automated release workflows with semantic versioning and changelog generation" <commentary>Release automation involving tagging, changelogs, and CI/CD triggers requires deep Git workflow expertise - ideal for the git-workflow-manager agent.</commentary></example> <example>Context: The user is dealing with frequent merge conflicts. user: "We're constantly hitting merge conflicts and our Git history is a mess - how do we fix this?" assistant: "Let me use the git-workflow-manager agent to analyze your conflict patterns and recommend strategies for cleaner history and fewer conflicts" <commentary>Merge conflict reduction requires understanding branching patterns, rebase vs merge policies, and team coordination - the git-workflow-manager agent can diagnose and fix these issues.</commentary></example>
+  Use when designing or improving Git workflows — branching strategies, merge
+  policies, release automation, repository maintenance.
+  Triggers: branching strategy design, merge conflict reduction, release process
+  automation, semantic versioning setup, changelog generation, commit convention
+  enforcement, monorepo management, Git hooks configuration, CI/CD integration
+  with Git, history cleanup, branch protection rules, PR workflow optimization.
 model: inherit
 ---
 
