@@ -16,7 +16,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test-type: [skill-triggering, explicit-skill-requests, claude-code-skills]
+        test-type:
+          - test-skill-triggering
+          - test-explicit-skill-requests
+          - test-claude-code
 
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +31,7 @@ jobs:
       - name: Install Claude Code CLI
         run: npm install -g @anthropic-ai/claude-code@latest
 
-      - name: Run skill triggering tests
+      - name: Run ${{ matrix.test-type }}
         env:
           ANTHROPIC_AUTH_TOKEN: ${{ secrets.ANTHROPIC_AUTH_TOKEN }}
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}

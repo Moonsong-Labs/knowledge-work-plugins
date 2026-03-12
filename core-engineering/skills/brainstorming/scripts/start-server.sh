@@ -23,54 +23,54 @@ FORCE_BACKGROUND="false"
 BIND_HOST="127.0.0.1"
 URL_HOST=""
 while [[ $# -gt 0 ]]; do
-  case "$1" in
-    --project-dir)
-      PROJECT_DIR="$2"
-      shift 2
-      ;;
-    --host)
-      BIND_HOST="$2"
-      shift 2
-      ;;
-    --url-host)
-      URL_HOST="$2"
-      shift 2
-      ;;
-    --foreground|--no-daemon)
-      FOREGROUND="true"
-      shift
-      ;;
-    --background|--daemon)
-      FORCE_BACKGROUND="true"
-      shift
-      ;;
-    *)
-      echo "{\"error\": \"Unknown argument: $1\"}"
-      exit 1
-      ;;
-  esac
+    case "$1" in
+        --project-dir)
+            PROJECT_DIR="$2"
+            shift 2
+            ;;
+        --host)
+            BIND_HOST="$2"
+            shift 2
+            ;;
+        --url-host)
+            URL_HOST="$2"
+            shift 2
+            ;;
+        --foreground | --no-daemon)
+            FOREGROUND="true"
+            shift
+            ;;
+        --background | --daemon)
+            FORCE_BACKGROUND="true"
+            shift
+            ;;
+        *)
+            echo "{\"error\": \"Unknown argument: $1\"}"
+            exit 1
+            ;;
+    esac
 done
 
 if [[ -z "$URL_HOST" ]]; then
-  if [[ "$BIND_HOST" == "127.0.0.1" || "$BIND_HOST" == "localhost" ]]; then
-    URL_HOST="localhost"
-  else
-    URL_HOST="$BIND_HOST"
-  fi
+    if [[ "$BIND_HOST" == "127.0.0.1" || "$BIND_HOST" == "localhost" ]]; then
+        URL_HOST="localhost"
+    else
+        URL_HOST="$BIND_HOST"
+    fi
 fi
 
 # Some environments reap detached/background processes. Auto-foreground when detected.
 if [[ -n "${CODEX_CI:-}" && "$FOREGROUND" != "true" && "$FORCE_BACKGROUND" != "true" ]]; then
-  FOREGROUND="true"
+    FOREGROUND="true"
 fi
 
 # Generate unique session directory
 SESSION_ID="$$-$(date +%s)"
 
 if [[ -n "$PROJECT_DIR" ]]; then
-  SCREEN_DIR="${PROJECT_DIR}/.brainstorm/${SESSION_ID}"
+    SCREEN_DIR="${PROJECT_DIR}/.brainstorm/${SESSION_ID}"
 else
-  SCREEN_DIR="/tmp/brainstorm-${SESSION_ID}"
+    SCREEN_DIR="/tmp/brainstorm-${SESSION_ID}"
 fi
 
 PID_FILE="${SCREEN_DIR}/.server.pid"
@@ -81,55 +81,57 @@ mkdir -p "$SCREEN_DIR"
 
 # Kill any existing server
 if [[ -f "$PID_FILE" ]]; then
-  old_pid=$(cat "$PID_FILE")
-  kill "$old_pid" 2>/dev/null
-  rm -f "$PID_FILE"
+    old_pid=$(cat "$PID_FILE")
+    kill "$old_pid" 2>/dev/null
+    rm -f "$PID_FILE"
 fi
 
-cd "$SCRIPT_DIR"
+cd "$SCRIPT_DIR" || exit 1
 
 # Resolve the harness PID (grandparent of this script).
 # $PPID is the ephemeral shell the harness spawned to run us — it dies
 # when this script exits. The harness itself is $PPID's parent.
 OWNER_PID="$(ps -o ppid= -p "$PPID" 2>/dev/null | tr -d ' ')"
 if [[ -z "$OWNER_PID" || "$OWNER_PID" == "1" ]]; then
-  OWNER_PID="$PPID"
+    OWNER_PID="$PPID"
 fi
 
 # Foreground mode for environments that reap detached/background processes.
 if [[ "$FOREGROUND" == "true" ]]; then
-  echo "$$" > "$PID_FILE"
-  env BRAINSTORM_DIR="$SCREEN_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.js
-  exit $?
+    echo "$$" >"$PID_FILE"
+    env BRAINSTORM_DIR="$SCREEN_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.js
+    exit $?
 fi
 
 # Start server, capturing output to log file
 # Use nohup to survive shell exit; disown to remove from job table
-nohup env BRAINSTORM_DIR="$SCREEN_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.js > "$LOG_FILE" 2>&1 &
+nohup env BRAINSTORM_DIR="$SCREEN_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.js >"$LOG_FILE" 2>&1 &
 SERVER_PID=$!
 disown "$SERVER_PID" 2>/dev/null
-echo "$SERVER_PID" > "$PID_FILE"
+echo "$SERVER_PID" >"$PID_FILE"
 
 # Wait for server-started message (check log file)
-for i in {1..50}; do
-  if grep -q "server-started" "$LOG_FILE" 2>/dev/null; then
-    # Verify server is still alive after a short window (catches process reapers)
-    alive="true"
-    for _ in {1..20}; do
-      if ! kill -0 "$SERVER_PID" 2>/dev/null; then
-        alive="false"
-        break
-      fi
-      sleep 0.1
-    done
-    if [[ "$alive" != "true" ]]; then
-      echo "{\"error\": \"Server started but was killed. Retry in a persistent terminal with: $SCRIPT_DIR/start-server.sh${PROJECT_DIR:+ --project-dir $PROJECT_DIR} --host $BIND_HOST --url-host $URL_HOST --foreground\"}"
-      exit 1
+attempt=0
+while ((attempt < 50)); do
+    if grep -q "server-started" "$LOG_FILE" 2>/dev/null; then
+        # Verify server is still alive after a short window (catches process reapers)
+        alive="true"
+        for _ in {1..20}; do
+            if ! kill -0 "$SERVER_PID" 2>/dev/null; then
+                alive="false"
+                break
+            fi
+            sleep 0.1
+        done
+        if [[ "$alive" != "true" ]]; then
+            echo "{\"error\": \"Server started but was killed. Retry in a persistent terminal with: $SCRIPT_DIR/start-server.sh${PROJECT_DIR:+ --project-dir $PROJECT_DIR} --host $BIND_HOST --url-host $URL_HOST --foreground\"}"
+            exit 1
+        fi
+        grep "server-started" "$LOG_FILE" | head -1
+        exit 0
     fi
-    grep "server-started" "$LOG_FILE" | head -1
-    exit 0
-  fi
-  sleep 0.1
+    attempt=$((attempt + 1))
+    sleep 0.1
 done
 
 # Timeout - server didn't start

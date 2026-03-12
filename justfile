@@ -2,6 +2,7 @@ markdownlint_cmd := "bunx markdownlint-cli2@0.21.0"
 shellcheck_cmd := "bunx shellcheck@4.1.0"
 shfmt_cmd := "go run mvdan.cc/sh/v3/cmd/shfmt@v3.13.0"
 actionlint_cmd := "go run github.com/rhysd/actionlint/cmd/actionlint@v1.7.9"
+shell_files_cmd := "{ find core-engineering -type f -name '*.sh'; printf '%s\n' core-engineering/hooks/session-start; } | sort"
 
 default:
   @just --list
@@ -24,13 +25,13 @@ check: lint test
 fix: fmt lint
 
 shellcheck:
-  set -eu; shell_files="$({ find core-engineering/tests -type f -name '*.sh'; printf '%s\n' core-engineering/hooks/session-start core-engineering/skills/systematic-debugging/find-polluter.sh; } | sort)"; {{shellcheck_cmd}} -x $shell_files
+  set -eu; shell_files="$({{shell_files_cmd}})"; {{shellcheck_cmd}} -x $shell_files
 
 shfmt-check:
-  set -eu; shell_files="$({ find core-engineering/tests -type f -name '*.sh'; printf '%s\n' core-engineering/hooks/session-start core-engineering/skills/systematic-debugging/find-polluter.sh; } | sort)"; {{shfmt_cmd}} -d -i 4 -ci $shell_files
+  set -eu; shell_files="$({{shell_files_cmd}})"; {{shfmt_cmd}} -d -i 4 -ci $shell_files
 
 shell-fmt:
-  set -eu; shell_files="$({ find core-engineering/tests -type f -name '*.sh'; printf '%s\n' core-engineering/hooks/session-start core-engineering/skills/systematic-debugging/find-polluter.sh; } | sort)"; {{shfmt_cmd}} -w -i 4 -ci $shell_files
+  set -eu; shell_files="$({{shell_files_cmd}})"; {{shfmt_cmd}} -w -i 4 -ci $shell_files
 
 yamllint:
   yamllint .github
