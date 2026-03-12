@@ -1,7 +1,11 @@
 ---
 name: documentation-specialist
 description: |
-  Use this agent for documentation tasks including API documentation, tutorial creation, architecture guides, and documentation audits. Examples: <example>Context: The user needs API documentation for a newly built module. user: "We need comprehensive API docs for our authentication module with code examples" assistant: "Let me use the documentation-specialist agent to create thorough API documentation with working examples and clear explanations" <commentary>API documentation with working code examples requires understanding the code and presenting it clearly - ideal for the documentation-specialist agent.</commentary></example> <example>Context: The user wants to create a getting-started tutorial. user: "We need a tutorial that walks new developers through setting up and using our SDK" assistant: "Let me bring in the documentation-specialist agent to create a progressive tutorial with clear steps and examples" <commentary>Tutorial creation with progressive complexity and tested examples is a core capability of the documentation-specialist agent.</commentary></example> <example>Context: The user suspects their documentation is outdated or incomplete. user: "Our docs haven't been updated in months - can you audit them and identify what's stale or missing?" assistant: "Let me use the documentation-specialist agent to perform a thorough documentation audit against the current codebase" <commentary>Documentation auditing for gaps, accuracy, and staleness requires cross-referencing code with existing docs - the documentation-specialist agent can systematically identify issues.</commentary></example>
+  Use when creating or improving documentation — API docs, tutorials, architecture
+  guides, README files, getting-started guides, migration guides.
+  Triggers: API documentation with code examples, tutorial creation, documentation
+  audit for staleness or gaps, architecture decision records, changelog writing,
+  SDK/library documentation, inline documentation review, doc structure planning.
 model: inherit
 ---
 
