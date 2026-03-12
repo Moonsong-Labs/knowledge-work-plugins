@@ -32,8 +32,8 @@ session_context="<EXTREMELY_IMPORTANT>\nYou have skills.\n\n**Below is the full 
 # Claude Code reads BOTH fields without deduplication, so we must only
 # emit the field consumed by the current platform to avoid double injection.
 if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
-  # Claude Code sets CLAUDE_PLUGIN_ROOT — emit only hookSpecificOutput
-  cat <<EOF
+    # Claude Code sets CLAUDE_PLUGIN_ROOT — emit only hookSpecificOutput
+    cat <<EOF
 {
   "hookSpecificOutput": {
     "hookEventName": "SessionStart",
@@ -42,8 +42,8 @@ if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
 }
 EOF
 else
-  # Other platforms (Cursor, etc.) — emit only additional_context
-  cat <<EOF
+    # Other platforms (Cursor, etc.) — emit only additional_context
+    cat <<EOF
 {
   "additional_context": "${session_context}"
 }

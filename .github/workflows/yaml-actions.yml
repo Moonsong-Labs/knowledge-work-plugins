@@ -7,11 +7,15 @@ on:
       - ".github/**/*.yml"
       - ".github/**/*.yaml"
       - ".yamllint.yml"
+      - "justfile"
+      - ".github/workflows/yaml-actions.yml"
   pull_request:
     paths:
       - ".github/**/*.yml"
       - ".github/**/*.yaml"
       - ".yamllint.yml"
+      - "justfile"
+      - ".github/workflows/yaml-actions.yml"
 
 permissions:
   contents: read
@@ -24,10 +28,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: extractions/setup-just@v3
+        with:
+          just-version: "1.46.0"
       - name: Install yamllint
         run: python3 -m pip install yamllint==1.38.0
       - name: Lint GitHub YAML
-        run: yamllint .github
+        run: just yamllint
 
   actionlint:
     runs-on: ubuntu-latest
@@ -36,7 +43,8 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: "1.25"
-      - name: Install actionlint
-        run: go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.9
+      - uses: extractions/setup-just@v3
+        with:
+          just-version: "1.46.0"
       - name: Lint GitHub Actions workflows
-        run: PATH="$(go env GOPATH)/bin:$PATH" actionlint
+        run: just actionlint
