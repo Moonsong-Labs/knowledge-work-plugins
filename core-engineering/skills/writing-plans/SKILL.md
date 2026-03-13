@@ -15,8 +15,28 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Context:** This should be run in a dedicated worktree (created by brainstorming skill).
 
-**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
-- (User preferences for plan location override this default)
+**Save plans to:** Discover the project's documentation structure before writing. See the Plan Location Discovery section below.
+
+### Plan Location Discovery
+
+Before writing a plan, discover where the project stores documentation:
+
+1. Check for existing doc directories: `docs/`, `documentation/`, `doc/`
+2. If found, explore the structure — look for subdirectories like `plans/`, `ADRs/`, `architecture/`, numbered folders (`01-overview/`, `02-architecture/`), or any existing plan/design files
+3. Choose the location that best matches the file type:
+   - Design specs → architecture, ADRs, or design-related directories
+   - Implementation plans → plans directory or alongside design specs
+4. Check existing files in the chosen directory for naming patterns:
+   - Numbered prefix: `adr-001-structure.md`, `003-caching.md`
+   - Date prefix: `2026-03-13-auth-system.md`
+   - Plain names: `auth-system.md`, `caching-layer.md`
+5. Follow the existing naming pattern. If the directory is empty or no pattern is clear, default to `YYYY-MM-DD-<feature-name>.md`
+6. If no doc structure exists at all, default to `docs/plans/`
+7. Announce your chosen path and wait for confirmation:
+   > "I'll save the plan to `<chosen-path>/<filename>`. OK?"
+8. If the user provides a different location, use that instead
+
+Do NOT write the plan file before confirming the location with the user.
 
 ## Scope Check
 
@@ -133,7 +153,7 @@ After completing each chunk of the plan:
 
 After saving the plan:
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Ready to execute?"**
+**"Plan complete and saved to `<discovered-path>/<filename>`. Ready to execute?"**
 
 **Execution path depends on harness capabilities:**
 
