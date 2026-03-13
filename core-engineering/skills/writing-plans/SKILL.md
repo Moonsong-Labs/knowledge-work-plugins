@@ -19,7 +19,7 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 ### Plan Location Discovery
 
-See `shared/plan-location-discovery.md` for the full discovery process.
+See [plan-location-discovery](../../shared/plan-location-discovery.md) for the full discovery process.
 
 ## Scope Check
 
