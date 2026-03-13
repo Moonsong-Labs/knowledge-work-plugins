@@ -15,8 +15,13 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 **Context:** This should be run in a dedicated worktree (created by brainstorming skill).
 
-**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
-- (User preferences for plan location override this default)
+**Save plans to:** Discover the project's documentation structure before writing. See the Plan Location Discovery section below.
+
+### Plan Location Discovery
+
+See [plan-location-discovery](../../shared/plan-location-discovery.md) for the full discovery process.
+
+**IMPORTANT:** You MUST announce your chosen path and wait for the user to confirm before writing any files. Do NOT write the plan before the user confirms the location.
 
 ## Scope Check
 
@@ -133,7 +138,7 @@ After completing each chunk of the plan:
 
 After saving the plan:
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Ready to execute?"**
+**"Plan complete and saved to `<discovered-path>/<filename>`. Ready to execute?"**
 
 **Execution path depends on harness capabilities:**
 
