@@ -33,7 +33,7 @@ for agent in "${AGENTS[@]}"; do
 
     echo "Testing: $agent"
 
-    if "$SHARED_RUNNER" "$agent" "$prompt_file" 4 2>&1 | tee "/tmp/agent-test-$agent.log"; then
+    if "$SHARED_RUNNER" "$agent" "$prompt_file" 15 2>&1 | tee "/tmp/agent-test-$agent.log"; then
         PASSED=$((PASSED + 1))
         RESULTS+=("✅ $agent")
     else
