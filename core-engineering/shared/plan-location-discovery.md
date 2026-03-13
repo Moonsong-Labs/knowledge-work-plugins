@@ -4,9 +4,7 @@ Before writing a design doc or plan, discover where the project stores documenta
 
 1. Check for existing doc directories: `docs/`, `documentation/`, `doc/`
 2. If found, explore the structure — look for subdirectories like `plans/`, `ADRs/`, `architecture/`, numbered folders (`01-overview/`, `02-architecture/`), or any existing plan/design files
-3. Choose the location that best matches the file type:
-   - Design specs → architecture, ADRs, or design-related directories
-   - Implementation plans → plans directory or alongside design specs
+3. **Use existing directories only.** Place the file in whichever existing directory is the closest match. Do not create new subdirectories within an existing doc structure — if the project has `docs/ADRs/` but no `docs/plans/`, use `docs/ADRs/`.
 4. Check existing files in the chosen directory for naming patterns:
    - Numbered prefix: `adr-001-structure.md`, `003-caching.md`
    - Date prefix: `2026-03-13-auth-system.md`
