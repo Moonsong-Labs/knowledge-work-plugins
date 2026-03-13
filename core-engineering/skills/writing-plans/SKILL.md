@@ -21,6 +21,8 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 See [plan-location-discovery](../../shared/plan-location-discovery.md) for the full discovery process.
 
+**IMPORTANT:** You MUST announce your chosen path and wait for the user to confirm before writing any files. Do NOT write the plan before the user confirms the location.
+
 ## Scope Check
 
 If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.

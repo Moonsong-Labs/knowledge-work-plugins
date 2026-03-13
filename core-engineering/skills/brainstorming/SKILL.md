@@ -120,6 +120,8 @@ digraph brainstorming {
 
 See [plan-location-discovery](../../shared/plan-location-discovery.md) for the full discovery process.
 
+**IMPORTANT:** You MUST announce your chosen path and wait for the user to confirm before writing any files. Do NOT write the spec before the user confirms the location.
+
 **Spec Review Loop:**
 After writing the spec document:
 
