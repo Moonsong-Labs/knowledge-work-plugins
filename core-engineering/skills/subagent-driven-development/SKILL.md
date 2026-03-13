@@ -121,17 +121,40 @@ Implementer subagents report one of four statuses. Handle each appropriately:
 - `./spec-reviewer-prompt.md` - Dispatch spec compliance reviewer subagent
 - `./code-quality-reviewer-prompt.md` - Dispatch code quality reviewer subagent
 
-## Available Specialist Agents
+## Specialist Agent Dispatch
 
-When a task matches a specialist agent's expertise, dispatch that agent instead of a general-purpose implementer. The specialist's domain knowledge produces better results than a generalist for these areas.
+When a task matches a specialist's domain, you MUST dispatch that specialist instead of a general-purpose implementer. Do not use a generalist for work that falls within a specialist's expertise.
 
-| Agent | When to dispatch |
-|-------|-----------------|
-| `core-engineering:code-reviewer` | Code quality review after each task (existing workflow) |
-| `core-engineering:rust-specialist` | Rust development tasks requiring deep language expertise |
-| `core-engineering:dependency-manager` | Dependency management tasks including vulnerability scanning, version conflict resolution, dependency audits, and bundle optimization across ecosystems |
-| `core-engineering:documentation-specialist` | Documentation tasks including API documentation, tutorial creation, architecture guides, and documentation audits |
-| `core-engineering:git-workflow-manager` | Git workflow design, branching strategy optimization, merge management, and repository maintenance |
+### Dispatch Rules
+
+Check these rules for EVERY task before dispatching. Match on file types, task content, or error context:
+
+| Signal | Dispatch | Instead of |
+|--------|----------|------------|
+| Task touches `.rs` files or `Cargo.toml` | `core-engineering:rust-specialist` | general-purpose |
+| Task involves borrow checker, lifetimes, traits, async Rust, unsafe, cargo | `core-engineering:rust-specialist` | general-purpose |
+| Task modifies `package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`, lock files | `core-engineering:dependency-manager` | general-purpose |
+| Task involves vulnerability scanning, version conflicts, dependency audit | `core-engineering:dependency-manager` | general-purpose |
+| Task creates or updates documentation, tutorials, API docs, READMEs | `core-engineering:documentation-specialist` | general-purpose |
+| Task involves branching strategy, release automation, Git hooks, merge policies | `core-engineering:git-workflow-manager` | general-purpose |
+| Code quality review after each task (existing workflow) | `core-engineering:code-reviewer` | general-purpose |
+
+### Multiple signals
+
+If a task matches multiple specialists (e.g., updating Cargo.toml dependencies in a Rust project), prefer the specialist whose domain is the primary concern of the task. Dependency version conflicts → dependency-manager. Rust API design that happens to add a dependency → rust-specialist. Documenting a Git workflow → documentation-specialist (writing is the primary task, Git is the subject).
+
+### Updating the implementer prompt
+
+When dispatching a specialist instead of general-purpose, change the Agent tool's `subagent_type` accordingly:
+
+````text
+Agent tool (core-engineering:rust-specialist):    ← not general-purpose
+  description: "Implement Task N: [task name]"
+  prompt: |
+    [same implementer prompt template]
+````
+
+The specialist receives the same implementer prompt template — the expertise comes from the agent definition, not a different prompt.
 
 ## Example Workflow
 

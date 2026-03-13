@@ -2,11 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
-
 ## [1.3.0] - 2026-03-13
 
 - feat(core-engineering): add plan location discovery to brainstorming and writing-plans (#27)
-
 
 ## [1.2.0] - 2026-03-12
 

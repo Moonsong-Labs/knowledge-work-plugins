@@ -52,4 +52,7 @@ test-explicit-skill-requests:
 test-claude-code:
   ./core-engineering/tests/claude-code/run-skill-tests.sh --timeout 900
 
-test: test-skill-triggering test-explicit-skill-requests test-claude-code
+test-agent-triggering:
+  ./core-engineering/tests/agent-triggering/run-all.sh
+
+test: test-skill-triggering test-explicit-skill-requests test-claude-code test-agent-triggering
