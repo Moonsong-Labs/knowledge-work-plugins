@@ -147,10 +147,12 @@ If a task matches multiple specialists (e.g., updating Cargo.toml dependencies i
 
 When dispatching a specialist instead of general-purpose, change the Agent tool's `subagent_type` accordingly:
 
-    Agent tool (core-engineering:rust-specialist):    ← not general-purpose
-      description: "Implement Task N: [task name]"
-      prompt: |
-        [same implementer prompt template]
+````text
+Agent tool (core-engineering:rust-specialist):    ← not general-purpose
+  description: "Implement Task N: [task name]"
+  prompt: |
+    [same implementer prompt template]
+````
 
 The specialist receives the same implementer prompt template — the expertise comes from the agent definition, not a different prompt.
 
