@@ -28,7 +28,7 @@ You MUST create a task for each of these items and complete them in order:
 3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, get user approval after each section
-6. **Write design doc** — save to `docs/plans/YYYY-MM-DD-<topic>-design.md` and commit
+6. **Write design doc** — discover plan location (see Plan Location Discovery below), confirm with user, save and commit
 7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch until approved (max 5 iterations, then surface to human)
 8. **User reviews written spec** — ask user to review the spec file before proceeding
 9. **Transition to implementation** — invoke writing-plans skill to create implementation plan
@@ -112,11 +112,15 @@ digraph brainstorming {
 
 **Documentation:**
 
-- Write the validated design (spec) to `docs/plans/YYYY-MM-DD-<topic>-design.md`
-  - (User preferences for spec location override this default)
+- Discover the plan location (see below), confirm with user, then write and commit
 - Use elements-of-style:writing-clearly-and-concisely skill if available
 - For documentation-heavy projects, dispatch core-engineering:documentation-specialist to review doc quality
-- Commit the design document to git
+
+### Plan Location Discovery
+
+See [plan-location-discovery](../../shared/plan-location-discovery.md) for the full discovery process.
+
+**IMPORTANT:** You MUST announce your chosen path and wait for the user to confirm before writing any files. Do NOT write the spec before the user confirms the location.
 
 **Spec Review Loop:**
 After writing the spec document:
