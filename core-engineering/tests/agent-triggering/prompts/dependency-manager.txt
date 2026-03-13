@@ -1,13 +1,1 @@
-I have an implementation plan for upgrading our stack. Here's Task 2:
-
-## Task 2: Resolve dependency conflicts after tokio upgrade
-
-After upgrading tokio from 1.32 to 1.40 in Cargo.toml, several workspace
-crates have conflicting version requirements:
-- `hyper` requires tokio ^1.35
-- `tonic` requires tokio ^1.38
-- `our-internal-crate` pins tokio =1.32
-
-Resolve all conflicts, update lock file, and verify the workspace builds.
-
-Please implement this task using the subagent-driven-development workflow.
+I have an implementation plan at docs/plans/dependency-upgrade.md. Please execute it using the subagent-driven-development workflow.

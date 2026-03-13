@@ -1,11 +1,1 @@
-I have an implementation plan for improving our CI/CD. Here's Task 1:
-
-## Task 1: Design and implement release automation
-
-Set up semantic-release with:
-- Conventional commit enforcement via pre-commit hook
-- Automated changelog generation
-- Git tag creation on merge to main
-- Branch protection rules for main and release/*
-
-Please implement this task using the subagent-driven-development workflow.
+I have an implementation plan at docs/plans/release-automation.md. Please execute it using the subagent-driven-development workflow.

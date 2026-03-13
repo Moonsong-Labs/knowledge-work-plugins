@@ -1,0 +1,9 @@
+[package]
+name = "my-service"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "=1.32", features = ["full"] }
+hyper = "1.0"
+tonic = "0.12"

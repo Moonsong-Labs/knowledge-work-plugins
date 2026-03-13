@@ -1,13 +1,1 @@
-I have an implementation plan for our public SDK. Here's Task 4:
-
-## Task 4: Write API documentation for the auth module
-
-Create comprehensive API docs for `src/auth/` covering:
-- All public types and their constructors
-- Authentication flow with code examples
-- Error types and handling guidance
-- Migration guide from v1 to v2
-
-Output as `docs/api/auth.md` with working code examples.
-
-Please implement this task using the subagent-driven-development workflow.
+I have an implementation plan at docs/plans/sdk-docs.md. Please execute it using the subagent-driven-development workflow.

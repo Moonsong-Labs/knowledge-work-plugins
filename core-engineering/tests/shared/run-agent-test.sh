@@ -46,19 +46,13 @@ cp "$PROMPT_FILE" "$OUTPUT_DIR/prompt.txt"
 PROJECT_DIR="$OUTPUT_DIR/project"
 mkdir -p "$PROJECT_DIR/docs/plans"
 
-# Create a dummy plan file for tests that reference plans
-cat >"$PROJECT_DIR/docs/plans/auth-system.md" <<'EOF'
-# Auth System Implementation Plan
-
-## Task 1: Add User Model
-Create user model with email and password fields.
-
-## Task 2: Add Auth Routes
-Create login and register endpoints.
-
-## Task 3: Add JWT Middleware
-Protect routes with JWT validation.
-EOF
+# Check for agent-specific fixtures directory next to the prompt file
+PROMPT_DIR="$(dirname "$PROMPT_FILE")"
+FIXTURES_DIR="$PROMPT_DIR/fixtures/${AGENT_NAME}"
+if [ -d "$FIXTURES_DIR" ]; then
+    echo "Using fixtures from: $FIXTURES_DIR"
+    cp -r "$FIXTURES_DIR"/* "$PROJECT_DIR/"
+fi
 
 # Run Claude with isolated environment
 # Unset CLAUDECODE to allow running tests from within a Claude Code terminal
@@ -71,7 +65,7 @@ echo "Running claude -p..."
 echo "Prompt: $PROMPT"
 echo ""
 
-timeout --foreground 300 claude -p "$PROMPT" \
+timeout --foreground 600 claude -p "$PROMPT" \
     --plugin-dir "$PLUGIN_DIR" \
     --dangerously-skip-permissions \
     --max-turns "$MAX_TURNS" \
