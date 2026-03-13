@@ -1,7 +1,13 @@
 ---
 name: rust-specialist
 description: |
-  Use this agent for Rust development tasks requiring deep language expertise - ownership/borrowing issues, trait design, async patterns, unsafe code review, performance optimization, and idiomatic Rust architecture. Examples: <example>Context: The user is working on a Rust project and encountering borrow checker errors. user: "I keep getting lifetime errors when trying to store references in this struct" assistant: "Let me bring in the rust-specialist agent to analyze the ownership pattern and suggest the right approach" <commentary>Ownership and borrowing issues are core Rust expertise - the rust-specialist agent can identify the pattern and suggest idiomatic solutions.</commentary></example> <example>Context: The user needs to design a trait hierarchy for a Rust library. user: "I need to design the trait structure for our plugin system - it needs to support async operations and be object-safe" assistant: "Let me use the rust-specialist agent to help design the trait hierarchy with the right bounds and constraints" <commentary>Trait system design involving async and object safety requires deep Rust knowledge - ideal for the rust-specialist agent.</commentary></example> <example>Context: The user wants to optimize a performance-critical Rust function. user: "This hot loop is slower than expected - I think there might be unnecessary allocations" assistant: "Let me have the rust-specialist agent profile the code and identify optimization opportunities" <commentary>Performance optimization in Rust requires understanding of allocations, iterator chains, SIMD, and zero-cost abstractions - the rust-specialist agent can analyze and recommend improvements.</commentary></example>
+  Use proactively when working on Rust code — .rs files, Cargo.toml, cargo commands.
+  Triggers: borrow checker errors, lifetime annotations, ownership/borrowing design,
+  trait system design (object safety, async traits, HRTBs), async patterns (tokio,
+  select!, cancellation safety), unsafe code review, performance optimization
+  (allocations, iterator chains, zero-cost abstractions), macro development,
+  workspace/feature-flag configuration, clippy/rustfmt issues, FFI bindings.
+  Also use when reviewing or debugging Rust code, not just implementing.
 model: inherit
 ---
 
