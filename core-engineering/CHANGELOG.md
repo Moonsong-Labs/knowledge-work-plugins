@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+
+## [1.5.0] - 2026-03-16
+
+- fix(core-engineering): Add notion of phased work and improve the naming for plan files (#31)
+
+
 ## [1.4.0] - 2026-03-13
 
 - feat(core-engineering): proactive specialist agent dispatch (#26)
