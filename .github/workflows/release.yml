@@ -128,18 +128,10 @@ jobs:
             echo ""
           } > /tmp/changelog-entry.md
 
-      - name: Create version bump PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update version and changelog
         run: |
           PLUGIN="${{ steps.release.outputs.plugin }}"
           NEW_VERSION="${{ steps.version.outputs.new }}"
-          BRANCH="release/${PLUGIN}/v${NEW_VERSION}"
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          git checkout -b "$BRANCH"
 
           # Update plugin's own plugin.json
           jq --arg v "$NEW_VERSION" '.version = $v' "$PLUGIN/.claude-plugin/plugin.json" > tmp.json && mv tmp.json "$PLUGIN/.claude-plugin/plugin.json"
@@ -161,25 +153,18 @@ jobs:
 
           {
             head -n 4 "$PLUGIN/CHANGELOG.md"
-            echo ""
             cat /tmp/changelog-entry.md
-            echo ""
             tail -n +5 "$PLUGIN/CHANGELOG.md"
           } > CHANGELOG.tmp && mv CHANGELOG.tmp "$PLUGIN/CHANGELOG.md"
 
-          git add "$PLUGIN/.claude-plugin/plugin.json" .claude-plugin/marketplace.json "$PLUGIN/CHANGELOG.md"
-          if [ -f "$PLUGIN/.cursor-plugin/plugin.json" ]; then
-            git add "$PLUGIN/.cursor-plugin/plugin.json"
-          fi
-
-          git commit -m "chore(${PLUGIN}): bump version to ${NEW_VERSION}"
-          git push origin "$BRANCH"
-
-          gh pr create \
-            --base main \
-            --head "$BRANCH" \
-            --title "chore(${PLUGIN}): release v${NEW_VERSION}" \
-            --body "Automated version bump and changelog update for ${PLUGIN} v${NEW_VERSION}."
+      # Uses the GitHub API to create commits (automatically signed/verified).
+      - name: Create version bump PR
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        with:
+          branch: release/${{ steps.release.outputs.plugin }}/v${{ steps.version.outputs.new }}
+          commit-message: "chore(${{ steps.release.outputs.plugin }}): bump version to ${{ steps.version.outputs.new }}"
+          title: "chore(${{ steps.release.outputs.plugin }}): release v${{ steps.version.outputs.new }}"
+          body: "Automated version bump and changelog update for ${{ steps.release.outputs.plugin }} v${{ steps.version.outputs.new }}."
 
   publish-release:
     if: >-
