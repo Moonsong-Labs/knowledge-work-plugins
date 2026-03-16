@@ -47,9 +47,9 @@ For verification and auditing tasks, dispatch a **cherry-pick specialist sub-age
 ### Process
 
 1. Read the tracking document to identify which repos have cherry-pick tables.
-2. For each repo, dispatch a sub-agent using `./cherry-pick-specialist-prompt.md`, filling in:
+2. For each repo, dispatch a sub-agent using [./cherry-pick-specialist-prompt.md](./cherry-pick-specialist-prompt.md), filling in:
    - The repo name and tracking document path
-   - The fork branch and upstream remote/ref from `./verify-cherry-picks.md`
+   - The fork branch and upstream remote/ref from [./verify-cherry-picks.md](./verify-cherry-picks.md)
 3. Collect sub-agent reports and aggregate discrepancies.
 4. Review flagged issues and update the tracking document as needed.
 
