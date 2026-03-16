@@ -1,0 +1,42 @@
+name: Skill Request
+description: Suggest a new skill for an existing plugin
+labels: ["skill-request"]
+body:
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      description: Which plugin should this skill belong to?
+      options:
+        - core-engineering
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Skill name
+      placeholder: "e.g. writing-tests, refactoring"
+    validations:
+      required: true
+  - type: textarea
+    id: trigger
+    attributes:
+      label: When should it activate?
+      description: Describe the situation where this skill should be triggered automatically.
+      placeholder: "Use when..."
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What should it do?
+      description: Describe the workflow or behavior the skill should enforce.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Examples, references, or related skills?
+    validations:
+      required: false
