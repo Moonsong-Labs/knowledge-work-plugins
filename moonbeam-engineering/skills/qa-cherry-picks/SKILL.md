@@ -36,9 +36,9 @@ This skill coordinates several activities. Read the relevant resource when perfo
 
 | Activity | Resource | Description |
 |----------|----------|-------------|
-| Verify cherry-picks | `./verify-cherry-picks.md` | Confirm cherry-picks against a branch using `git merge-base` |
-| Create new document | `./create-cherry-pick-document.md` | Build a tracking doc for a new stable branch upgrade |
-| Common pitfalls | `./common-pitfalls.md` | Known gotchas when working with cherry-pick tables |
+| Verify cherry-picks | [./verify-cherry-picks.md](./verify-cherry-picks.md) | Confirm cherry-picks against a branch using `git merge-base` |
+| Create new document | [./create-cherry-pick-document.md](./create-cherry-pick-document.md) | Build a tracking doc for a new stable branch upgrade |
+| Common pitfalls | [./common-pitfalls.md](./common-pitfalls.md) | Known gotchas when working with cherry-pick tables |
 
 ## Sub-Agent Workflow
 
