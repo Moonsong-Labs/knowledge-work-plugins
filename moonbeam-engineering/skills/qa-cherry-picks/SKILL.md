@@ -58,3 +58,4 @@ For verification and auditing tasks, dispatch a **cherry-pick specialist sub-age
 - **Parallel execution** — each repo is independent; sub-agents can run concurrently.
 - **Fresh context** — each sub-agent focuses on a single repo without cross-contamination.
 - **Focused expertise** — the specialist prompt encodes the verification steps and pitfalls.
+steps and pitfalls.
