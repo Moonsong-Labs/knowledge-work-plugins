@@ -6,14 +6,14 @@ Before writing a design doc or plan, discover where the project stores documenta
 2. Check for existing doc directories: `docs/`, `documentation/`, `doc/`
 3. If found, explore the structure — look for subdirectories like `plans/`, `ADRs/`, `architecture/`, numbered folders (`01-overview/`, `02-architecture/`), or any existing plan/design files
 4. Place the file in whichever existing directory is the closest match. Do not create new subdirectories within an existing doc structure — use what's already there.
-5. Check existing files in the chosen directory for naming patterns:
-   - Numbered prefix: `adr-001-structure.md`, `003-caching.md`
-   - Date prefix: `2026-03-13-auth-system.md`
-   - Plain names: `auth-system.md`, `caching-layer.md`
-6. Follow the existing naming pattern. If the directory is empty or no pattern is clear, default to `YYYY-MM-DD-<topic>.md`
+5. **Check existing files in the chosen directory for naming patterns** — this step is MANDATORY, do not skip it:
+   - List files in the directory (e.g., `ls docs/plans/`)
+   - Identify the pattern: numbered prefix (`adr-001-structure.md`), date prefix (`2026-03-13-auth-system.md`), or plain names (`auth-system.md`)
+   - If a date prefix pattern is found, use today's date in the same format
+6. **Follow the existing naming pattern exactly.** If the directory is empty or no pattern is clear, default to `YYYY-MM-DD-<topic>.md`
 7. If no doc structure exists at all, default to `docs/plans/`
-8. Announce your chosen path and wait for confirmation:
-   > "I'll save this to `<chosen-path>/<filename>`. OK?"
+8. Announce your chosen path **including the reasoning for the name** and wait for confirmation:
+   > "Existing plans use `YYYY-MM-DD-<topic>.md` naming. I'll save this to `docs/plans/2026-03-16-p2p-tls-transport.md`. OK?"
 9. If the user provides a different location, use that instead
 
 Do NOT write files before confirming the location with the user.
