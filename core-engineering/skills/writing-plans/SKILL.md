@@ -27,6 +27,15 @@ See [plan-location-discovery](../../shared/plan-location-discovery.md) for the f
 
 If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.
 
+### Phased Work
+
+When work is broken into sequential phases (e.g., "Phase 1: foundation, Phase 2: resilience, Phase 3: features"), **write all phase plans before executing any of them.** This ensures:
+- The user can review the full scope and phasing before work begins
+- Later phases can inform earlier ones (e.g., interfaces designed in Phase 1 that Phase 3 needs)
+- No implementation starts without a complete picture
+
+Each phase gets its own plan file. List them in order with cross-references (e.g., "Depends on: Phase 1 plan at `<path>`").
+
 ## File Structure
 
 Before defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.
