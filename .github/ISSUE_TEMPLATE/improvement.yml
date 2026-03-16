@@ -1,0 +1,41 @@
+name: Improvement
+description: Suggest an enhancement to an existing skill or plugin
+labels: ["improvement"]
+body:
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Plugin
+      description: Which plugin does this apply to?
+      options:
+        - core-engineering
+    validations:
+      required: true
+  - type: input
+    id: skill
+    attributes:
+      label: Skill (if applicable)
+      placeholder: "e.g. subagent-driven-development, writing-plans"
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: What would you improve?
+      description: Describe the current behavior and what you'd like to change.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why?
+      description: What problem does this solve or what workflow does it improve?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Examples, screenshots, or related issues?
+    validations:
+      required: false
