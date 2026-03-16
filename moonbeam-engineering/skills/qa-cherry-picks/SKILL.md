@@ -42,7 +42,7 @@ This skill coordinates several activities. Read the relevant resource when perfo
 
 ## Sub-Agent Workflow
 
-For verification and auditing tasks, dispatch a **cherry-pick specialist sub-agent per repo** so that each fork can be processed in parallel. Use `./cherry-pick-specialist-prompt.md` as the prompt template.
+For verification and auditing tasks, dispatch a **cherry-pick specialist sub-agent per repo** so that each fork can be processed in parallel. Use [./cherry-pick-specialist-prompt.md](./cherry-pick-specialist-prompt.md) as the prompt template.
 
 ### Process
 
