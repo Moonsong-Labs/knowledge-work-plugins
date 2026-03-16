@@ -10,4 +10,4 @@ When upgrading to a new stable branch (e.g., `stable2603`):
 4. **Check for gaps** — diff the previous doc's "Included" items against the new doc to catch anything forgotten:
    - Items absorbed into upstream need no action.
    - Items with `Temporary` or `Needs PR upstream` status need careful review.
-5. **Verify every row** by running the merge-base method from `./verify-cherry-picks.md` on each repo.
+5. **Verify every row** by running the merge-base method from [./verify-cherry-picks.md](./verify-cherry-picks.md) on each repo.
