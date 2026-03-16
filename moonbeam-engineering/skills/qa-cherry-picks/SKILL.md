@@ -39,3 +39,22 @@ This skill coordinates several activities. Read the relevant resource when perfo
 | Verify cherry-picks | `./verify-cherry-picks.md` | Confirm cherry-picks against a branch using `git merge-base` |
 | Create new document | `./create-cherry-pick-document.md` | Build a tracking doc for a new stable branch upgrade |
 | Common pitfalls | `./common-pitfalls.md` | Known gotchas when working with cherry-pick tables |
+
+## Sub-Agent Workflow
+
+For verification and auditing tasks, dispatch a **cherry-pick specialist sub-agent per repo** so that each fork can be processed in parallel. Use `./cherry-pick-specialist-prompt.md` as the prompt template.
+
+### Process
+
+1. Read the tracking document to identify which repos have cherry-pick tables.
+2. For each repo, dispatch a sub-agent using `./cherry-pick-specialist-prompt.md`, filling in:
+   - The repo name and tracking document path
+   - The fork branch and upstream remote/ref from `./verify-cherry-picks.md`
+3. Collect sub-agent reports and aggregate discrepancies.
+4. Review flagged issues and update the tracking document as needed.
+
+### Why Sub-Agents
+
+- **Parallel execution** — each repo is independent; sub-agents can run concurrently.
+- **Fresh context** — each sub-agent focuses on a single repo without cross-contamination.
+- **Focused expertise** — the specialist prompt encodes the verification steps and pitfalls.
