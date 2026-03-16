@@ -9,8 +9,12 @@ Moonbeam maintains forks of `polkadot-sdk`, `frontier`, `evm`, `ethereum`, and `
 
 ## Documents
 
-- `docs/cherry-picks/polkadot-sdk-stable2512.md` — current
-- `docs/cherry-picks/polkadot-sdk-stable2506.md` — previous
+Cherry-pick tracking documents live in `docs/cherry-picks/` inside the moonbeam repository and follow the naming convention `<repo>-stable<YYMM>.md`. For example:
+
+- `docs/cherry-picks/polkadot-sdk-stable2512.md` — current stable branch
+- `docs/cherry-picks/polkadot-sdk-stable2506.md` — previous stable branch
+
+> **Note:** The filenames above are examples. Check the `docs/cherry-picks/` directory for the actual documents relevant to the current upgrade cycle.
 
 ## Table Schema
 
