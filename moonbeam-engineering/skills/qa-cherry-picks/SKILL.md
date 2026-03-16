@@ -42,20 +42,19 @@ This skill coordinates several activities. Read the relevant resource when perfo
 
 ## Sub-Agent Workflow
 
-For verification and auditing tasks, dispatch a **cherry-pick specialist sub-agent per repo** so that each fork can be processed in parallel. Use [./cherry-pick-specialist-prompt.md](./cherry-pick-specialist-prompt.md) as the prompt template.
+For verification and auditing tasks, dispatch the `moonbeam-engineering:cherry-pick-specialist` agent **once per repo** so that each fork can be processed in parallel.
 
 ### Process
 
 1. Read the tracking document to identify which repos have cherry-pick tables.
-2. For each repo, dispatch a sub-agent using [./cherry-pick-specialist-prompt.md](./cherry-pick-specialist-prompt.md), filling in:
+2. For each repo, dispatch `moonbeam-engineering:cherry-pick-specialist`, providing:
    - The repo name and tracking document path
    - The fork branch and upstream remote/ref from [./verify-cherry-picks.md](./verify-cherry-picks.md)
-3. Collect sub-agent reports and aggregate discrepancies.
+3. Collect agent reports and aggregate discrepancies.
 4. Review flagged issues and update the tracking document as needed.
 
 ### Why Sub-Agents
 
-- **Parallel execution** — each repo is independent; sub-agents can run concurrently.
-- **Fresh context** — each sub-agent focuses on a single repo without cross-contamination.
-- **Focused expertise** — the specialist prompt encodes the verification steps and pitfalls.
-steps and pitfalls.
+- **Parallel execution** — each repo is independent; agents can run concurrently.
+- **Fresh context** — each agent focuses on a single repo without cross-contamination.
+- **Focused expertise** — the agent encodes the verification steps and pitfalls.
