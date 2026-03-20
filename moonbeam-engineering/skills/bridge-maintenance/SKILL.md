@@ -172,7 +172,10 @@ to ensure bridge pallet compatibility.
 3. Pin polkadot-sdk to the stable branch:
 
    ```bash
+   # On Linux / GNU sed:
    sed -i 's|git = "https://github.com/paritytech/polkadot-sdk", branch = "master"|git = "https://github.com/moonbeam-foundation/polkadot-sdk", branch = "moonbeam-polkadot-stable<NNNN>"|g' Cargo.toml
+   # On macOS / BSD sed:
+   sed -i '' 's|git = "https://github.com/paritytech/polkadot-sdk", branch = "master"|git = "https://github.com/moonbeam-foundation/polkadot-sdk", branch = "moonbeam-polkadot-stable<NNNN>"|g' Cargo.toml
    ```
 
 4. Fix compilation issues. Common ones:
