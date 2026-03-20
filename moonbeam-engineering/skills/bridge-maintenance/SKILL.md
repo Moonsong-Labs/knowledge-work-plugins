@@ -24,8 +24,8 @@ Moonriver (on Kusama). The bridge infrastructure consists of:
 |-------------------|---------------------------------------------|---------------------------------------------------------|
 | Bridge pallets    | `moonbeam-foundation/polkadot-sdk`          | On-chain bridge logic (GRANDPA verifier, message lanes) |
 | Substrate relay   | `moonbeam-foundation/parity-bridges-common` | Off-chain relayer that syncs headers and messages       |
-| Zombienet configs | This repo (`zombienet/`)                    | Local test network definitions                          |
-| Chain specs       | This repo (`zombienet/specs/`)              | Relay chain genesis specs for local testing             |
+| Zombienet configs | Moonbeam repo (`zombienet/`)                | Local test network definitions                          |
+| Chain specs       | Moonbeam repo (`zombienet/specs/`)          | Relay chain genesis specs for local testing             |
 
 When upgrading to a new `polkadot-sdk` stable version, **all components must be
 updated together** to ensure bridge pallet version compatibility.
