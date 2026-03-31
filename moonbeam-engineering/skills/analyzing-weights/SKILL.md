@@ -29,7 +29,7 @@ Run the analysis script piping the git diff of weight files:
 
 ```bash
 git diff $(git merge-base <base-branch> HEAD)..HEAD -- '*/weights/*' \
-  | python3 .claude/skills/analyzing-weights/scripts/analyze-weight-diff.py --threshold 50
+  | python3 scripts/analyze-weight-diff.py --threshold 50
 ```
 
 The script accepts:
