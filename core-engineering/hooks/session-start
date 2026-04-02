@@ -10,6 +10,9 @@ PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 # Read using-skills content
 using_skills_content=$(cat "${PLUGIN_ROOT}/skills/using-skills/SKILL.md" 2>&1 || echo "Error reading using-skills skill")
 
+# Read MSL engineering values
+msl_values_content=$(cat "${PLUGIN_ROOT}/shared/msl-engineering-values.md" 2>&1 || echo "Error reading MSL engineering values")
+
 # Escape string for JSON embedding using bash parameter substitution.
 # Each ${s//old/new} is a single C-level pass - orders of magnitude
 # faster than the character-by-character loop this replaces.
@@ -23,8 +26,9 @@ escape_for_json() {
     printf '%s' "$s"
 }
 
+msl_values_escaped=$(escape_for_json "$msl_values_content")
 using_skills_escaped=$(escape_for_json "$using_skills_content")
-session_context="<EXTREMELY_IMPORTANT>\nYou have skills.\n\n**Below is the full content of your 'core-engineering:using-skills' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_skills_escaped}\n</EXTREMELY_IMPORTANT>"
+session_context="${msl_values_escaped}\n\n<EXTREMELY_IMPORTANT>\nYou have skills.\n\n**Below is the full content of your 'core-engineering:using-skills' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_skills_escaped}\n</EXTREMELY_IMPORTANT>"
 
 # Output context injection as JSON.
 # Cursor hooks expect additional_context.
