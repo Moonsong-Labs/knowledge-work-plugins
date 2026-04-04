@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2026-04-04
+
+- feat(session-start): integrate MSL engineering values into session context (#38)
+
 ## [1.5.0] - 2026-03-16
 
 - fix(core-engineering): Add notion of phased work and improve the naming for plan files (#31)
