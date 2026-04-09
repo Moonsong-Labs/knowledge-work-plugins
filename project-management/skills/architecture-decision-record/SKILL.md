@@ -9,7 +9,7 @@ description: "Use when choosing between competing technical approaches, recordin
 
 Create architecture decision records (ADRs) following the [MADR](https://github.com/adr/madr) (Markdown Any Decision Records) standard. ADRs capture the context, options considered, and rationale behind significant architecture decisions.
 
-The [ADR template](adr-template.md) contains the full MADR document structure ready to copy into a project. This skill describes when and how to use it.
+The [ADR template](adr-template.md) contains the full MADR document structure ready to copy into a project. Optional sections are marked with HTML comments and can be removed for a minimal ADR. This skill describes when and how to use it.
 
 **Announce at start:** "I'm using the architecture-decision-record skill to create an ADR following the MADR standard."
 
@@ -51,20 +51,19 @@ List existing ADRs in the directory and use the next sequential number. Pad with
 
 ### 4. Walk Through MADR Sections
 
-Guide the user through each section using the [ADR template](adr-template.md). Do not skip sections without asking.
+Guide the user through each section using the [ADR template](adr-template.md). Do not skip required sections. For optional sections, ask if the user wants to include them. A minimal ADR only needs the three required sections.
 
 **Required sections:**
 - Context and Problem Statement
 - Considered Options
 - Decision Outcome
 
-**Optional but recommended sections:**
+**Optional sections (remove if not needed):**
+- YAML frontmatter (status, date, decision-makers, consulted, informed)
 - Decision Drivers
 - Consequences (Good/Bad)
-- Pros and Cons of the Options
-
-**Optional sections:**
 - Confirmation (how to verify the decision was implemented correctly)
+- Pros and Cons of the Options
 - More Information (links, references, related ADRs)
 
 ### 5. Write the ADR
