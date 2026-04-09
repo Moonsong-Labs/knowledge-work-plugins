@@ -7,7 +7,9 @@ description: "Use when identifying project risks, creating risk registers, build
 
 ## Overview
 
-Structured risk assessment that produces a risk register with dual scoring (inherent and residual) and actionable mitigation plans. Aligned with ISO 31000:2018 principles using a 5x5 likelihood-impact matrix.
+Structured risk assessment that produces a risk register with dual scoring (inherent and residual) and actionable mitigation plans. Uses a 5x5 likelihood-impact matrix aligned with ISO 31000:2018 principles.
+
+The [risk register template](risk-register-template.md) contains the full document structure with all scales, tables, diagrams, and guidance on what to adapt per project. This skill describes when and how to use it.
 
 **Announce at start:** "I'm using the risk-management skill to create a risk register and mitigation plan."
 
@@ -28,194 +30,53 @@ Before identifying risks, establish:
 - Who is the audience? (engineering team, leadership, auditors, external stakeholders)
 - Is this a discovery-phase assessment or an update to an existing register?
 
-### 2. Establish Risk Taxonomy
-
-Define risk categories tailored to the project. Start with these defaults and adapt:
-
-| Category | Code | Covers |
-|----------|------|--------|
-| Security | SEC | Key material, access control, cryptographic soundness, contract vulnerabilities |
-| Operational | OPS | Infrastructure failures, procedural errors, monitoring gaps, incident readiness |
-| Protocol / Technical | PRO | Design-level vulnerabilities, integration assumptions, performance, compatibility |
-| Governance | GOV | Decision authority, collusion, compliance, decentralization |
-
-Add or remove categories based on the project domain. Every risk gets a category code prefix in its ID.
-
-### 3. Define Likelihood and Impact Scales
-
-Use these scales. Adapt the impact definitions to the project domain (the examples below are for infrastructure/protocol projects).
-
-**Likelihood:**
-
-| Score | Label | Definition |
-|-------|-------|------------|
-| 1 | Rare | < 5% probability |
-| 2 | Unlikely | 5-20%; has occurred in similar systems but conditions differ |
-| 3 | Possible | 20-50%; plausible given current architecture |
-| 4 | Likely | 50-80%; expected without additional controls |
-| 5 | Almost Certain | > 80%; has occurred in comparable systems |
-
-**Impact:**
-
-| Score | Label | Definition |
-|-------|-------|------------|
-| 1 | Insignificant | No financial loss; minor delay; self-correcting |
-| 2 | Minor | Limited financial impact; recoverable within hours; no user impact |
-| 3 | Moderate | Significant operational disruption; partial service degradation; reputation damage |
-| 4 | Major | Material financial loss; extended downtime; potential data or fund exposure |
-| 5 | Catastrophic | Total loss of critical assets; unrecoverable compromise; project-ending event |
-
-### 4. Set Severity Bands
-
-Risk score = Likelihood x Impact. Map scores to severity bands:
-
-| Score Range | Severity | Required Action |
-|-------------|----------|-----------------|
-| 1-3 | Low | Accept; monitor with documented rationale |
-| 4-6 | Low-Medium | Monitor; review periodically |
-| 8-10 | Medium | Active mitigation required; assign owner and timeline |
-| 12-16 | High | Immediate mitigation plan; escalate to project leadership |
-| 20-25 | Critical | Must resolve before launch; potential blocker |
-
-### 5. Define Risk Appetite
-
-For each category, set the maximum acceptable residual severity. Example:
-
-| Category | Max Acceptable Residual Severity | Notes |
-|----------|----------------------------------|-------|
-| Security (SEC) | Medium (10 or below) | No unmitigated High or Critical security risks at launch |
-| Operational (OPS) | Medium (10 or below) | Disruptions must be recoverable within defined SLAs |
-| Protocol (PRO) | Medium (10 or below) | Risks above Medium require design changes before launch |
-| Governance (GOV) | Medium (10 or below) | Governance gaps must be resolved before production |
-
-Adapt thresholds to the project's risk tolerance.
-
-### 6. Build the Risk Register
-
-Score each risk twice:
-
-- **Inherent risk** = Likelihood x Impact (before any controls)
-- **Residual risk** = Likelihood x Impact (after planned controls are applied)
-
-The gap between inherent and residual makes the effectiveness of mitigations visible and auditable.
-
-**Risk register table format (one table per category):**
-
-| ID | Risk | Description | Inherent Likelihood | Inherent Impact | Inherent Score | Existing Controls | Mitigation Strategy | Control Type | Residual Likelihood | Residual Impact | Residual Score | Owner | Status | Related Docs |
-|----|------|-------------|---------------------|-----------------|----------------|-------------------|---------------------|--------------|---------------------|-----------------|----------------|-------|--------|--------------|
-
-- **ID format:** `R-{CATEGORY}-{NNN}` (e.g., `R-SEC-001`, `R-OPS-003`)
-- **Control Type:** Preventive, Detective, or Corrective (see below)
-- **Status:** Open, In Progress, Closed
-
-### 7. Build Detailed Mitigation Plans
-
-For every risk with an inherent score of 12 or above (High/Critical), write a detailed mitigation plan. Medium and lower risks are tracked in the register with mitigation strategies noted inline.
-
-**Control types:**
-
-| Type | When It Acts | Purpose | Example |
-|------|-------------|---------|---------|
-| Preventive | Before the event | Stop the risk from materializing | Access controls, audits, input validation |
-| Detective | During / immediately after | Detect that a risk event has occurred | Monitoring, alerting, anomaly detection |
-| Corrective | After the event | Limit damage and restore operation | Incident response, rollback, emergency pause |
-
-**Response strategies:**
-
-| Strategy | When to Use |
-|----------|-------------|
-| Avoid | Eliminate the risk by changing the design |
-| Reduce | Lower likelihood or impact through controls |
-| Transfer | Shift the risk to a third party (audits, insurance, bug bounties) |
-| Accept | Acknowledge and monitor; appropriate for low-severity risks |
-
-**Mitigation plan format for each High/Critical risk:**
-
-```markdown
----
-
-| R-XXX-NNN: Risk title |
-|:--|
-| **Risk:** Description of what could go wrong. |
-| **Inherent Score:** L x I = Score (Severity) |
-| **Target Residual Score:** L x I = Score (Severity) |
-
-**Preventive Controls:**
-
-- [ ] Control description (owner: TBD)
-
-**Detective Controls:**
-
-- [ ] Control description (owner: TBD)
-
-**Corrective Controls:**
-
-- [ ] Control description (owner: TBD)
-
-**Acceptance Criteria:** What must be true for this risk to be considered mitigated.
-
----
-```
-
-### 8. Define Roles and Review Cadence
-
-**Roles:**
-
-| Role | Responsibility |
-|------|---------------|
-| Risk Owner | Keeps the risk entry current; implements or oversees mitigation; reports status; escalates if residual risk exceeds appetite |
-| Project Team | Assigns risk owners; ensures mitigations are resourced; reviews register regularly |
-| Leadership | Sets risk appetite; approves acceptance of high/critical residual risks |
-
-**Review cadence (adapt to project phase):**
-
-| Activity | Frequency |
-|----------|-----------|
-| Full register review | Quarterly |
-| High/Critical risk check | Monthly |
-| Event-triggered update | As needed (incidents, architecture changes, new threats) |
-| Risk owner status update | Monthly |
-| Risk appetite review | Quarterly |
-
-## Output Location
+### 2. Discover Output Location
 
 Use the [plan location discovery](../../shared/plan-location-discovery.md) process to find the right directory. Default filename: `risk-register-and-mitigation-plan.md`.
 
 Announce the chosen path and wait for user confirmation before writing.
 
-## Example
+### 3. Copy and Adapt the Template
 
-A single worked example showing a risk register entry and its mitigation plan.
+Start from the [risk register template](risk-register-template.md). Adapt it to the project:
 
-**Register entry:**
+- **Purpose and Scope** (section 1): Fill in the project boundary, audience, and phase context.
+- **Impact scale** (section 3): Rewrite impact definitions for the project domain. The template defaults are for infrastructure/protocol projects.
+- **Risk appetite** (section 4): Set maximum acceptable residual severity per category based on the project's risk tolerance.
+- **Risk taxonomy** (section 5): Add, remove, or rename categories to match the domain. The defaults (SEC, OPS, PRO, GOV) work for most technical projects.
+- **Roles** (section 8): Map roles to actual people or teams.
+- **Review cadence** (section 9): Adjust frequencies for the project phase and team size.
 
-| ID | Risk | Description | Inherent L | Inherent I | Inherent Score | Existing Controls | Mitigation Strategy | Control Type | Residual L | Residual I | Residual Score | Owner | Status | Related Docs |
-|----|------|-------------|-----------|-----------|----------------|-------------------|---------------------|--------------|-----------|-----------|----------------|-------|--------|--------------|
-| `R-SEC-003` | Smart contract vulnerability | Logic bug or upgrade proxy exploit in the EVM verifier contract | 3 | 4 | 12 | None yet | Reduce | Preventive, Corrective | 2 | 4 | 8 | TBD | Open | ADR-002 |
+### 4. Identify and Score Risks
 
-**Detailed mitigation plan (required because inherent score is 12, High):**
+For each risk:
 
----
+1. Assign a category and sequential ID (e.g., `R-SEC-001`)
+2. Describe what could go wrong, clearly and specifically
+3. Score **inherent risk** (Likelihood x Impact, before controls)
+4. Document existing controls and planned mitigation
+5. Score **residual risk** (Likelihood x Impact, after planned controls)
 
-| R-SEC-003: Smart contract vulnerability |
-|:--|
-| **Risk:** Logic bug or upgrade proxy exploit in the EVM verifier contract. |
-| **Inherent Score:** 3 x 4 = 12 (High) |
-| **Target Residual Score:** 2 x 4 = 8 (Medium) |
+The gap between inherent and residual makes mitigation effectiveness visible and auditable.
 
-**Preventive Controls:**
+### 5. Write Detailed Mitigation Plans
 
-- [ ] Commission independent security audit of EVM verifier contract (owner: TBD)
-- [ ] Establish bug bounty program covering EVM contracts (owner: TBD)
+For every risk with an inherent score of 12 or above (High/Critical), write a detailed mitigation plan using the template format in section 7. Organize controls by type:
 
-**Corrective Controls:**
+- **Preventive**: stops the risk from materializing
+- **Detective**: detects that a risk event has occurred
+- **Corrective**: limits damage and restores operation
 
-- [ ] Emergency pause capability via multisig (owner: TBD)
-- [ ] Documented contract incident response procedure (owner: TBD)
+Medium and lower risks are tracked in the register with mitigation strategies noted inline.
 
-**Acceptance Criteria:** At least one independent audit with no critical/high findings unresolved.
+### 6. Review with Stakeholders
 
----
+Present the completed register for review. Check that:
+
+- No High/Critical risk is missing a detailed mitigation plan
+- Every mitigation has an owner assigned
+- Risk appetite thresholds are not exceeded by residual scores
+- Impact definitions match the project domain (not left as generic defaults)
 
 ## Common Mistakes
 
