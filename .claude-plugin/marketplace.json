@@ -31,6 +31,15 @@
       "author": {
         "name": "Moonsong Labs"
       }
+    },
+    {
+      "name": "moonsong-project-management",
+      "description": "Skills for project management: risk registers, architecture decision records, and mitigation planning",
+      "version": "0.1.0",
+      "source": "./moonsong-project-management",
+      "author": {
+        "name": "Moonsong Labs"
+      }
     }
   ]
 }

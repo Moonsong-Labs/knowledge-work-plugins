@@ -1,0 +1,18 @@
+{
+  "name": "moonsong-project-management",
+  "description": "Skills for project management: risk registers, architecture decision records, and mitigation planning",
+  "version": "0.1.0",
+  "author": {
+    "name": "Moonsong Labs"
+  },
+  "homepage": "https://github.com/Moonsong-Labs/knowledge-work-plugins",
+  "repository": "https://github.com/Moonsong-Labs/knowledge-work-plugins",
+  "license": "MIT",
+  "keywords": [
+    "project-management",
+    "risk-management",
+    "adr",
+    "architecture-decisions",
+    "mitigation-planning"
+  ]
+}

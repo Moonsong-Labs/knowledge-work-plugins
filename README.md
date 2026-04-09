@@ -16,6 +16,10 @@ A complete software engineering workflow: brainstorming, planning, TDD, debuggin
 
 A collection of skills that enhance AI agents with specialized capabilities for developing on the Moonbeam parachain: adding pallets, precompiles, XCM messaging, runtime development, testing, migrations, and more.
 
+### [Moonsong Project Management](./moonsong-project-management)
+
+Skills for project management tasks: risk assessment with dual scoring (inherent/residual), architecture decision records following the MADR standard, and mitigation planning.
+
 ## Installation
 
 **Note:** Installation differs by platform. Claude Code and Cursor have built-in plugin marketplaces. Codex and OpenCode require manual setup.
