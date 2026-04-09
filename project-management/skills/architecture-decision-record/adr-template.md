@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD003 -->
 <!-- Full MADR (Markdown Any Decision Records) template. -->
 <!-- Sections marked "Optional" can be removed for a minimal ADR. -->
 <!-- Source: https://github.com/adr/madr -->
