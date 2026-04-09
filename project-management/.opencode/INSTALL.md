@@ -1,4 +1,4 @@
-# Installing the Moonsong Project Management plugin for OpenCode
+# Installing the Project Management plugin for OpenCode
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Create a symlink so OpenCode discovers the skills:
 
 ```bash
 mkdir -p ~/.config/opencode/skills
-ln -s ~/.config/opencode/knowledge-work-plugins/moonsong-project-management/skills ~/.config/opencode/skills/moonsong-project-management
+ln -s ~/.config/opencode/knowledge-work-plugins/project-management/skills ~/.config/opencode/skills/project-management
 ```
 
 ### 3. Restart OpenCode
@@ -32,7 +32,7 @@ Use OpenCode's native `skill` tool to list and load skills:
 
 ```text
 use skill tool to list skills
-use skill tool to load moonsong-project-management/risk-management
+use skill tool to load project-management/risk-management
 ```
 
 ## Updating
@@ -44,7 +44,7 @@ cd ~/.config/opencode/knowledge-work-plugins && git pull
 ## Uninstalling
 
 ```bash
-rm ~/.config/opencode/skills/moonsong-project-management
+rm ~/.config/opencode/skills/project-management
 ```
 
 Optionally delete the clone: `rm -rf ~/.config/opencode/knowledge-work-plugins`

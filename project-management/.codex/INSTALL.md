@@ -11,14 +11,14 @@ Enable skills in Codex via native skill discovery. Just clone and symlink.
 1. **Clone the skills repository:**
 
    ```bash
-   git clone https://github.com/Moonsong-Labs/knowledge-work-plugins.git ~/.codex/moonsong-project-management
+   git clone https://github.com/Moonsong-Labs/knowledge-work-plugins.git ~/.codex/project-management
    ```
 
 2. **Create the skills symlink:**
 
    ```bash
    mkdir -p ~/.agents/skills
-   ln -s ~/.codex/moonsong-project-management/moonsong-project-management/skills ~/.agents/skills/moonsong-project-management
+   ln -s ~/.codex/project-management/project-management/skills ~/.agents/skills/project-management
    ```
 
 3. **Restart Codex** (quit and relaunch the CLI) to discover the skills.
@@ -26,7 +26,7 @@ Enable skills in Codex via native skill discovery. Just clone and symlink.
 ## Verify
 
 ```bash
-ls -la ~/.agents/skills/moonsong-project-management
+ls -la ~/.agents/skills/project-management
 ```
 
 You should see a symlink pointing to your skills directory.
@@ -34,7 +34,7 @@ You should see a symlink pointing to your skills directory.
 ## Updating
 
 ```bash
-cd ~/.codex/moonsong-project-management && git pull
+cd ~/.codex/project-management && git pull
 ```
 
 Skills update instantly through the symlink.
@@ -42,7 +42,7 @@ Skills update instantly through the symlink.
 ## Uninstalling
 
 ```bash
-rm ~/.agents/skills/moonsong-project-management
+rm ~/.agents/skills/project-management
 ```
 
-Optionally delete the clone: `rm -rf ~/.codex/moonsong-project-management`.
+Optionally delete the clone: `rm -rf ~/.codex/project-management`.

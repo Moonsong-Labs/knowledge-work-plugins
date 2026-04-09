@@ -1,4 +1,4 @@
-# Moonsong Project Management
+# Project Management
 
 Skills for project management tasks: risk assessment with dual scoring, architecture decision records following the MADR standard, and mitigation planning.
 
@@ -24,7 +24,7 @@ In Claude Code, register the marketplace first:
 Then install the plugin:
 
 ```bash
-/plugin install moonsong-project-management@moonsong-labs
+/plugin install project-management@moonsong-labs
 ```
 
 ### Cursor
@@ -36,7 +36,7 @@ Cursor automatically detects plugins installed by Claude Code. Install via Claud
 Tell Codex:
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonsong-project-management/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/project-management/.codex/INSTALL.md
 ```
 
 ### OpenCode
@@ -44,5 +44,5 @@ Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-La
 Tell OpenCode:
 
 ```text
-Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/moonsong-project-management/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/Moonsong-Labs/knowledge-work-plugins/refs/heads/main/project-management/.opencode/INSTALL.md
 ```
