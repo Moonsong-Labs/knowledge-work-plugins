@@ -9,6 +9,8 @@ description: "Use when choosing between competing technical approaches, recordin
 
 Create architecture decision records (ADRs) following the [MADR](https://github.com/adr/madr) (Markdown Any Decision Records) standard. ADRs capture the context, options considered, and rationale behind significant architecture decisions.
 
+The [ADR template](adr-template.md) contains the full MADR document structure ready to copy into a project. This skill describes when and how to use it.
+
 **Announce at start:** "I'm using the architecture-decision-record skill to create an ADR following the MADR standard."
 
 ## When to Use
@@ -49,7 +51,7 @@ List existing ADRs in the directory and use the next sequential number. Pad with
 
 ### 4. Walk Through MADR Sections
 
-Guide the user through each section. Do not skip sections without asking.
+Guide the user through each section using the [ADR template](adr-template.md). Do not skip sections without asking.
 
 **Required sections:**
 - Context and Problem Statement
@@ -67,74 +69,7 @@ Guide the user through each section. Do not skip sections without asking.
 
 ### 5. Write the ADR
 
-Use the MADR template below. File naming: `NNNN-title-in-kebab-case.md`.
-
-## MADR Template
-
-```markdown
----
-status: {proposed | accepted | rejected | deprecated | superseded by ADR-NNNN}
-date: {YYYY-MM-DD}
-decision-makers: {list everyone involved in the decision}
-consulted: {list everyone whose opinions are sought; two-way communication}
-informed: {list everyone kept up-to-date; one-way communication}
----
-
-# {Short title, representative of solved problem and found solution}
-
-## Context and Problem Statement
-
-{Describe the context and problem statement, e.g., in free form using two to three
-sentences or in the form of a question. Consider adding links to collaboration
-boards or issue trackers.}
-
-## Decision Drivers
-
-* {Decision driver 1, e.g., a desired quality, constraint, or force}
-* {Decision driver 2}
-
-## Considered Options
-
-* {Title of option 1}
-* {Title of option 2}
-* {Title of option 3}
-
-## Decision Outcome
-
-Chosen option: "{title of option}", because {justification}.
-
-### Consequences
-
-* Good, because {positive consequence}
-* Bad, because {negative consequence}
-
-### Confirmation
-
-{How the implementation or compliance of the ADR can be confirmed. E.g., a design
-review, code review, or test.}
-
-## Pros and Cons of the Options
-
-### {Title of option 1}
-
-{Description or pointer to more information.}
-
-* Good, because {argument a}
-* Good, because {argument b}
-* Neutral, because {argument c}
-* Bad, because {argument d}
-
-### {Title of option 2}
-
-{Description or pointer to more information.}
-
-* Good, because {argument a}
-* Bad, because {argument b}
-
-## More Information
-
-{Additional evidence, links to related ADRs, or references.}
-```
+Copy the template and fill in each section. File naming: `NNNN-title-in-kebab-case.md`.
 
 ## Statuses
 
