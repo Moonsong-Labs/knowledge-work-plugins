@@ -36,12 +36,7 @@ Ask:
 
 ### 2. Discover ADR Location
 
-Search for existing ADR directories in order:
-
-1. Check project instructions (`CLAUDE.md`, `AGENTS.md`) for ADR location guidance
-2. Look for existing directories: `docs/decisions/`, `docs/adr/`, `docs/ADRs/`, `docs/architecture/decisions/`
-3. If found, check existing files for naming patterns (numbered prefix like `0001-`, `adr-001-`, etc.)
-4. If no ADR directory exists, default to `docs/decisions/`
+Use the [plan location discovery](../../shared/plan-location-discovery.md) process to find the right directory. When searching for existing directories, also check for ADR-specific locations: `docs/decisions/`, `docs/adr/`, `docs/ADRs/`, `docs/architecture/decisions/`. If no ADR directory exists, default to `docs/decisions/`.
 
 Announce the chosen path and wait for user confirmation before writing.
 
