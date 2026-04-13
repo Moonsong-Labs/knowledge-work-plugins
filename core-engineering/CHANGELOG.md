@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.0] - 2026-04-13
+
+- Port upstream improvements from superpowers (#42)
+
 ## [1.6.0] - 2026-04-04
 
 - feat(session-start): integrate MSL engineering values into session context (#38)
