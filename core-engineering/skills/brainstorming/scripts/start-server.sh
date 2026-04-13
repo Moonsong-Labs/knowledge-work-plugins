@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Start the brainstorm server and output connection info
 # Usage: start-server.sh [--project-dir <path>] [--host <bind-host>] [--url-host <display-host>] [--foreground] [--background]
 #
@@ -64,20 +64,31 @@ if [[ -n "${CODEX_CI:-}" && "$FOREGROUND" != "true" && "$FORCE_BACKGROUND" != "t
     FOREGROUND="true"
 fi
 
+# Windows/Git Bash reaps nohup background processes. Auto-foreground when detected.
+if [[ "$FOREGROUND" != "true" && "$FORCE_BACKGROUND" != "true" ]]; then
+    case "${OSTYPE:-}" in
+        msys* | cygwin* | mingw*) FOREGROUND="true" ;;
+    esac
+    if [[ -n "${MSYSTEM:-}" ]]; then
+        FOREGROUND="true"
+    fi
+fi
+
 # Generate unique session directory
 SESSION_ID="$$-$(date +%s)"
 
 if [[ -n "$PROJECT_DIR" ]]; then
-    SCREEN_DIR="${PROJECT_DIR}/.brainstorm/${SESSION_ID}"
+    SESSION_DIR="${PROJECT_DIR}/.brainstorm/${SESSION_ID}"
 else
-    SCREEN_DIR="/tmp/brainstorm-${SESSION_ID}"
+    SESSION_DIR="/tmp/brainstorm-${SESSION_ID}"
 fi
 
-PID_FILE="${SCREEN_DIR}/.server.pid"
-LOG_FILE="${SCREEN_DIR}/.server.log"
+STATE_DIR="${SESSION_DIR}/state"
+PID_FILE="${STATE_DIR}/server.pid"
+LOG_FILE="${STATE_DIR}/server.log"
 
-# Create fresh session directory
-mkdir -p "$SCREEN_DIR"
+# Create fresh session directory with content and state peers
+mkdir -p "${SESSION_DIR}/content" "$STATE_DIR"
 
 # Kill any existing server
 if [[ -f "$PID_FILE" ]]; then
@@ -99,20 +110,19 @@ fi
 # Foreground mode for environments that reap detached/background processes.
 if [[ "$FOREGROUND" == "true" ]]; then
     echo "$$" >"$PID_FILE"
-    env BRAINSTORM_DIR="$SCREEN_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.js
+    env BRAINSTORM_DIR="$SESSION_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.js
     exit $?
 fi
 
 # Start server, capturing output to log file
 # Use nohup to survive shell exit; disown to remove from job table
-nohup env BRAINSTORM_DIR="$SCREEN_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.js >"$LOG_FILE" 2>&1 &
+nohup env BRAINSTORM_DIR="$SESSION_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.js >"$LOG_FILE" 2>&1 &
 SERVER_PID=$!
 disown "$SERVER_PID" 2>/dev/null
 echo "$SERVER_PID" >"$PID_FILE"
 
 # Wait for server-started message (check log file)
-attempt=0
-while ((attempt < 50)); do
+for _ in {1..50}; do
     if grep -q "server-started" "$LOG_FILE" 2>/dev/null; then
         # Verify server is still alive after a short window (catches process reapers)
         alive="true"
@@ -130,7 +140,6 @@ while ((attempt < 50)); do
         grep "server-started" "$LOG_FILE" | head -1
         exit 0
     fi
-    attempt=$((attempt + 1))
     sleep 0.1
 done
 
