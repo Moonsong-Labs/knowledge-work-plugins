@@ -1,7 +1,7 @@
 {
   "name": "project-management",
   "description": "Skills for project management: risk registers, architecture decision records, and mitigation planning",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": {
     "name": "Moonsong Labs"
   },
