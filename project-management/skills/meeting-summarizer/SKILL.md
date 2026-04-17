@@ -29,7 +29,11 @@ The [meeting summary template](meeting-summary-template.md) contains the exact o
 - Input is a design doc, chat log, email thread, or other non-meeting content
 - User wants a verbatim cleanup of the transcript without classification
 
-## The Core Discipline: Classify, Don't Synthesize
+## Content Rules
+
+Rules about what the summary must contain. Apply these during drafting and self-audit, before the operational steps in the next section.
+
+### The Core Discipline: Classify, Don't Synthesize
 
 Every substantive item in the transcript goes into exactly one of four buckets. **Pick the weakest bucket you can defend from the transcript.** When in doubt, it is Discussion, not Decision.
 
@@ -42,7 +46,7 @@ Every substantive item in the transcript goes into exactly one of four buckets. 
 | Two or more participants held opposing positions and neither yielded | Open Question (with positions noted) | Decision |
 | Pleasantries, "can you hear me", "sounds good", "let me check my calendar", tangents | Omit | Anything |
 
-### Evidence rules
+#### Evidence rules
 
 Before writing a Decision or Action Item, verify from the transcript:
 
@@ -50,7 +54,7 @@ Before writing a Decision or Action Item, verify from the transcript:
 - **Action Item:** Is there a **named owner** (a specific person, not "the team") AND a **concrete task**? If the owner is implicit or the task is vague ("someone should look into it"), either name the owner as `TBD` or demote to an Open Question. Never invent an owner.
 - **Rationale on a Decision:** Only include a rationale if the transcript states one. Do not invent "because it's simpler" or "for performance reasons" unless those words or equivalents appear in the transcript.
 
-### Action Items must deliver project value
+#### Action Items must deliver project value
 
 An Action Item exists to help a reader *do project work*. Meeting-logistics tasks (share the recording, send the transcript, schedule the follow-up, add to next week's agenda, circulate the invite) are noise — **omit them**, even when they have a named owner and a concrete verb.
 
@@ -70,14 +74,14 @@ Test: does the **object** of the action refer to the meeting itself, or to a pro
 
 If the only "action items" you can find are meeting-logistics tasks, the Action Items section has no content — omit the entire section.
 
-### Hedge language preserves uncertainty
+#### Hedge language preserves uncertainty
 
 When something was merely proposed or favored by one participant, keep that attribution in Discussion. Examples:
 
 - Transcript: "Ana: I lean towards Redis for this." → Discussion bullet: `Ana favored Redis over DynamoDB for session storage.` **Not** a Decision.
 - Transcript: "Maybe we could switch to gRPC." → Discussion bullet: `gRPC was raised as a possible alternative.` **Not** an Action Item.
 
-## Output Contract
+### Output Contract
 
 The **summary content** contains no preamble, no "Here is the summary", no trailing commentary. The first character of the summary is `#`, the last character is the final character of the summary.
 
@@ -85,83 +89,7 @@ This applies whether the summary is printed to chat or written to a file. Conver
 
 Follow the structure in [meeting-summary-template.md](meeting-summary-template.md). If a section has no content, omit the entire section (heading and all). Never emit an empty section.
 
-## Output Destination
-
-Before writing the summary, decide where it goes. There are two modes:
-
-- **File mode** — write to a meeting-summaries directory in the current project
-- **Chat mode** — print inline in the conversation
-
-### Discovery
-
-1. Scan the current project (CWD and up to two levels deep) for a meetings directory. Priority order:
-   - `meeting-summaries/`
-   - `meetings/`
-   - `notes/meetings/`
-   - `docs/meetings/`
-   - Any directory whose name contains `meeting` or `summaries`
-2. If a directory is found, check for a convention:
-   - Read any `README.md` inside it for an explicit naming rule
-   - Otherwise, list existing `*.md` files and adopt the dominant pattern (e.g., `YYYY-MM-DD.md`, `YYYY-MM-DD-<topic>.md`)
-   - If the directory is empty or no pattern is clear, default to `YYYY-MM-DD.md`
-3. If no directory is found, ask the user: "No meeting-summaries directory found. Where should I save this, or do you want me to just print it to chat?"
-
-### Collision check
-
-Before writing, test whether the target file exists. If it does, do NOT overwrite silently. Present the collision and ask whether to:
-
-- Overwrite the existing file
-- Pick a different filename (e.g., append a short topic slug: `YYYY-MM-DD-<topic>.md`)
-- Abort and print to chat instead
-
-### Announce and wait
-
-Announce the chosen path (with reasoning) and wait for confirmation. Do not write the file before the user confirms. Example:
-
-> "`meeting-summaries/` already uses the `YYYY-MM-DD.md` naming from its README. I'll save this to `meeting-summaries/2026-04-16.md`. OK?"
-
-Only after confirmation: write the file. Report the written path once done.
-
-### When to default to chat mode
-
-- The user pasted the transcript directly into chat with no project context
-- No meetings directory exists and the user does not want to create one
-- The user explicitly asks for the summary inline
-
-## Terminology Validation (File Mode only)
-
-Transcription tools mangle project-specific terms (e.g. `dApps` — decentralised applications — spoken aloud and transcribed as `DAPs`). When the summary is being written into a project, cross-check domain terms against the project's glossary and rewrite to the canonical spelling.
-
-**Skip this pass entirely in Chat Mode**, and skip it in File Mode if no glossary is found. Do NOT invent canonical forms.
-
-### Glossary discovery
-
-After drafting the summary, look for a glossary in this priority order:
-
-1. Dedicated glossary file at project root or under `docs/`:
-   - `glossary.md`, `GLOSSARY.md`
-   - `terminology.md`, `TERMINOLOGY.md`
-   - `docs/glossary.md`, `docs/glossary/`, `docs/terminology.md`
-2. A "Glossary" or "Terminology" heading inside `CLAUDE.md`, `AGENTS.md`, or `README.md`
-
-If nothing is found, skip the pass.
-
-### Validation rules
-
-- For each domain-specific term in the drafted summary (acronyms, product names, component names, compound technical terms), check whether the glossary defines it
-- Match on meaning, not just letters: if the transcript's term has a parenthetical expansion (`DAPs (decentralised applications)`) that matches a glossary entry with a different spelling (`dApps — decentralised applications`), rewrite to the canonical form
-- If a term appears in the transcript but not in the glossary, **leave it as-is** — do not guess a canonical form
-- If two glossary sources disagree, prefer the most project-specific one (dedicated file > CLAUDE.md/AGENTS.md heading), and surface the conflict to the user
-
-### Report before writing
-
-List the corrections as part of the announce-and-wait step, so the user can veto before the file is written:
-
-> "Applied glossary corrections: `DAPs` → `dApps` (decentralised applications). Writing to `meeting-summaries/2026-04-16.md`. OK?"
-
-If no corrections were made, skip the corrections line.
-
-## Rules
+### Specific Rules
 
 1. **Start with `#` as the first character.** No preamble.
 2. **Present tense for Decisions.** "Sessions use Redis" — not "We decided sessions would use Redis".
@@ -175,7 +103,7 @@ If no corrections were made, skip the corrections line.
 10. **Keep the summary tight.** Target under 600 words for a 1-hour meeting. Longer summaries correlate with invention.
 11. **Meeting title** is short and descriptive, derived from the transcript's topics or the explicit meeting name if given.
 
-## Rationalizations to Reject
+### Rationalizations to Reject
 
 | Thought | Reality |
 |---------|---------|
@@ -189,7 +117,7 @@ If no corrections were made, skip the corrections line.
 | "The meeting mentions an ADR-042 style reference I'll flesh out" | If the transcript does not name the doc/ADR, do not invent one. |
 | "Someone committed to share the recording — that's an Action Item" | Meeting-logistics tasks (recording, transcript, agenda, invite) are not project work. Omit. |
 
-## Red Flags — Stop Before Writing
+### Red Flags — Stop Before Writing
 
 - You are about to write a Decision but cannot quote or paraphrase the confirmation phrase from the transcript
 - You are about to assign an owner whose name appears in the transcript but who did not verbally accept the task
@@ -200,7 +128,7 @@ If no corrections were made, skip the corrections line.
 
 If any of these fires, move the item one bucket weaker (Decision → Discussion, Action Item → Open Question) or omit it.
 
-## Common Mistakes
+### Common Mistakes
 
 | Mistake | Correct behavior |
 |---------|------------------|
@@ -219,7 +147,7 @@ If any of these fires, move the item one bucket weaker (Decision → Discussion,
 | Keeping transcription-mangled terms (`DAPs` instead of `dApps`, decentralised applications) when a project glossary defines the canonical form | Run the terminology pass in File Mode; rewrite to the glossary spelling and report the corrections |
 | Guessing a canonical spelling for a term that is not in the glossary | Leave the transcript form. Do not invent canonical terms. |
 
-## Example
+### Example
 
 **Input (excerpt):**
 
@@ -260,7 +188,87 @@ Let's take that offline.
 
 Note what is **not** in the output: the "yeah, makes sense" pleasantry, timestamps, and any invented rationale. The rationale ("lower latency, already running in production") appears because Ana stated it verbatim.
 
-## Workflow
+## Operational Flow
+
+Rules about how the skill runs in a project — where the file lands, how terminology is validated, the end-to-end step ordering.
+
+### Output Destination
+
+Before writing the summary, decide where it goes. There are two modes:
+
+- **File mode** — write to a meeting-summaries directory in the current project
+- **Chat mode** — print inline in the conversation
+
+#### Discovery
+
+1. Scan the current project (CWD and up to two levels deep) for a meetings directory. Priority order:
+   - `meeting-summaries/`
+   - `meetings/`
+   - `notes/meetings/`
+   - `docs/meetings/`
+   - Any directory whose name contains `meeting` or `summaries`
+2. If a directory is found, check for a convention:
+   - Read any `README.md` inside it for an explicit naming rule
+   - Otherwise, list existing `*.md` files and adopt the dominant pattern (e.g., `YYYY-MM-DD.md`, `YYYY-MM-DD-<topic>.md`)
+   - If the directory is empty or no pattern is clear, default to `YYYY-MM-DD.md`
+3. If no directory is found, ask the user: "No meeting-summaries directory found. Where should I save this, or do you want me to just print it to chat?"
+
+#### Collision check
+
+Before writing, test whether the target file exists. If it does, do NOT overwrite silently. Present the collision and ask whether to:
+
+- Overwrite the existing file
+- Pick a different filename (e.g., append a short topic slug: `YYYY-MM-DD-<topic>.md`)
+- Abort and print to chat instead
+
+#### Announce and wait
+
+Announce the chosen path (with reasoning) and wait for confirmation. Do not write the file before the user confirms. Example:
+
+> "`meeting-summaries/` already uses the `YYYY-MM-DD.md` naming from its README. I'll save this to `meeting-summaries/2026-04-16.md`. OK?"
+
+Only after confirmation: write the file. Report the written path once done.
+
+#### When to default to chat mode
+
+- The user pasted the transcript directly into chat with no project context
+- No meetings directory exists and the user does not want to create one
+- The user explicitly asks for the summary inline
+
+### Terminology Validation (File Mode only)
+
+Transcription tools mangle project-specific terms (e.g. `dApps` — decentralised applications — spoken aloud and transcribed as `DAPs`). When the summary is being written into a project, cross-check domain terms against the project's glossary and rewrite to the canonical spelling.
+
+**Skip this pass entirely in Chat Mode**, and skip it in File Mode if no glossary is found. Do NOT invent canonical forms.
+
+#### Glossary discovery
+
+After drafting the summary, look for a glossary in this priority order:
+
+1. Dedicated glossary file at project root or under `docs/`:
+   - `glossary.md`, `GLOSSARY.md`
+   - `terminology.md`, `TERMINOLOGY.md`
+   - `docs/glossary.md`, `docs/glossary/`, `docs/terminology.md`
+2. A "Glossary" or "Terminology" heading inside `CLAUDE.md`, `AGENTS.md`, or `README.md`
+
+If nothing is found, skip the pass.
+
+#### Validation rules
+
+- For each domain-specific term in the drafted summary (acronyms, product names, component names, compound technical terms), check whether the glossary defines it
+- Match on meaning, not just letters: if the transcript's term has a parenthetical expansion (`DAPs (decentralised applications)`) that matches a glossary entry with a different spelling (`dApps — decentralised applications`), rewrite to the canonical form
+- If a term appears in the transcript but not in the glossary, **leave it as-is** — do not guess a canonical form
+- If two glossary sources disagree, prefer the most project-specific one (dedicated file > CLAUDE.md/AGENTS.md heading), and surface the conflict to the user
+
+#### Report before writing
+
+List the corrections as part of the announce-and-wait step, so the user can veto before the file is written:
+
+> "Applied glossary corrections: `DAPs` → `dApps` (decentralised applications). Writing to `meeting-summaries/2026-04-16.md`. OK?"
+
+If no corrections were made, skip the corrections line.
+
+### Workflow
 
 1. **Read the full transcript once before writing anything.** You cannot classify correctly without knowing how a topic resolved later in the meeting.
 2. **Extract Attendees** from the participant metadata or the set of speakers. Strip emails and roles.
