@@ -259,7 +259,7 @@ Only after confirmation: write the file. Report the written path once done.
 
 ### Terminology Validation (File Mode only)
 
-Transcription tools mangle project-specific terms (e.g. `dApps` — decentralised applications — spoken aloud and transcribed as `DAPs`). When the summary is being written into a project, cross-check domain terms against the project's glossary and rewrite to the canonical spelling.
+Transcription tools mangle project-specific terms. Examples: `dApps` (decentralised applications) transcribed as `DAPs`; a named component like `Gateway` typed as `gateway`. When the summary is being written into a project, cross-check domain terms against the project's glossary and rewrite to the canonical form (including case).
 
 **Skip this pass entirely in Chat Mode**, and skip it in File Mode if no glossary is found. Do NOT invent canonical forms.
 
@@ -279,6 +279,7 @@ If nothing is found, skip the pass.
 
 - For each domain-specific term in the drafted summary (acronyms, product names, component names, compound technical terms), check whether the glossary defines it
 - Match on meaning, not just letters: if the transcript's term has a parenthetical expansion (`DAPs (decentralised applications)`) that matches a glossary entry with a different spelling (`dApps — decentralised applications`), rewrite to the canonical form
+- **Casing is part of the canonical form.** If the glossary defines `Gateway` as a named component, rewrite lowercase `gateway` to `Gateway` — but only when the word refers to the component as a standalone noun. Do NOT capitalize when the word is used attributively as a modifier: `the Gateway forwards requests` gets corrected; `gateway API key` (where *gateway* modifies *API key*) stays lowercase
 - If a term appears in the transcript but not in the glossary, **leave it as-is** — do not guess a canonical form
 - If two glossary sources disagree, prefer the most project-specific one (dedicated file > CLAUDE.md/AGENTS.md heading), and surface the conflict to the user
 
