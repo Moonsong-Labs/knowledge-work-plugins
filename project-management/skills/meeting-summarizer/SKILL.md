@@ -1,6 +1,6 @@
 ---
 name: meeting-summarizer
-description: "Use when converting a meeting transcript, recording transcript, or auto-generated notes (Gemini, Granola, Otter, Fireflies, Zoom) into a structured summary. Enforces classification of content as Decision, Action Item, Discussion, or Open Question so that items merely discussed are not inflated into decisions, and transcript noise (pleasantries, timestamps, AI footers) is stripped."
+description: "Use when converting a meeting transcript, recording transcript, or auto-generated notes (Gemini, Granola, Otter, Fireflies, Zoom) into a structured summary. Not for behavioral analysis, filler-word counts, or facilitation critique."
 ---
 
 # Meeting Summarizer
