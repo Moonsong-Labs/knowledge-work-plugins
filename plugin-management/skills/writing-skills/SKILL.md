@@ -278,6 +278,17 @@ Agent found new rationalization? Add explicit counter. Re-test until bulletproof
 - Plugging holes systematically
 - Meta-testing techniques
 
+### REVIEW: Run the Skill Reviewer
+
+Before considering the skill done, run `plugin-management:skill-reviewer` against the finished bundle. The reviewer checks the artifact against the shared standard (trigger quality, frontmatter, structure, progressive disclosure, metadata parity, example realism) and returns structured findings with priorities.
+
+- Apply any `P1` or `P2` findings before deployment
+- `P3` findings can be deferred but should be recorded
+- Status `good` = ready to deploy; `needs_improvement` = fix first; `rethink` = the bundle shape is wrong, revisit the design
+- Use the reviewer any time you edit an existing skill too, not just for new ones
+
+The reviewer catches violations that pressure-testing cannot — TRIGGER/body drift, topology issues, stale examples, metadata parity — so it complements REFACTOR rather than replacing it.
+
 ## Anti-Patterns
 
 ### ❌ Narrative Example
@@ -336,6 +347,12 @@ Deploying untested skills = deploying untested code. It's a violation of quality
 - [ ] Build rationalization table from all test iterations
 - [ ] Create red flags list
 - [ ] Re-test until bulletproof
+
+**REVIEW Phase - Run the Skill Reviewer:**
+- [ ] Run `plugin-management:skill-reviewer` against the finished bundle
+- [ ] Fix all `P1` and `P2` findings
+- [ ] Record deferred `P3` findings
+- [ ] Re-run reviewer after fixes until status is `good`
 
 **Quality Checks:**
 - [ ] Shared-standard rules are satisfied without duplicating policy prose locally
