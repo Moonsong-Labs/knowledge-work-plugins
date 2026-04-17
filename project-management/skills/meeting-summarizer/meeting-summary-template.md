@@ -4,7 +4,7 @@
 
 # YYYY-MM-DD — {Short Meeting Title}
 
-**Attendees:** {Speakers only — names comma-separated. Drop silent invitees, emails, roles, and company suffixes.}
+**Attendees:** {Names only, comma-separated. No emails, no roles, no company suffixes.}
 
 ## Decisions
 
