@@ -81,6 +81,44 @@ When something was merely proposed or favored by one participant, keep that attr
 - Transcript: "Ana: I lean towards Redis for this." → Discussion bullet: `Ana favored Redis over DynamoDB for session storage.` **Not** a Decision.
 - Transcript: "Maybe we could switch to gRPC." → Discussion bullet: `gRPC was raised as a possible alternative.` **Not** an Action Item.
 
+#### Combine tightly coupled decisions
+
+When two decisions are tightly coupled — one is the mechanism, rationale, or condition for the other — combine them into a single bullet rather than emitting two. Use a secondary clause (`... preserved via ...`, `... pending ...`, `... with ...`) to carry the coupled piece.
+
+Example:
+
+- **Session storage**: Redis is the session store over DynamoDB — lower latency; durability preserved via hourly snapshots to S3
+
+Do not split this into two bullets. The snapshot mechanism is not a parallel decision; it addresses the durability concern raised during the storage decision.
+
+This rule only applies when one decision is genuinely the mechanism/rationale/condition of the other. Unrelated decisions stay in separate bullets.
+
+#### Open Questions include implicit deferrals
+
+Agents often miss open questions buried in flowing discussion. Scan the transcript for these phrases and paraphrases, and treat each as an Open Question candidate:
+
+- "we haven't decided yet"
+- "we still need to figure out"
+- "to be determined" *(spoken — distinct from the `**TBD**` token used in Action Items for missing owners)*
+- "we'll decide later" / "we'll see"
+- "either X or Y"
+- "for now ... but we might ..."
+- "let's take that offline" / "let's defer that"
+
+An item becomes an Open Question if the transcript does not also contain a resolution elsewhere. Explicit parking ("let's discuss next week") is not required.
+
+#### Topic grouping in Discussion Points
+
+Use H3 subheadings to group related points. "One topic per heading" does not mean "one bullet per heading". A single coherent thread that covers several related subtopics stays under one heading. Create a new heading only when the subject matter changes to a genuinely different technical domain (e.g. auth vs. consensus, request flow vs. deployment).
+
+Rule of thumb: if two subtopics share stakeholders, mechanisms, or constraints, they belong under the same heading.
+
+#### Preserve stated constraints
+
+When the transcript contains a specific constraint or qualifier ("only X", "not via Y", "infrequent so Z is tolerable", "at the scale already required"), preserve it in the summary. These constraints carry the highest-value information in a discussion; dropping them in favor of a generic paraphrase erases what made the discussion informative.
+
+Rule of thumb: if the sentence survives as accurate when the constraint is removed, keep the constraint anyway.
+
 ### Output Contract
 
 The **summary content** contains no preamble, no "Here is the summary", no trailing commentary. The first character of the summary is `#`, the last character is the final character of the summary.
@@ -101,7 +139,7 @@ Follow the structure in [meeting-summary-template.md](meeting-summary-template.m
 8. **Never fabricate.** If the transcript does not state an owner, a rationale, a deadline, or a reference, do not invent one. Use `TBD` for missing owners; omit the field entirely for missing rationales or deadlines.
 9. **Reference existing artifacts only if named.** Do not invent ADR numbers, doc titles, or ticket IDs that are not in the transcript.
 10. **Keep the summary tight.** Target under 600 words for a 1-hour meeting. Longer summaries correlate with invention.
-11. **Meeting title** is short and descriptive, derived from the transcript's topics or the explicit meeting name if given.
+11. **Meeting title** is a short, descriptive phrase derived from what was actually discussed or decided. Use the explicit calendar name (e.g. "Weekly Tech Standup") **only when the meeting covers so many unrelated topics that no specific theme emerges**. Prefer a content-based title every other time. Good: `Session Storage Sync`. Avoid: `Weekly Tech Standup`.
 
 ### Rationalizations to Reject
 
@@ -116,6 +154,10 @@ Follow the structure in [meeting-summary-template.md](meeting-summary-template.m
 | "The summary feels too short" | Short and accurate beats long and inflated. Do not pad. |
 | "The meeting mentions an ADR-042 style reference I'll flesh out" | If the transcript does not name the doc/ADR, do not invent one. |
 | "Someone committed to share the recording — that's an Action Item" | Meeting-logistics tasks (recording, transcript, agenda, invite) are not project work. Omit. |
+| "They didn't explicitly park this, so it's not an Open Question" | Implicit deferrals ("we haven't decided", "for now ... but we might", "either X or Y") are Open Questions too. |
+| "The calendar invite is called X, so the title should be X" | Prefer a content-based title derived from what was discussed. Use the calendar name only when no theme emerges. |
+| "These two decisions are related, so list them both" | If one is the mechanism/rationale of the other, combine into a single bullet. |
+| "The speaker said it more specifically but I'll paraphrase to be concise" | If a stated constraint ("only X", "not via Y") survives being removed, keep it anyway. Specifics are the highest-value compression. |
 
 ### Red Flags — Stop Before Writing
 
@@ -125,6 +167,10 @@ Follow the structure in [meeting-summary-template.md](meeting-summary-template.m
 - Your Decisions section is longer than the Discussion Points section (decisions are usually the smaller subset)
 - You find yourself writing "the team agreed" or "everyone was aligned" without a transcript line that confirms alignment
 - The Action Item's object is the meeting itself (recording, transcript, agenda, invite) rather than a project artifact — drop it
+- The meeting title is the calendar invite name but the discussion had a clear specific theme — rewrite to the content-based title
+- Attendees list includes names that never appeared as a speaker line — drop them
+- Two decision bullets are actually the same decision with one being the mechanism of the other — merge them
+- A specific constraint from the transcript ("only X", "not via Y") was paraphrased away into a generic statement — restore the constraint
 
 If any of these fires, move the item one bucket weaker (Decision → Discussion, Action Item → Open Question) or omit it.
 
@@ -143,6 +189,11 @@ If any of these fires, move the item one bucket weaker (Decision → Discussion,
 | Adding sections not in the template ("Summary", "Overview", "Key Takeaways") | Use only the template sections |
 | Narrative prose in Discussion Points | Concise bullet points, one fact each |
 | Inflating a single participant's suggestion into a team Decision | Keep it in Discussion with attribution |
+| Listing invited participants who never spoke as Attendees | Attendees are speakers only; silent invitees add no information |
+| Using the calendar invite name as the title when the meeting had a specific theme | Use a content-derived title; reserve the calendar name for grab-bag agendas |
+| Splitting a decision and its mechanism into two bullets | Combine: `**Topic**: choice — rationale; mechanism preserved via ...` |
+| Over-splitting a single architecture walkthrough into many H3 headings | One heading covers a coherent thread; split only for genuinely different technical domains |
+| Paraphrasing specific transcript constraints ("not via Y", "only X") into generic statements | Preserve stated constraints verbatim; they are the highest-value compression |
 | Listing "share the recording / send the transcript / schedule a follow-up" as Action Items | Drop meeting-logistics tasks; Action Items are for project work only |
 | Keeping transcription-mangled terms (`DAPs` instead of `dApps`, decentralised applications) when a project glossary defines the canonical form | Run the terminology pass in File Mode; rewrite to the glossary spelling and report the corrections |
 | Guessing a canonical spelling for a term that is not in the glossary | Leave the transcript form. Do not invent canonical terms. |
@@ -294,7 +345,7 @@ If no corrections were made, skip the corrections line.
 ### Workflow
 
 1. **Read the full transcript once before writing anything.** You cannot classify correctly without knowing how a topic resolved later in the meeting.
-2. **Extract Attendees** from the participant metadata or the set of speakers. Strip emails and roles.
+2. **Extract Attendees from the set of speakers** in the transcript. Invited participants who never spoke are omitted — their attendance is not established and they add no information. Strip emails, titles, and company suffixes. Use the name as spoken.
 3. **For each substantive topic, pick the weakest bucket you can defend.** Apply the evidence rules.
 4. **Draft the summary** into the template structure. Omit empty sections.
 5. **Self-audit against Red Flags** before finalizing. Demote or omit anything that fails.
