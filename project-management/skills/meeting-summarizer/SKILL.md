@@ -215,11 +215,33 @@ Before writing the summary, decide where it goes. There are two modes:
 
 #### Collision check
 
-Before writing, test whether the target file exists. If it does, do NOT overwrite silently. Present the collision and ask whether to:
+Before writing, test whether the target file exists. If it does, do NOT overwrite silently.
 
-- Overwrite the existing file
-- Pick a different filename (e.g., append a short topic slug: `YYYY-MM-DD-<topic>.md`)
+1. Read the existing file's first line — the `# YYYY-MM-DD — <Title>` heading.
+2. Compare the existing title to the new summary's title:
+   - **Same title** → this is a re-run on the same meeting. Offer overwrite as the default.
+   - **Different title** → two different meetings fell on the same day. Default to the two-slug path below.
+
+**Two-slug path (different meetings, same day):**
+
+- Save new summary as `YYYY-MM-DD-<new-slug>.md`
+- Also rename the existing `YYYY-MM-DD.md` → `YYYY-MM-DD-<existing-slug>.md` so both files share the same shape
+- `<slug>` is a short kebab-case derivative of the meeting title (e.g. *Session Storage Sync* → `session-storage-sync`)
+- Ask the user to confirm both actions before writing or renaming
+- If the directory has a `README.md` with an index table that links to the renamed file, remind the user to update the index — the skill does not edit the README
+
+**Other options (always offered):**
+
+- Save new summary with a slug, leave the existing file unchanged
+- Overwrite (only if this really is the same meeting)
 - Abort and print to chat instead
+
+Example prompt for the different-meetings case:
+
+> "Existing `2026-04-16.md` is titled *Architecture Review*. New summary is titled *Session Storage Sync*. Options:
+> - Save new as `2026-04-16-session-storage-sync.md` AND rename existing to `2026-04-16-architecture-review.md` (recommended, keeps naming consistent)
+> - Save new as `2026-04-16-session-storage-sync.md` only, leave existing unchanged
+> - Overwrite (only if this is the same meeting)"
 
 #### Announce and wait
 
