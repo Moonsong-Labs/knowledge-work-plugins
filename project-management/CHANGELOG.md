@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.2] - 2026-04-20
+
+- Expand ADR skill guidance (#50)
+
 ## [1.1.1] - 2026-04-17
 
 - Refine meeting-summarizer classification and composition rules (#48)
