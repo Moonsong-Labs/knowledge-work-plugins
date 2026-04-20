@@ -76,4 +76,4 @@ Then include:
 
 * What is already sound.
 * Open questions.
-* Suggested status: `proposed`, `accepted after fixes`, `needs rewrite`, or `supersede`.
+* Suggested review disposition: `accept`, `accept after fixes`, `needs rewrite`, or `supersede`.

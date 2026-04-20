@@ -21,6 +21,7 @@ Use this when deciding how much MADR structure to include.
 | Minimal | Decision is significant but straightforward, low controversy, and already has clear options | `adr-template-minimal.md` |
 | Standard | Normal engineering decision with tradeoffs, stakeholders, and implementation follow-through | `adr-template.md`, then remove unused optional sections |
 | Full | Decision is high-risk, controversial, cross-team, compliance-relevant, expensive to reverse, or likely to be revisited | `adr-template.md` with all useful optional sections |
+| Canonical MADR full | User asks for the exact/full MADR template or the project wants the published MADR shape without local adaptation | `adr-template-madr-full.md` |
 | Experimental | Decision is time-boxed, confidence is low, or implementation must be validated before wider rollout | Full template plus confirmation, success/kill criteria, fallback, and review date |
 | Backfill | Decision was already made and needs honest historical capture | Standard or full; separate original rationale from hindsight |
 
@@ -58,6 +59,8 @@ Use these metadata fields unless the project already has different names:
 * `decision-makers`
 * `consulted`
 * `informed`
+
+Use scalar metadata fields when preserving the canonical MADR full template. Use list metadata only when the project convention supports it or the adapted template is acceptable.
 
 ### Decision Drivers
 

@@ -34,7 +34,8 @@ If the project already has an ADR template, use it. Do not replace local templat
 If no template exists:
 
 * Use `adr-template-minimal.md` for small decisions.
-* Use `adr-template.md` for normal or high-impact decisions.
+* Use `adr-template-madr-full.md` when the project wants the exact published MADR full template.
+* Use `adr-template.md` for normal or high-impact decisions where the adapted MADR-style prompts are acceptable.
 * Keep a copy of the selected template in the ADR directory if the project wants repeatable manual creation.
 
 ## Filenames

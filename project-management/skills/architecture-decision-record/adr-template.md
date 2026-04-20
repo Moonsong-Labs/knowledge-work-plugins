@@ -1,7 +1,6 @@
 ---
-# Full MADR 4.0.0 (Markdown Architectural Decision Records) template.
-# Optional sections and metadata can be removed when they do not add value.
-# Source model: https://github.com/adr/madr/tree/4.0.0/template
+# Adapted full ADR template based on MADR.
+# Use adr-template-madr-full.md when an exact canonical MADR full template is requested.
 # Optional metadata. Remove any field that does not add value.
 status: "{proposed | rejected | accepted | deprecated | superseded by ADR-0123}"
 date: "{YYYY-MM-DD when the decision was last updated}"
