@@ -1,64 +1,76 @@
-<!-- markdownlint-disable MD003 -->
-<!-- Full MADR (Markdown Any Decision Records) template. -->
-<!-- Sections marked "Optional" can be removed for a minimal ADR. -->
-<!-- Source: https://github.com/adr/madr -->
-
-<!-- Optional: YAML frontmatter. Remove the entire block if not needed. -->
 ---
-status: "{proposed | rejected | accepted | deprecated | superseded by ADR-NNNN}"
-date: {YYYY-MM-DD when the decision was last updated}
-decision-makers: {list everyone involved in the decision}
-consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication}
-informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
+# Full MADR 4.0.0 (Markdown Architectural Decision Records) template.
+# Optional sections and metadata can be removed when they do not add value.
+# Source model: https://github.com/adr/madr/tree/4.0.0/template
+# Optional metadata. Remove any field that does not add value.
+status: "{proposed | rejected | accepted | deprecated | superseded by ADR-0123}"
+date: "{YYYY-MM-DD when the decision was last updated}"
+decision-makers:
+  - "{name or role of everyone involved in the decision}"
+consulted:
+  - "{name or role of subject-matter experts or stakeholders consulted through two-way communication}"
+informed:
+  - "{name or role of people kept up to date through one-way communication}"
 ---
+<!-- markdownlint-disable MD004 -->
 
-# {Short title, representative of solved problem and found solution}
+# {short title, representative of solved problem and found solution}
 
 ## Context and Problem Statement
 
-{Describe the context and problem statement, e.g., in free form using two to three sentences or in the form of an illustrative story. You may want to articulate the problem in form of a question and add links to collaboration boards or issue management systems. Make the scope of the decision explicit, for instance by calling out or pointing at structural architecture elements (components, connectors, ...).}
+{Describe the context and problem statement in two to three factual sentences, or as an illustrative story if that better explains the situation. Prefer a question when the decision can be phrased clearly. Include links to issues, RFCs, incidents, benchmarks, or diagrams when they are evidence. Make the scope explicit by naming the affected system, component, connector, workflow, quality attribute, or stakeholder concern.}
 
 <!-- Optional section. Remove if not needed. -->
 ## Decision Drivers
 
-* {Decision driver 1, e.g., a desired software quality, faced concern, constraint, or force}
-* {Decision driver 2}
+* {decision driver 1, e.g., desired quality, force, stakeholder concern, constraint, deadline, risk, or requirement}
+* {decision driver 2}
+* {decision driver 3}
 
 ## Considered Options
 
-* {Title of option 1}
-* {Title of option 2}
-* {Title of option 3}
+* {title of option 1}
+* {title of option 2}
+* {title of option 3}
 
 ## Decision Outcome
 
-Chosen option: "{title of option}", because {justification. e.g., only option which meets k.o. criterion decision driver | which resolves force {force} | comes out best (see below)}.
+Chosen option: "{title of option 1}", because {justification, e.g., it is the only option that meets a knockout driver, resolves the most important force, best satisfies the drivers below, or has the best risk/cost tradeoff}.
 
 <!-- Optional section. Remove if not needed. -->
 ### Consequences
 
 * Good, because {positive consequence, e.g., improvement of one or more desired qualities}
-* Bad, because {negative consequence, e.g., compromising one or more desired qualities}
+* Bad, because {negative consequence, e.g., compromised quality, implementation cost, operational burden, migration risk, or reduced flexibility}
+* Neutral, because {noteworthy effect that is neither clearly positive nor negative}
 
 <!-- Optional section. Remove if not needed. -->
 ### Confirmation
 
-{Describe how the implementation or compliance of the ADR can be confirmed. Is there any automated or manual fitness function? If so, list it and explain how it is applied. Is the chosen design and its implementation in line with the decision? E.g., a design review, code review, or a test with a library such as ArchUnit can help validate this.}
+{Describe how implementation or compliance with this decision can be confirmed. Examples: design review, code review, architecture test, dependency check, operational runbook review, dashboard/alert check, migration rehearsal, security review, or post-release review. Include success criteria, kill criteria, fallback plan, or review date when the decision is experimental or time-sensitive.}
 
 <!-- Optional section. Remove if not needed. -->
 ## Pros and Cons of the Options
 
-### {Title of option 1}
+### {title of option 1}
 
 {Example, description, or pointer to more information.}
 
 * Good, because {argument a}
 * Good, because {argument b}
-<!-- Use "neutral" if the given argument weights neither for good nor bad -->
+<!-- Use "Neutral" if the argument is noteworthy but weighs neither clearly for nor against the option. -->
 * Neutral, because {argument c}
 * Bad, because {argument d}
 
-### {Title of option 2}
+### {title of option 2}
+
+{Example, description, or pointer to more information.}
+
+* Good, because {argument a}
+* Neutral, because {argument b}
+* Bad, because {argument c}
+
+### {title of option 3}
 
 {Example, description, or pointer to more information.}
 
@@ -68,4 +80,4 @@ Chosen option: "{title of option}", because {justification. e.g., only option wh
 <!-- Optional section. Remove if not needed. -->
 ## More Information
 
-{Additional evidence/confidence for the decision outcome, team agreement on the decision, when/how the decision should be realized, and if/when it should be re-visited. Links to other decisions and resources might appear here as well.}
+{Add evidence, assumptions, confidence level, agreement notes, rollout plan, revisit date, related decisions, and links to supporting artifacts. Link large context here rather than embedding it in the ADR.}

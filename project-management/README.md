@@ -7,7 +7,7 @@ Skills for project management tasks: risk assessment with dual scoring, architec
 | Component | Type | Description |
 |-----------|------|-------------|
 | [risk-management](./skills/risk-management/SKILL.md) | Skill | Structured risk assessment with 5x5 matrix, inherent/residual scoring, and mitigation plans |
-| [architecture-decision-record](./skills/architecture-decision-record/SKILL.md) | Skill | Create ADRs following the MADR (Markdown Any Decision Records) standard |
+| [architecture-decision-record](./skills/architecture-decision-record/SKILL.md) | Skill | Draft, review, backfill, and supersede ADRs following the MADR (Markdown Architectural Decision Records) standard |
 | [meeting-summarizer](./skills/meeting-summarizer/SKILL.md) | Skill | Convert meeting transcripts into structured summaries that classify content as Decision, Action Item, Discussion, or Open Question without inflating discussions into decisions ([usage guide](./docs/meeting-summarizer.md)) |
 
 ## Installation
