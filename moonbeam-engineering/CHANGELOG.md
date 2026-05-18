@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-05-18
+
+
 ## [1.2.1] - 2026-03-31
 
 - Add missing `analyze-weight-diff.py` script and fix hardcoded path (#36)
