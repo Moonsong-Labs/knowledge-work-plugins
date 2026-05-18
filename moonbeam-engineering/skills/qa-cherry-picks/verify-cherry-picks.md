@@ -31,9 +31,4 @@ cargo check --workspace --tests
 ```
 
 Always pass `--tests`. Plain `cargo check --workspace` skips `#[cfg(test)]`
-modules and integration tests, so a cherry-pick — or an upstream refactor the
-cherry-pick lands on top of — can leave a test module that no longer compiles
-while the check still reports success. This bit us in the stable2603 cycle:
-evm's `evm-core` `delegation.rs` test module had been broken since an
-`Option`→`Result` API refactor, and a `--tests`-less check let it ride along
-undetected from one stable branch to the next.
+modules and integration tests.
