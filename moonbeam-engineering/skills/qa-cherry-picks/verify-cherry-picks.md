@@ -20,3 +20,15 @@ Upstream remotes by repo:
 | moonkit      | moonbeam-foundation/moonkit (origin) | Moonsong-Labs/moonkit (branch: `main`)               |
 
 Then for each "Included" row, confirm the commit exists on the branch. For each "Dropped" row, confirm it does not.
+
+## Verify the branch compiles
+
+After confirming the cherry-picks are present, check that the fork branch still
+builds — **including test code**:
+
+```bash
+cargo check --workspace --tests
+```
+
+Always pass `--tests`. Plain `cargo check --workspace` skips `#[cfg(test)]`
+modules and integration tests.
