@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2026-05-21
+
+- feat(core-engineering)!: rewrite worktrees, consolidate code-reviewer (#56)
+
 ## [1.7.1] - 2026-05-21
 
 - fix(core-engineering): quote SessionStart hook path with double quotes (#54)
