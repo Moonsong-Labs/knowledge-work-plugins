@@ -139,7 +139,6 @@ Check these rules for EVERY task before dispatching. Match on file types, task c
 | Task involves vulnerability scanning, version conflicts, dependency audit | `core-engineering:dependency-manager` | general-purpose |
 | Task creates or updates documentation, tutorials, API docs, READMEs | `core-engineering:documentation-specialist` | general-purpose |
 | Task involves branching strategy, release automation, Git hooks, merge policies | `core-engineering:git-workflow-manager` | general-purpose |
-| Code quality review after each task (existing workflow) | `core-engineering:code-reviewer` | general-purpose |
 
 ### Multiple signals
 
@@ -296,17 +295,3 @@ Done!
 **If subagent fails task:**
 - Dispatch fix subagent with specific instructions
 - Don't try to fix manually (context pollution)
-
-## Integration
-
-**Required workflow skills:**
-- **core-engineering:using-git-worktrees** - REQUIRED: Set up isolated workspace before starting
-- **core-engineering:writing-plans** - Creates the plan this skill executes
-- **core-engineering:requesting-code-review** - Code review template for reviewer subagents
-- **core-engineering:finishing-a-development-branch** - Complete development after all tasks
-
-**Subagents should use:**
-- **core-engineering:test-driven-development** - Subagents follow TDD for each task
-
-**Alternative workflow:**
-- **core-engineering:executing-plans** - Use for parallel session instead of same-session execution

@@ -13,7 +13,6 @@ AGENTS=(
     "dependency-manager"
     "documentation-specialist"
     "git-workflow-manager"
-    "code-reviewer"
 )
 
 echo "=== Running Agent Triggering Tests ==="
