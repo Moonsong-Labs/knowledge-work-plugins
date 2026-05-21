@@ -59,7 +59,6 @@ There's a bunch more to it, but that's the core of the system. And because the s
 
 ### Agents
 
-- **code-reviewer** - Reviews completed work against the original plan and coding standards
 - **dependency-manager** - Vulnerability scanning, version conflict resolution, and bundle optimization
 - **documentation-specialist** - API docs, tutorials, architecture guides, and documentation audits
 - **git-workflow-manager** - Branching strategies, release automation, and merge conflict resolution
