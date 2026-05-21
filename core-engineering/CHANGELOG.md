@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.1] - 2026-05-21
+
+- fix(core-engineering): quote SessionStart hook path with double quotes (#54)
+
 ## [1.7.0] - 2026-04-13
 
 - Port upstream improvements from superpowers (#42)
