@@ -25,16 +25,26 @@ Analyzes weight file changes between the current branch and a base branch to det
 
 ### 2) Generate and parse the weight diff
 
-Run the analysis script piping the git diff of weight files:
+Run the analysis script piping the git diff of weight files. **Always pass
+`-W` (`--function-context`)** — without it, attribution is wrong (see note
+below):
 
 ```bash
-git diff $(git merge-base <base-branch> HEAD)..HEAD -- '*/weights/*' \
+git diff -W $(git merge-base <base-branch> HEAD)..HEAD -- '*/weights/*' \
   | python3 scripts/analyze-weight-diff.py --threshold 50
 ```
 
 The script accepts:
 - `--file <path>` or stdin (piped diff)
 - `--threshold <N>` percentage threshold for flagging (default: 50)
+
+> **Why `-W` is required:** weight files put the `fn NAME(...)` signature ~5
+> lines above the first changed line, and git's hunk headers show the enclosing
+> `impl ... WeightInfo` block, not the `fn`. With the default 3-line context the
+> parser can't see where one function ends and the next begins, so it attributes
+> changes to the wrong function and drops some flags entirely. `-W` includes the
+> signature lines. The script prints a loud warning if it detects merged
+> functions (the tell-tale of a diff generated without `-W`).
 
 ### 3) Interpret the report
 
