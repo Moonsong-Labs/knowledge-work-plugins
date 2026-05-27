@@ -2,15 +2,23 @@
 """
 Analyze git diff of Substrate weight files and flag significant changes.
 
+IMPORTANT: always generate the diff with `-W` (--function-context).
+Weight files place the `fn NAME(...)` signature ~5 lines above the first
+changed line, and git's hunk headers show the enclosing `impl ... WeightInfo`
+block rather than the `fn`. Without function context the parser cannot tell
+where one function ends and the next begins, so changes get attributed to the
+wrong function (and some are dropped). `-W` includes the signature lines so
+each weight block is bound to the correct function.
+
 Usage:
   # Compare current branch against a base branch:
-  git diff $(git merge-base <base-branch> HEAD)..HEAD -- '*/weights/*' | python3 scripts/analyze-weight-diff.py
+  git diff -W $(git merge-base <base-branch> HEAD)..HEAD -- '*/weights/*' | python3 scripts/analyze-weight-diff.py
 
-  # Or from a saved diff file:
+  # Or from a saved diff file (must have been produced with `git diff -W`):
   python3 scripts/analyze-weight-diff.py --file weight_diff.txt
 
   # Adjust the threshold for flagging changes (default: 50%):
-  python3 scripts/analyze-weight-diff.py --threshold 30
+  git diff -W ... | python3 scripts/analyze-weight-diff.py --threshold 30
 """
 
 import argparse
@@ -25,6 +33,10 @@ def parse_weight_block(lines):
         "base_ref": 0,
         "base_proof": 0,
         "min_execution_time": None,
+        # Number of "Minimum execution time" lines seen in this bucket. >1 means
+        # several functions were merged into one bucket (insufficient diff
+        # context) and attribution can no longer be trusted.
+        "min_exec_count": 0,
         "ref_multipliers": {},
         "proof_multipliers": {},
         "db_reads_base": 0,
@@ -39,6 +51,7 @@ def parse_weight_block(lines):
         )
         if min_match:
             result["min_execution_time"] = int(min_match.group(1).replace("_", ""))
+            result["min_exec_count"] += 1
             continue
 
         # Base Weight::from_parts — first occurrence NOT inside a saturating_add
@@ -238,6 +251,33 @@ def main():
     print(sep)
     print(f"WEIGHT DIFF ANALYSIS (threshold: {threshold:.0f}%)")
     print(sep)
+
+    # Guard against insufficient diff context: if any bucket captured more than
+    # one "Minimum execution time" line, several functions were merged together
+    # and the diff was almost certainly generated without `-W`. Attribution is
+    # unreliable in that case, so warn loudly rather than print wrong numbers.
+    merged = [
+        c
+        for c in all_changes
+        if c["old"]["min_exec_count"] > 1 or c["new"]["min_exec_count"] > 1
+    ]
+    if merged:
+        print()
+        print("!" * 120)
+        print(
+            "WARNING: multiple functions were merged into a single block "
+            f"({len(merged)} affected). The diff was likely produced WITHOUT "
+            "function context."
+        )
+        print(
+            "         Per-function attribution below is UNRELIABLE. Regenerate "
+            "the diff with `-W`:"
+        )
+        print(
+            "           git diff -W $(git merge-base <base> HEAD)..HEAD -- "
+            "'*/weights/*' | python3 analyze-weight-diff.py"
+        )
+        print("!" * 120)
 
     # ------------------------------------------------------------------
     # OVERALL STATS
