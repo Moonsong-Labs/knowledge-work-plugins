@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2026-05-27
+
+- fix(analyzing-weights): bind weight changes to the correct function via -W (#58)
+
 ## [1.3.0] - 2026-05-18
 
 - Adds a "Verify the branch compiles" step to the qa-cherry-picks skill's verify-cherry-picks.md, requiring cargo check --workspace --tests during fork-branch QA.
