@@ -146,6 +146,8 @@ Use the local project's status vocabulary if it already exists.
 
 ## Output Contract
 
+All prose that this skill creates or rewrites MUST use ASD-STE100 Simplified Technical English. This requirement applies to ADRs, reviews, and user-facing responses.
+
 When creating or updating an ADR, report:
 
 - File path.
