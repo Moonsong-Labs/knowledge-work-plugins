@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-08-21
+
+- Require the ADR skill to use ASD-STE100 Simplified Technical English (#60)
+
 ## [1.1.2] - 2026-04-20
 
 - Expand ADR skill guidance (#50)
